@@ -1,0 +1,1001 @@
++ }
+> WeatherNumBin <- function(nflData) {
++   nflData$Weather[nflData$Weather=="Dome"]<-"0"
++   nflData$Weather <- as.numeric(nflData$Weather)
++   return(nflData)
++ }
+> 
+> UpsetAmtBin <- function(curData) {
++   curData <- as.numeric(curData)
++   curData[curData>=1 & curData<10]<-"Low"
++   curData[curData>=10 & curData<21]<-"Medium"
++   curData[curData>=21 & curData<=45]<-"High"
++   curData <- as.factor(curData)
++   return(curData)
++ }
+> decisionTreeClassifyData <- function(trainData, testData) {
++   nflDataUpsetWins_rpart <- rpart(Upset ~ AorH + Time + Weather, data = trainData, method = "class")
++   printcp(nflDataUpsetWins_rpart)
++   plotcp(nflDataUpsetWins_rpart)
++   plot(nflDataUpsetWins_rpart)
++   text(nflDataUpsetWins_rpart, use.n=TRUE)
++   #nflDataUpsetWins_pred <- predict(nflDataUpsetWins_rpart, newData = testData, type="class")
++   nflDataUpsetWins_pred <- predict(nflDataUpsetWins_rpart, testData[,-6], type="class")
++   #balanceScale_pred <- predict(balanceScale_rpart, newData = testData, type="class")
++   nflDataUpsetWins_pred
++   table(nflDataUpsetWins_pred, testData$Upset)
++ }
+> nflData <- BinningData(nflData)
+> nflData <- WeatherNumBin(nflData)
+> testData <- BinningData(testData)
+> testData <- WeatherNumBin(testData)
+> nflDataTies <- subset(nflData, nflData$Outcome == "T")
+> #nflDataTies[1:20,]
+> nflDataWins <- subset(nflData, nflData$Outcome == "W")
+> #nflDataWins[1:20,]
+> nflDataLoses <- subset(nflData, nflData$Outcome == "L")
+> #nflDataLoses[1:20,]
+> nflDataUpsetWins <- subset(nflDataWins, nflDataWins$Upset == "1")
+> #nflDataUpsetWins[1:20,]
+> nflDataUpsetLoses <- subset(nflDataLoses, nflDataLoses$Upset == "1")
+> #nflDataUpsetLoses[1:20,]
+> newDataUpsetWins <- cbind(nflDataUpsetWins$Odds, nflDataUpsetWins$UpsetAmt)
+> newDataUpsetWins <- abs(newDataUpsetWins)
+> plot(newDataUpsetWins)
+> dbr <- dbscan(newDataUpsetWins, eps=1.75, MinPts=1)
+> str(dbr)
+List of 4
+ $ cluster: num [1:178] 1 2 3 1 1 1 1 1 1 2 ...
+ $ eps    : num 1.75
+ $ MinPts : num 1
+ $ isseed : logi [1:178] TRUE TRUE TRUE TRUE TRUE TRUE ...
+ - attr(*, "class")= chr "dbscan"
+> plot(newDataUpsetWins, col=dbr$cluster+1L)
+> # Silhouette plot
+> d <- dist(newDataUpsetWins)
+> sil <- silhouette(dbr$cluster,d)
+> plot(sil)
+> myData <- newDataUpsetWins
+> wss<-(nrow(myData)-1)*sum(apply(myData,2,var))
+> for (i in 2:15) wss[i] <- sum(kmeans(myData,
++                                      centers=i)$withinss)
+> plot(1:15, wss, type="b", xlab="Number of Clusters",
++      ylab="Within groups")
+> #run k-means with k = 4
+> km4 <- kmeans(newDataUpsetWins, centers = 4)
+> km4
+K-means clustering with 4 clusters of sizes 14, 43, 37, 84
+
+Cluster means:
+      [,1]      [,2]
+1 3.250000 29.071429
+2 3.755814 16.209302
+3 8.189189  6.216216
+4 2.809524  4.571429
+
+Clustering vector:
+  [1] 4 4 1 4 4 4 4 4 3 2 3 4 2 2 2 4 2 2 4 4 4 2 3 4 4 3 4 1 4 4 2 3 1 3 3 3 4 3 4 4 3 4 4 1 4 4 3 2 4 4 2 4 2 2 3 2 2 2 2 3 2 2 4 4 2 4 2 2 2
+ [70] 4 4 4 4 3 4 1 2 4 4 4 4 4 3 3 4 2 4 4 3 3 2 4 4 4 1 2 3 2 4 2 4 4 4 4 2 3 4 4 4 4 2 4 3 4 4 4 3 4 3 1 4 4 1 3 3 4 4 4 1 2 4 2 3 4 3 3 3 4
+[139] 4 1 3 2 3 4 2 3 4 4 2 4 2 4 3 4 4 4 4 1 2 4 4 2 4 3 2 2 1 2 3 1 2 4 3 1 3 4 2 4
+
+Within cluster sum of squares by cluster:
+[1] 439.3036 574.3023 557.9459 565.5238
+ (between_SS / total_SS =  83.1 %)
+
+Available components:
+
+[1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss" "betweenss"    "size"         "iter"         "ifault"      
+> #visualize results colored by cluster
+> plot(newDataUpsetWins, col=km4$cluster)
+> #plot cluster centers
+> points(km4$centers,pch='x',cex=1.5)
+> #run k-means with k = 3
+> km3 <- kmeans(newDataUpsetWins, centers = 3)
+> km3
+K-means clustering with 3 clusters of sizes 21, 48, 109
+
+Cluster means:
+      [,1]     [,2]
+1 3.000000 26.33333
+2 4.927083 14.12500
+3 4.096330  4.46789
+
+Clustering vector:
+  [1] 3 2 1 3 3 3 3 3 3 2 3 3 2 2 2 3 1 2 3 3 3 2 3 3 3 3 3 1 2 3 2 3 1 2 3 3 3 3 3 3 2 3 3 1 3 3 3 2 3 3 2 3 2 1 2 2 2 2 2 3 1 2 3 3 1 3 2 2 2
+ [70] 3 3 3 3 3 3 1 2 3 3 3 3 3 3 3 3 2 3 3 2 2 1 2 3 3 1 2 2 2 3 2 3 3 3 3 2 3 2 3 3 3 2 3 3 3 3 3 2 3 3 1 3 3 1 3 2 3 3 3 1 2 3 2 3 3 3 3 3 3
+[139] 3 1 3 1 3 3 2 3 3 3 2 3 2 3 3 3 3 3 3 1 2 3 3 2 3 3 2 2 1 1 3 1 2 3 3 1 3 3 2 3
+
+Within cluster sum of squares by cluster:
+[1]  769.6667  943.2448 1139.8761
+ (between_SS / total_SS =  77.4 %)
+
+Available components:
+
+[1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss" "betweenss"    "size"         "iter"         "ifault"      
+> #visualize results colored by cluster
+> plot(newDataUpsetWins, col=km3$cluster)
+> #plot cluster centers
+> points(km3$centers,pch='x',cex=1.5)
+> #silhouette plots
+> d <- dist(newDataUpsetWins)
+> sil <- silhouette(km4$cluster,d)
+> plot(sil)
+> d <- dist(newDataUpsetWins)
+> sil <- silhouette(km3$cluster,d)
+> plot(sil)
+> table(discretize(nflDataUpsetWins$UpsetAmt, method="cluster", categories=3))
+
+[ 1.0,10.4) [10.4,22.5) [22.5,45.0] 
+        118          46          14 
+> nflDataUpsetWins$UpsetAmt <- UpsetAmtBin(nflDataUpsetWins$UpsetAmt)
+> testData$UpsetAmt <- UpsetAmtBin(testData$UpsetAmt)
+> nflDataUpsetAmtWins_rpart <- rpart(UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWins, method = "class")
+> printcp(nflDataUpsetAmtWins_rpart)
+
+Classification tree:
+rpart(formula = UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWins, 
+    method = "class")
+
+Variables actually used in tree construction:
+[1] AorH    Time    Weather
+
+Root node error: 69/178 = 0.38764
+
+n= 178 
+
+        CP nsplit rel error xerror     xstd
+1 0.014493      0   1.00000 1.0000 0.094206
+2 0.010000      3   0.95652 1.0725 0.095296
+> plotcp(nflDataUpsetAmtWins_rpart)
+> plot(nflDataUpsetAmtWins_rpart)
+> text(nflDataUpsetAmtWins_rpart, use.n=TRUE)
+> testData$Odds <- abs(testData$Odds)
+> nflDataUpsetWinsMedHigh <- subset(nflDataUpsetWins, nflDataUpsetWins$UpsetAmt!="Low")
+> View(nflDataUpsetWinsMedHigh)
+> View(nflDataUpsetWinsMedHigh)
+> nflDataUpsetAmtWins_rpart <- rpart(UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWinsMedHigh, method = "class")
+> printcp(nflDataUpsetAmtWins_rpart)
+
+Classification tree:
+rpart(formula = UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWinsMedHigh, 
+    method = "class")
+
+Variables actually used in tree construction:
+character(0)
+
+Root node error: 19/69 = 0.27536
+
+n= 69 
+
+  CP nsplit rel error xerror xstd
+1  0      0         1      0    0
+> plotcp(nflDataUpsetAmtWins_rpart)
+> plot(nflDataUpsetAmtWins_rpart)
+Error in plot.rpart(nflDataUpsetAmtWins_rpart) : 
+  fit is not a tree, just a root
+> text(nflDataUpsetAmtWins_rpart, use.n=TRUE)
+Error in text.rpart(nflDataUpsetAmtWins_rpart, use.n = TRUE) : 
+  fit is not a tree, just a root
+> nflDataUpsetAmtWins_rpart <- rpart(UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWinsMedHigh, method = "class")
+> printcp(nflDataUpsetAmtWins_rpart)
+
+Classification tree:
+rpart(formula = UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWinsMedHigh, 
+    method = "class")
+
+Variables actually used in tree construction:
+character(0)
+
+Root node error: 19/69 = 0.27536
+
+n= 69 
+
+  CP nsplit rel error xerror xstd
+1  0      0         1      0    0
+> nflDataUpsetAmtWins_rpart <- rpart(UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWinsMedHigh, method = "class")
+> nflDataUpsetAmtWins_rpart <- rpart(UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWin, method = "class")
+Error in is.data.frame(data) : object 'nflDataUpsetWin' not found
+> nflDataUpsetAmtWins_rpart <- rpart(UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWins, method = "class")
+> printcp(nflDataUpsetAmtWins_rpart)
+
+Classification tree:
+rpart(formula = UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWins, 
+    method = "class")
+
+Variables actually used in tree construction:
+[1] AorH    Time    Weather
+
+Root node error: 69/178 = 0.38764
+
+n= 178 
+
+        CP nsplit rel error xerror     xstd
+1 0.014493      0   1.00000 1.0000 0.094206
+2 0.010000      3   0.95652 1.1739 0.096287
+> plotcp(nflDataUpsetAmtWins_rpart)
+> plot(nflDataUpsetAmtWins_rpart)
+> text(nflDataUpsetAmtWins_rpart, use.n=TRUE)
+> nflDataUpsetAmtWins_rpart <- rpart(UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWinsMedHigh, method = "class")
+> printcp(nflDataUpsetAmtWins_rpart)
+
+Classification tree:
+rpart(formula = UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWinsMedHigh, 
+    method = "class")
+
+Variables actually used in tree construction:
+character(0)
+
+Root node error: 19/69 = 0.27536
+
+n= 69 
+
+  CP nsplit rel error xerror xstd
+1  0      0         1      0    0
+> plotcp(nflDataUpsetAmtWins_rpart)
+> plot(nflDataUpsetAmtWins_rpart)
+Error in plot.rpart(nflDataUpsetAmtWins_rpart) : 
+  fit is not a tree, just a root
+> text(nflDataUpsetAmtWins_rpart, use.n=TRUE)
+Error in text.rpart(nflDataUpsetAmtWins_rpart, use.n = TRUE) : 
+  fit is not a tree, just a root
+> nflDataUpsetAmtWins_rpart <- rpart(UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWinsMedHigh, method = "class")
+> printcp(nflDataUpsetAmtWins_rpart)
+
+Classification tree:
+rpart(formula = UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWinsMedHigh, 
+    method = "class")
+
+Variables actually used in tree construction:
+character(0)
+
+Root node error: 19/69 = 0.27536
+
+n= 69 
+
+  CP nsplit rel error xerror xstd
+1  0      0         1      0    0
+> nflDataUpsetAmtWins_rpart <- rpart(UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWins, method = "class")
+> printcp(nflDataUpsetAmtWins_rpart)
+
+Classification tree:
+rpart(formula = UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWins, 
+    method = "class")
+
+Variables actually used in tree construction:
+[1] AorH    Time    Weather
+
+Root node error: 69/178 = 0.38764
+
+n= 178 
+
+        CP nsplit rel error xerror     xstd
+1 0.014493      0   1.00000 1.0000 0.094206
+2 0.010000      3   0.95652 1.3333 0.096624
+> View(nflDataUpsetWins)
+> View(nflDataUpsetWins)
+> nflDataUpsetAmtWins_rpart <- rpart(UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWins, method = "class")
+> printcp(nflDataUpsetAmtWins_rpart)
+
+Classification tree:
+rpart(formula = UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWins, 
+    method = "class")
+
+Variables actually used in tree construction:
+[1] AorH    Time    Weather
+
+Root node error: 69/178 = 0.38764
+
+n= 178 
+
+        CP nsplit rel error xerror     xstd
+1 0.014493      0   1.00000 1.0000 0.094206
+2 0.010000      3   0.95652 1.1159 0.095796
+> plotcp(nflDataUpsetAmtWins_rpart)
+> plot(nflDataUpsetAmtWins_rpart)
+> text(nflDataUpsetAmtWins_rpart, use.n=TRUE)
+> nflDataUpsetAmtWins_pred <- predict(nflDataUpsetAmtWins_rpart, testData[,-6], type="class")
+> nflDataUpsetAmtWins_pred
+     1      2      3      4      5      6      7      8      9     10     11     12     13     14     15     16     17     18     19     20 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low 
+    21     22     23     24     25     26     27     28     29     30     31     32     33     34     35     36     37     38     39     40 
+   Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+    41     42     43     44     45     46     47     48     49     50     51     52     53     54     55     56     57     58     59     60 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low 
+    61     62     63     64     65     66     67     68     69     70     71     72     73     74     75     76     77     78     79     80 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+    81     82     83     84     85     86     87     88     89     90     91     92     93     94     95     96     97     98     99    100 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   101    102    103    104    105    106    107    108    109    110    111    112    113    114    115    116    117    118    119    120 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   121    122    123    124    125    126    127    128    129    130    131    132    133    134    135    136    137    138    139    140 
+   Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium 
+   141    142    143    144    145    146    147    148    149    150    151    152    153    154    155    156    157    158    159    160 
+   Low    Low    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   161    162    163    164    165    166    167    168    169    170    171    172    173    174    175    176    177    178    179    180 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   181    182    183    184    185    186    187    188    189    190    191    192    193    194    195    196    197    198    199    200 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   201    202    203    204    205    206    207    208    209    210    211    212    213    214    215    216    217    218    219    220 
+   Low    Low    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   221    222    223    224    225    226    227    228    229    230    231    232    233    234    235    236    237    238    239    240 
+   Low    Low    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+Levels: High Low Medium
+> table(nflDataUpsetAmtWins_pred,testData$UpsetAmt)
+                        
+nflDataUpsetAmtWins_pred   0 High Low Medium
+                  High     0    0   0      0
+                  Low    138    4  61     28
+                  Medium   4    0   3      2
+> nflDataUpsetAmtWins_rpart <- rpart(UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWins, method = "class")
+> printcp(nflDataUpsetAmtWins_rpart)
+
+Classification tree:
+rpart(formula = UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWins, 
+    method = "class")
+
+Variables actually used in tree construction:
+[1] AorH    Time    Weather
+
+Root node error: 69/178 = 0.38764
+
+n= 178 
+
+        CP nsplit rel error xerror     xstd
+1 0.014493      0   1.00000 1.0000 0.094206
+2 0.010000      3   0.95652 1.2754 0.096673
+> plotcp(nflDataUpsetAmtWins_rpart)
+> plot(nflDataUpsetAmtWins_rpart)
+> text(nflDataUpsetAmtWins_rpart, use.n=TRUE)
+> nflDataUpsetAmtWins_pred <- predict(nflDataUpsetAmtWins_rpart, newData = testData, type="class")
+> nflDataUpsetAmtWins_pred
+     4     14     24     28     29     32     34     35     41     45     47     49     60     65     67     75     80     86     92     93 
+   Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low    Low 
+    96     98     99    106    107    114    119    123    129    132    137    139    141    144    146    147    149    154    157    161 
+   Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low    Low    Low Medium    Low    Low 
+   185    192    195    201    203    207    213    215    217    223    242    254    272    278    281    283    285    289    295    299 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low Medium Medium    Low    Low    Low    Low    Low    Low 
+   313    339    344    347    349    357    363    371    373    375    381    390    392    396    403    406    419    423    428    431 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium Medium    Low Medium    Low    Low Medium    Low 
+   433    443    452    461    465    468    472    477    479    481    487    512    522    523    525    528    529    538    543    550 
+   Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low 
+   563    574    584    585    587    590    594    600    611    614    617    620    623    641    645    652    653    677    686    693 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   698    705    713    718    720    729    736    744    749    755    759    761    767    769    771    773    777    787    791    793 
+   Low    Low    Low    Low Medium    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   796    801    806    819    821    829    839    855    857    859    866    867    879    882    883    890    901    910    911    920 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low    Low Medium    Low Medium    Low    Low    Low Medium 
+   925    935    937    940    942    943    945    958    962    968    975    977    981    984    996   1009   1013   1017 
+   Low    Low    Low    Low Medium    Low    Low    Low    Low Medium    Low    Low    Low Medium Medium    Low    Low    Low 
+Levels: High Low Medium
+> table(nflDataUpsetAmtWins_pred,testData$UpsetAmt)
+Error in table(nflDataUpsetAmtWins_pred, testData$UpsetAmt) : 
+  all arguments must have the same length
+> nflDataUpsetAmtWins_pred <- predict(nflDataUpsetAmtWins_rpart, testData[,-1], type="class")
+> table(nflDataUpsetAmtWins_pred,testData$UpsetAmt)
+                        
+nflDataUpsetAmtWins_pred   0 High Low Medium
+                  High     0    0   0      0
+                  Low    138    4  61     28
+                  Medium   4    0   3      2
+> nflDataUpsetAmtWins_pred <- predict(nflDataUpsetAmtWins_rpart, testData[,-7], type="class")
+Error in eval(expr, envir, enclos) : object 'AorH' not found
+> table(nflDataUpsetAmtWins_pred,testData$UpsetAmt)
+                        
+nflDataUpsetAmtWins_pred   0 High Low Medium
+                  High     0    0   0      0
+                  Low    138    4  61     28
+                  Medium   4    0   3      2
+> testData$UpsetAmt <- as.factor(testData$UpsetAmt)
+> nflDataUpsetAmtWins_pred <- predict(nflDataUpsetAmtWins_rpart, testData[,-6], type="class")
+> table(nflDataUpsetAmtWins_pred,testData$UpsetAmt)
+                        
+nflDataUpsetAmtWins_pred   0 High Low Medium
+                  High     0    0   0      0
+                  Low    138    4  61     28
+                  Medium   4    0   3      2
+> nflDataUpsetAmtWins_pred <- predict(nflDataUpsetAmtWins_rpart, testData[,-8], type="class")
+Error in eval(expr, envir, enclos) : object 'Time' not found
+> nflDataUpsetAmtWins_pred
+     1      2      3      4      5      6      7      8      9     10     11     12     13     14     15     16     17     18     19     20 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low 
+    21     22     23     24     25     26     27     28     29     30     31     32     33     34     35     36     37     38     39     40 
+   Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+    41     42     43     44     45     46     47     48     49     50     51     52     53     54     55     56     57     58     59     60 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low 
+    61     62     63     64     65     66     67     68     69     70     71     72     73     74     75     76     77     78     79     80 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+    81     82     83     84     85     86     87     88     89     90     91     92     93     94     95     96     97     98     99    100 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   101    102    103    104    105    106    107    108    109    110    111    112    113    114    115    116    117    118    119    120 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   121    122    123    124    125    126    127    128    129    130    131    132    133    134    135    136    137    138    139    140 
+   Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium 
+   141    142    143    144    145    146    147    148    149    150    151    152    153    154    155    156    157    158    159    160 
+   Low    Low    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   161    162    163    164    165    166    167    168    169    170    171    172    173    174    175    176    177    178    179    180 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   181    182    183    184    185    186    187    188    189    190    191    192    193    194    195    196    197    198    199    200 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   201    202    203    204    205    206    207    208    209    210    211    212    213    214    215    216    217    218    219    220 
+   Low    Low    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   221    222    223    224    225    226    227    228    229    230    231    232    233    234    235    236    237    238    239    240 
+   Low    Low    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+Levels: High Low Medium
+> table(nflDataUpsetAmtWins_pred,testData$UpsetAmt)
+                        
+nflDataUpsetAmtWins_pred   0 High Low Medium
+                  High     0    0   0      0
+                  Low    138    4  61     28
+                  Medium   4    0   3      2
+> nflDataUpsetAmtWins_pred <- predict(nflDataUpsetAmtWins_rpart, testData[,-6], type="class")
+> nflDataUpsetAmtWins_pred <- predict(nflDataUpsetAmtWins_rpart, newData = testData, type="class")
+> nflDataUpsetAmtWins_pred
+     4     14     24     28     29     32     34     35     41     45     47     49     60     65     67     75     80     86     92     93 
+   Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low    Low 
+    96     98     99    106    107    114    119    123    129    132    137    139    141    144    146    147    149    154    157    161 
+   Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low    Low    Low Medium    Low    Low 
+   185    192    195    201    203    207    213    215    217    223    242    254    272    278    281    283    285    289    295    299 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low Medium Medium    Low    Low    Low    Low    Low    Low 
+   313    339    344    347    349    357    363    371    373    375    381    390    392    396    403    406    419    423    428    431 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium Medium    Low Medium    Low    Low Medium    Low 
+   433    443    452    461    465    468    472    477    479    481    487    512    522    523    525    528    529    538    543    550 
+   Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low 
+   563    574    584    585    587    590    594    600    611    614    617    620    623    641    645    652    653    677    686    693 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   698    705    713    718    720    729    736    744    749    755    759    761    767    769    771    773    777    787    791    793 
+   Low    Low    Low    Low Medium    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   796    801    806    819    821    829    839    855    857    859    866    867    879    882    883    890    901    910    911    920 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low    Low Medium    Low Medium    Low    Low    Low Medium 
+   925    935    937    940    942    943    945    958    962    968    975    977    981    984    996   1009   1013   1017 
+   Low    Low    Low    Low Medium    Low    Low    Low    Low Medium    Low    Low    Low Medium Medium    Low    Low    Low 
+Levels: High Low Medium
+> table(nflDataUpsetAmtWins_pred,testData$UpsetAmt)
+Error in table(nflDataUpsetAmtWins_pred, testData$UpsetAmt) : 
+  all arguments must have the same length
+> View(testData)
+> classtestData <- subset(testData, testData$Upset!=0)
+> View(classtestData)
+> View(classtestData)
+> testData <- read.csv(file = "C:/Users/maryjoyce/Desktop/NFL-2016.csv", stringsAsFactors = FALSE, header = TRUE, sep = ",")
+> testData <- BinningData(testData)
+> testData <- WeatherNumBin(testData)
+> testData$UpsetAmt <- UpsetAmtBin(testData$UpsetAmt)
+> classtestData <- subset(testData, testData$Upset!=0)
+> classtestData <- subset(testData, testData$Upset!=0)
+> classtestData <- subset(testData, testData$Upset!=0 && testData$Outcome!="T")
+> classtestData <- subset(testData, testData$Upset!=0 && testData$Outcome!="T")
+> classtestData <- subset(testData, testData$Upset!=0 & testData$Outcome!="T")
+> nflDataUpsetAmtWins_rpart <- rpart(UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWins, method = "class")
+> printcp(nflDataUpsetAmtWins_rpart)
+
+Classification tree:
+rpart(formula = UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWins, 
+    method = "class")
+
+Variables actually used in tree construction:
+[1] AorH    Time    Weather
+
+Root node error: 69/178 = 0.38764
+
+n= 178 
+
+        CP nsplit rel error xerror     xstd
+1 0.014493      0   1.00000 1.0000 0.094206
+2 0.010000      3   0.95652 1.2754 0.096673
+> plotcp(nflDataUpsetAmtWins_rpart)
+> plot(nflDataUpsetAmtWins_rpart)
+> text(nflDataUpsetAmtWins_rpart, use.n=TRUE)
+> View(classtestData)
+> classTestData <- subset(testData, testData$Upset!=0 & testData$Outcome!="T")
+> classTestData$UpsetAmt <- as.factor(classTestData$UpsetAmt)
+> nflDataUpsetAmtWins_pred <- predict(nflDataUpsetAmtWins_rpart, newData = classTestData, type="class")
+> nflDataUpsetAmtWins_pred
+     4     14     24     28     29     32     34     35     41     45     47     49     60     65     67     75     80     86     92     93 
+   Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low    Low 
+    96     98     99    106    107    114    119    123    129    132    137    139    141    144    146    147    149    154    157    161 
+   Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low    Low    Low Medium    Low    Low 
+   185    192    195    201    203    207    213    215    217    223    242    254    272    278    281    283    285    289    295    299 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low Medium Medium    Low    Low    Low    Low    Low    Low 
+   313    339    344    347    349    357    363    371    373    375    381    390    392    396    403    406    419    423    428    431 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium Medium    Low Medium    Low    Low Medium    Low 
+   433    443    452    461    465    468    472    477    479    481    487    512    522    523    525    528    529    538    543    550 
+   Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low 
+   563    574    584    585    587    590    594    600    611    614    617    620    623    641    645    652    653    677    686    693 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   698    705    713    718    720    729    736    744    749    755    759    761    767    769    771    773    777    787    791    793 
+   Low    Low    Low    Low Medium    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   796    801    806    819    821    829    839    855    857    859    866    867    879    882    883    890    901    910    911    920 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low    Low Medium    Low Medium    Low    Low    Low Medium 
+   925    935    937    940    942    943    945    958    962    968    975    977    981    984    996   1009   1013   1017 
+   Low    Low    Low    Low Medium    Low    Low    Low    Low Medium    Low    Low    Low Medium Medium    Low    Low    Low 
+Levels: High Low Medium
+> table(nflDataUpsetAmtWins_pred,testData$UpsetAmt)
+Error in table(nflDataUpsetAmtWins_pred, testData$UpsetAmt) : 
+  all arguments must have the same length
+> table(nflDataUpsetAmtWins_pred,classTestData$UpsetAmt)
+Error in table(nflDataUpsetAmtWins_pred, classTestData$UpsetAmt) : 
+  all arguments must have the same length
+> View(nflDataUpsetWins)
+> classTestData <- subset(testData, testData$Upset!=0 & testData$Outcome!="T")
+> nflDataUpsetAmtWins_rpart <- rpart(UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWins, method = "class")
+> printcp(nflDataUpsetAmtWins_rpart)
+
+Classification tree:
+rpart(formula = UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWins, 
+    method = "class")
+
+Variables actually used in tree construction:
+[1] AorH    Time    Weather
+
+Root node error: 69/178 = 0.38764
+
+n= 178 
+
+        CP nsplit rel error xerror     xstd
+1 0.014493      0   1.00000 1.0000 0.094206
+2 0.010000      3   0.95652 1.1304 0.095937
+> plotcp(nflDataUpsetAmtWins_rpart)
+> plot(nflDataUpsetAmtWins_rpart)
+> text(nflDataUpsetAmtWins_rpart, use.n=TRUE)
+> classTestData$UpsetAmt <- as.factor(classTestData$UpsetAmt)
+> nflDataUpsetAmtWins_pred <- predict(nflDataUpsetAmtWins_rpart, newData = classTestData, type="class")
+> nflDataUpsetAmtWins_pred
+     4     14     24     28     29     32     34     35     41     45     47     49     60     65     67     75     80     86     92     93 
+   Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low    Low 
+    96     98     99    106    107    114    119    123    129    132    137    139    141    144    146    147    149    154    157    161 
+   Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low    Low    Low Medium    Low    Low 
+   185    192    195    201    203    207    213    215    217    223    242    254    272    278    281    283    285    289    295    299 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low Medium Medium    Low    Low    Low    Low    Low    Low 
+   313    339    344    347    349    357    363    371    373    375    381    390    392    396    403    406    419    423    428    431 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium Medium    Low Medium    Low    Low Medium    Low 
+   433    443    452    461    465    468    472    477    479    481    487    512    522    523    525    528    529    538    543    550 
+   Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low 
+   563    574    584    585    587    590    594    600    611    614    617    620    623    641    645    652    653    677    686    693 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   698    705    713    718    720    729    736    744    749    755    759    761    767    769    771    773    777    787    791    793 
+   Low    Low    Low    Low Medium    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   796    801    806    819    821    829    839    855    857    859    866    867    879    882    883    890    901    910    911    920 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low    Low Medium    Low Medium    Low    Low    Low Medium 
+   925    935    937    940    942    943    945    958    962    968    975    977    981    984    996   1009   1013   1017 
+   Low    Low    Low    Low Medium    Low    Low    Low    Low Medium    Low    Low    Low Medium Medium    Low    Low    Low 
+Levels: High Low Medium
+> table(nflDataUpsetAmtWins_pred,classTestData$UpsetAmt)
+Error in table(nflDataUpsetAmtWins_pred, classTestData$UpsetAmt) : 
+  all arguments must have the same length
+> nflDataUpsetAmtWins_pred <- predict(nflDataUpsetAmtWins_rpart, classTestData[,-6], type="class")
+> nflDataUpsetAmtWins_pred
+     1      2      9     10     15     16     23     24     27     28     31     32     33     34     37     38     49     50     53     54 
+   Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+    55     56     61     62     63     64     69     70     73     74     79     80     81     82     83     84     91     92     95     96 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+    99    100    101    102    105    106    109    110    111    112    119    120    121    122    133    134    135    136    141    142 
+   Low    Low    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low 
+   143    144    147    148    153    154    155    156    157    158    159    160    165    166    169    170    177    178    189    190 
+   Low    Low    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   195    196    197    198    201    202    203    204    205    206    207    208    221    222    231    232    239    240 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low 
+Levels: High Low Medium
+> table(nflDataUpsetAmtWins_pred,classTestData$UpsetAmt)
+                        
+nflDataUpsetAmtWins_pred  0 High Low Medium
+                  High    0    0   0      0
+                  Low     0    4  61     28
+                  Medium  0    0   3      2
+> table(discretize(nflDataUpsetWins$UpsetAmt, method="cluster", categories=3))
+Error in stats::kmeans(stats::na.omit(x), categories, ...) : 
+  more cluster centers than distinct data points.
+In addition: Warning message:
+In stats::kmeans(stats::na.omit(x), categories, ...) :
+  NAs introduced by coercion
+> View(nflDataUpsetWins)
+> View(nflDataUpsetWins)
+> myData <- newDataUpsetWins
+> wss<-(nrow(myData)-1)*sum(apply(myData,2,var))
+> for (i in 2:15) wss[i] <- sum(kmeans(myData,
++                                      centers=i)$withinss)
+> plot(1:15, wss, type="b", xlab="Number of Clusters",
++      ylab="Within groups")
+> #run k-means with k = 4
+> km4 <- kmeans(newDataUpsetWins, centers = 4)
+> km4
+K-means clustering with 4 clusters of sizes 94, 41, 14, 29
+
+Cluster means:
+      [,1]      [,2]
+1 3.234043  4.414894
+2 3.426829 16.317073
+3 3.250000 29.071429
+4 8.827586  7.827586
+
+Clustering vector:
+  [1] 1 1 3 1 1 1 1 1 4 2 4 1 2 2 2 1 2 2 1 1 1 2 4 1 1 1 1 3 1 1 2 1 3 4 4 4 1 4 1 1 4 1 1 3 1 1 4 2 1 1 2 1 2 2 4 2 2 2 2 1 2 2 1 1 2 1 2 4 2
+ [70] 1 1 1 1 1 1 3 2 1 1 1 1 1 1 1 1 2 1 1 4 4 2 1 1 1 3 2 4 2 1 2 1 1 1 1 4 1 1 1 1 1 2 1 4 1 1 1 4 1 4 3 1 1 3 4 4 1 1 1 3 2 1 2 4 1 4 4 4 1
+[139] 1 3 4 2 1 1 2 4 1 1 2 1 2 1 4 1 1 1 1 3 2 1 1 2 1 4 2 2 3 2 1 3 2 1 4 3 1 1 2 1
+
+Within cluster sum of squares by cluster:
+[1] 735.1702 454.1585 439.3036 492.7759
+ (between_SS / total_SS =  83.2 %)
+
+Available components:
+
+[1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss" "betweenss"    "size"         "iter"         "ifault"      
+> #visualize results colored by cluster
+> plot(newDataUpsetWins, col=km4$cluster)
+> #plot cluster centers
+> points(km4$centers,pch='x',cex=1.5)
+> #run k-means with k = 3
+> km3 <- kmeans(newDataUpsetWins, centers = 3)
+> km3
+K-means clustering with 3 clusters of sizes 109, 21, 48
+
+Cluster means:
+      [,1]     [,2]
+1 4.096330  4.46789
+2 3.000000 26.33333
+3 4.927083 14.12500
+
+Clustering vector:
+  [1] 1 3 2 1 1 1 1 1 1 3 1 1 3 3 3 1 2 3 1 1 1 3 1 1 1 1 1 2 3 1 3 1 2 3 1 1 1 1 1 1 3 1 1 2 1 1 1 3 1 1 3 1 3 2 3 3 3 3 3 1 2 3 1 1 2 1 3 3 3
+ [70] 1 1 1 1 1 1 2 3 1 1 1 1 1 1 1 1 3 1 1 3 3 2 3 1 1 2 3 3 3 1 3 1 1 1 1 3 1 3 1 1 1 3 1 1 1 1 1 3 1 1 2 1 1 2 1 3 1 1 1 2 3 1 3 1 1 1 1 1 1
+[139] 1 2 1 2 1 1 3 1 1 1 3 1 3 1 1 1 1 1 1 2 3 1 1 3 1 1 3 3 2 2 1 2 3 1 1 2 1 1 3 1
+
+Within cluster sum of squares by cluster:
+[1] 1139.8761  769.6667  943.2448
+ (between_SS / total_SS =  77.4 %)
+
+Available components:
+
+[1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss" "betweenss"    "size"         "iter"         "ifault"      
+> #visualize results colored by cluster
+> plot(newDataUpsetWins, col=km3$cluster)
+> #plot cluster centers
+> points(km3$centers,pch='x',cex=1.5)
+> #silhouette plots
+> d <- dist(newDataUpsetWins)
+> sil <- silhouette(km4$cluster,d)
+> plot(sil)
+> d <- dist(newDataUpsetWins)
+> sil <- silhouette(km3$cluster,d)
+> plot(sil)
+> table(discretize(nflDataUpsetWins$UpsetAmt, method="cluster", categories=3))
+Error in stats::kmeans(stats::na.omit(x), categories, ...) : 
+  more cluster centers than distinct data points.
+In addition: Warning message:
+In stats::kmeans(stats::na.omit(x), categories, ...) :
+  NAs introduced by coercion
+> km3 <- kmeans(newDataUpsetWins, centers = 3)
+> nflDataUpsetWins$UpsetAmt
+  [1] Low    Medium High   Low    Low    Low    Low    Low    Low    Medium Low    Low    Medium Medium Medium Low    High   Medium Low   
+ [20] Low    Low    Medium Low    Low    Low    Low    Low    High   Medium Low    Medium Low    High   Medium Low    Low    Low    Low   
+ [39] Low    Low    Medium Low    Low    High   Low    Low    Low    Medium Low    Low    Medium Low    Medium Medium Medium Medium Medium
+ [58] Medium Medium Low    High   Medium Low    Low    High   Low    Medium Medium Medium Low    Low    Low    Low    Low    Low    High  
+ [77] Medium Low    Low    Low    Low    Low    Low    Low    Low    Medium Low    Low    Medium Medium High   Medium Low    Low    High  
+ [96] Medium Medium Medium Low    Medium Low    Low    Low    Low    Medium Low    Medium Low    Low    Low    Medium Low    Low    Low   
+[115] Low    Low    Medium Low    Low    High   Low    Low    High   Low    Medium Low    Low    Low    High   Medium Low    Medium Low   
+[134] Low    Low    Low    Low    Low    Low    High   Low    High   Low    Low    Medium Low    Low    Low    Medium Low    Medium Low   
+[153] Low    Low    Low    Low    Low    High   Medium Low    Low    Medium Low    Low    Medium Medium High   Medium Low    High   Medium
+[172] Low    Low    High   Low    Low    Medium Low   
+Levels: High Low Medium
+> table(discretize(nflDataUpsetWins$UpsetAmt, method="cluster", categories=3))
+Error in stats::kmeans(stats::na.omit(x), categories, ...) : 
+  more cluster centers than distinct data points.
+In addition: Warning message:
+In stats::kmeans(stats::na.omit(x), categories, ...) :
+  NAs introduced by coercion
+> nflData <- read.csv(file = "C:/Users/maryjoyce/Desktop/NFL-All.csv", stringsAsFactors = FALSE, header = TRUE, sep = ",")
+> testData <- read.csv(file = "C:/Users/maryjoyce/Desktop/NFL-2016.csv", stringsAsFactors = FALSE, header = TRUE, sep = ",")
+> BinningTeamData <- function(nflData){
++     # Bin team data
++   nflData$Team[nflData$Team=="Arizona Cardinals"]<-"1"
++   nflData$Team[nflData$Team=="Atlanta Falcons"]<-"2"
++   nflData$Team[nflData$Team=="Baltimore Ravens"]<-"3"
++   nflData$Team[nflData$Team=="Buffalo Bills"]<-"4"
++   nflData$Team[nflData$Team=="Carolina Panthers"]<-"5"
++   nflData$Team[nflData$Team=="Chicago Bears"]<-"6"
++   nflData$Team[nflData$Team=="Cincinnati Bengals"]<-"7"
++   nflData$Team[nflData$Team=="Cleveland Browns"]<-"8"
++   nflData$Team[nflData$Team=="Dallas Cowboys"]<-"9"
++   nflData$Team[nflData$Team=="Denver Broncos"]<-"10"
++   nflData$Team[nflData$Team=="Detroit Lions"]<-"11"
++   nflData$Team[nflData$Team=="Green Bay Packers"]<-"12"
++   nflData$Team[nflData$Team=="Houston Texans"]<-"13"
++   nflData$Team[nflData$Team=="Indianapolis Colts"]<-"14"
++   nflData$Team[nflData$Team=="Jacksonville Jaguars"]<-"15"
++   nflData$Team[nflData$Team=="Kansas City Chiefs"]<-"16"
++   nflData$Team[nflData$Team=="Miami Dolphins"]<-"17"
++   nflData$Team[nflData$Team=="Minnesota Vikings"]<-"18"
++   nflData$Team[nflData$Team=="New England Patriots"]<-"19"
++   nflData$Team[nflData$Team=="New Orleans Saints"]<-"20"
++   nflData$Team[nflData$Team=="New York Giants"]<-"21"
++   nflData$Team[nflData$Team=="New York Jets"]<-"22"
++   nflData$Team[nflData$Team=="Oakland Raiders"]<-"23"
++   nflData$Team[nflData$Team=="Philadelphia Eagles"]<-"24"
++   nflData$Team[nflData$Team=="Pittsburgh Steelers"]<-"25"
++   nflData$Team[nflData$Team=="St. Louis Rams"]<-"26"
++   nflData$Team[nflData$Team=="San Diego Chargers"]<-"27"
++   nflData$Team[nflData$Team=="San Francisco 49ers"]<-"28"
++   nflData$Team[nflData$Team=="Seattle Seahawks"]<-"29"
++   nflData$Team[nflData$Team=="Tampa Bay Buccaneers"]<-"30"
++   nflData$Team[nflData$Team=="Tennessee Titans"]<-"31"
++   nflData$Team[nflData$Team=="Washington Redskins"]<-"32"
++   nflData$Team <- as.numeric(nflData$Team)
++   return(nflData)
++ }
+> 
+> BinningData <- function(nflData){
++   nflData$Upset[nflData$Upset=="N"]<-"0"
++   nflData$Upset[nflData$Upset=="Y"]<-"1"
++   nflData$AorH[nflData$AorH=="A"]<-"0"
++   nflData$AorH[nflData$AorH=="A*"]<-"0"
++   nflData$AorH[nflData$AorH=="H"]<-"1"
++   nflData$AorH[nflData$AorH=="H*"]<-"1"
++   nflData$QB[nflData$QB=="P"]<-"1"
++   nflData$QB[nflData$QB=="O"]<-"2"
++   nflData$QB[nflData$QB=='']<-"0"
++   nflData$RB[nflData$RB=="P"]<-"1"
++   nflData$RB[nflData$RB=="O"]<-"2"
++   nflData$RB[nflData$RB=='']<-"0"
++   nflData$Upset <- as.numeric(nflData$Upset)
++   nflData$AorH <- as.numeric(nflData$AorH)
++   nflData$QB <- as.numeric(nflData$QB)
++   nflData$RB <- as.numeric(nflData$RB)
++   return(nflData)
++ }
+> 
+> ViewBinnedData <- function(nflData) {
++ #  nflData$Team
++   nflData$Upset
++   nflData$AorH
++   nflData$QB
++   nflData$RB
++   
++  # unique(nflData$Team)
++   unique(nflData$Upset)
++   unique(nflData$AorH)
++   unique(nflData$QB)
++ }
+> 
+> WeatherBin <- function(nflData) {
++   nflData$Weather[nflData$Weather>=85 & nflData$Weather!="Dome"]<-"Hot"
++   nflData$Weather[nflData$Weather>=70 & nflData$Weather<85 & nflData$Weather!="Dome"]<-"Warm"
++   nflData$Weather[nflData$Weather>=55 & nflData$Weather<70 & nflData$Weather!="Dome"]<-"Mild"
++   nflData$Weather[nflData$Weather>=40 & nflData$Weather<55 & nflData$Weather!="Dome"]<-"Cool"
++   nflData$Weather[nflData$Weather<40 & nflData$Weather!="Dome"]<-"Cold"
++   nflData$Weather <- as.factor(nflData$Weather)
++   return(nflData)
++ }
+> 
+> WeatherNumBin <- function(nflData) {
++   nflData$Weather[nflData$Weather=="Dome"]<-"0"
++   nflData$Weather <- as.numeric(nflData$Weather)
++   return(nflData)
++ }
+> 
+> UpsetAmtBin <- function(curData) {
++   curData <- as.numeric(curData)
++   curData[curData>=1 & curData<10]<-"Low"
++   curData[curData>=10 & curData<21]<-"Medium"
++   curData[curData>=21 & curData<=45]<-"High"
++   curData <- as.factor(curData)
++   return(curData)
++ }
+> 
+> decisionTreeClassifyData <- function(trainData, testData) {
++   nflDataUpsetWins_rpart <- rpart(Upset ~ AorH + Time + Weather, data = trainData, method = "class")
++   printcp(nflDataUpsetWins_rpart)
++   plotcp(nflDataUpsetWins_rpart)
++   plot(nflDataUpsetWins_rpart)
++   text(nflDataUpsetWins_rpart, use.n=TRUE)
++   #nflDataUpsetWins_pred <- predict(nflDataUpsetWins_rpart, newData = testData, type="class")
++   nflDataUpsetWins_pred <- predict(nflDataUpsetWins_rpart, testData[,-6], type="class")
++   #balanceScale_pred <- predict(balanceScale_rpart, newData = testData, type="class")
++   nflDataUpsetWins_pred
++   table(nflDataUpsetWins_pred, testData$Upset)
++ }
+> nflData <- BinningData(nflData)
+> nflData <- WeatherNumBin(nflData)
+> testData <- BinningData(testData)
+> testData <- WeatherNumBin(testData)
+> nflDataTies <- subset(nflData, nflData$Outcome == "T")
+> #nflDataTies[1:20,]
+> nflDataWins <- subset(nflData, nflData$Outcome == "W")
+> #nflDataWins[1:20,]
+> nflDataLoses <- subset(nflData, nflData$Outcome == "L")
+> #nflDataLoses[1:20,]
+> 
+> nflDataUpsetWins <- subset(nflDataWins, nflDataWins$Upset == "1")
+> #nflDataUpsetWins[1:20,]
+> nflDataUpsetLoses <- subset(nflDataLoses, nflDataLoses$Upset == "1")
+> #nflDataUpsetLoses[1:20,]
+> newDataUpsetWins <- cbind(nflDataUpsetWins$Odds, nflDataUpsetWins$UpsetAmt)
+> #newDataUpsetWins$Odds <- lapply(newDataUpsetWins$Odds, abs);
+> newDataUpsetWins <- abs(newDataUpsetWins)
+> plot(newDataUpsetWins)
+> dbr <- dbscan(newDataUpsetWins, eps=1.75, MinPts=1)
+> str(dbr)
+List of 4
+ $ cluster: num [1:178] 1 2 3 1 1 1 1 1 1 2 ...
+ $ eps    : num 1.75
+ $ MinPts : num 1
+ $ isseed : logi [1:178] TRUE TRUE TRUE TRUE TRUE TRUE ...
+ - attr(*, "class")= chr "dbscan"
+> plot(newDataUpsetWins, col=dbr$cluster+1L)
+> # Silhouette plot
+> d <- dist(newDataUpsetWins)
+> sil <- silhouette(dbr$cluster,d)
+> plot(sil)
+> myData <- newDataUpsetWins
+> wss<-(nrow(myData)-1)*sum(apply(myData,2,var))
+> for (i in 2:15) wss[i] <- sum(kmeans(myData,
++                                      centers=i)$withinss)
+> plot(1:15, wss, type="b", xlab="Number of Clusters",
++      ylab="Within groups")
+> #run k-means with k = 4
+> km4 <- kmeans(newDataUpsetWins, centers = 4)
+> km4
+K-means clustering with 4 clusters of sizes 30, 29, 14, 105
+
+Cluster means:
+      [,1]      [,2]
+1 2.850000 17.500000
+2 6.775862 11.413793
+3 3.250000 29.071429
+4 3.985714  4.333333
+
+Clustering vector:
+  [1] 4 2 3 4 4 4 4 4 2 2 4 4 1 1 1 4 1 2 4 4 4 1 4 4 4 4 4 3 2 4 1 4 3 2 2 4 4 4 4 4 2 4 4 3 4 4 2 1 4 4 1 4 1 1 2 1 2 1 1 4 1 1 4 4 1 4 2 2 2
+ [70] 4 4 4 4 4 4 3 1 4 4 4 4 4 4 4 4 2 4 4 2 2 1 2 4 4 3 1 2 1 4 2 4 4 4 4 2 4 2 4 4 4 1 4 4 4 4 4 2 4 4 3 4 4 3 4 2 4 4 4 3 1 4 2 4 4 4 4 4 4
+[139] 4 3 4 1 4 4 1 4 4 4 1 4 1 4 2 4 4 4 4 3 1 4 4 2 4 4 2 1 3 1 4 3 1 4 4 3 4 4 2 4
+
+Within cluster sum of squares by cluster:
+[1]  219.5750  484.3276  439.3036 1047.5619
+ (between_SS / total_SS =  82.7 %)
+
+Available components:
+
+[1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss" "betweenss"    "size"         "iter"         "ifault"      
+> #visualize results colored by cluster
+> plot(newDataUpsetWins, col=km4$cluster)
+> #plot cluster centers
+> points(km4$centers,pch='x',cex=1.5)
+> #run k-means with k = 3
+> km3 <- kmeans(newDataUpsetWins, centers = 3)
+> km3
+K-means clustering with 3 clusters of sizes 21, 109, 48
+
+Cluster means:
+      [,1]     [,2]
+1 3.000000 26.33333
+2 4.096330  4.46789
+3 4.927083 14.12500
+
+Clustering vector:
+  [1] 2 3 1 2 2 2 2 2 2 3 2 2 3 3 3 2 1 3 2 2 2 3 2 2 2 2 2 1 3 2 3 2 1 3 2 2 2 2 2 2 3 2 2 1 2 2 2 3 2 2 3 2 3 1 3 3 3 3 3 2 1 3 2 2 1 2 3 3 3
+ [70] 2 2 2 2 2 2 1 3 2 2 2 2 2 2 2 2 3 2 2 3 3 1 3 2 2 1 3 3 3 2 3 2 2 2 2 3 2 3 2 2 2 3 2 2 2 2 2 3 2 2 1 2 2 1 2 3 2 2 2 1 3 2 3 2 2 2 2 2 2
+[139] 2 1 2 1 2 2 3 2 2 2 3 2 3 2 2 2 2 2 2 1 3 2 2 3 2 2 3 3 1 1 2 1 3 2 2 1 2 2 3 2
+
+Within cluster sum of squares by cluster:
+[1]  769.6667 1139.8761  943.2448
+ (between_SS / total_SS =  77.4 %)
+
+Available components:
+
+[1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss" "betweenss"    "size"         "iter"         "ifault"      
+> #visualize results colored by cluster
+> plot(newDataUpsetWins, col=km3$cluster)
+> #plot cluster centers
+> points(km3$centers,pch='x',cex=1.5)
+> #silhouette plots
+> d <- dist(newDataUpsetWins)
+> sil <- silhouette(km4$cluster,d)
+> plot(sil)
+> d <- dist(newDataUpsetWins)
+> sil <- silhouette(km3$cluster,d)
+> plot(sil)
+> table(discretize(nflDataUpsetWins$UpsetAmt, method="cluster", categories=3))
+
+[ 1.00, 9.41) [ 9.41,20.68) [20.68,45.00] 
+          109            50            19 
+> nflDataUpsetWins$UpsetAmt <- UpsetAmtBin(nflDataUpsetWins$UpsetAmt)
+> testData$UpsetAmt <- UpsetAmtBin(testData$UpsetAmt)
+> classTestData <- subset(testData, testData$Upset!=0 & testData$Outcome!="T")
+> nflDataUpsetAmtWins_rpart <- rpart(UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWins, method = "class")
+> printcp(nflDataUpsetAmtWins_rpart)
+
+Classification tree:
+rpart(formula = UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWins, 
+    method = "class")
+
+Variables actually used in tree construction:
+[1] AorH    Time    Weather
+
+Root node error: 69/178 = 0.38764
+
+n= 178 
+
+        CP nsplit rel error xerror     xstd
+1 0.014493      0   1.00000 1.0000 0.094206
+2 0.010000      3   0.95652 1.1159 0.095796
+> plotcp(nflDataUpsetAmtWins_rpart)
+> plot(nflDataUpsetAmtWins_rpart)
+> text(nflDataUpsetAmtWins_rpart, use.n=TRUE)
+> nflDataUpsetAmtWins_pred <- predict(nflDataUpsetAmtWins_rpart, newData = classTestData, type="class")
+> nflDataUpsetAmtWins_pred <- predict(nflDataUpsetAmtWins_rpart, classTestData[,-6], type="class")
+> nflDataUpsetAmtWins_pred
+     1      2      9     10     15     16     23     24     27     28     31     32     33     34     37     38     49     50     53     54 
+   Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+    55     56     61     62     63     64     69     70     73     74     79     80     81     82     83     84     91     92     95     96 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+    99    100    101    102    105    106    109    110    111    112    119    120    121    122    133    134    135    136    141    142 
+   Low    Low    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low 
+   143    144    147    148    153    154    155    156    157    158    159    160    165    166    169    170    177    178    189    190 
+   Low    Low    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low 
+   195    196    197    198    201    202    203    204    205    206    207    208    221    222    231    232    239    240 
+   Low    Low    Low    Low    Low    Low    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low 
+Levels: High Low Medium
+> table(nflDataUpsetAmtWins_pred,classTestData$UpsetAmt)
+                        
+nflDataUpsetAmtWins_pred  0 High Low Medium
+                  High    0    0   0      0
+                  Low     0    4  61     28
+                  Medium  0    0   3      2
+> table(droplevels(nflDataUpsetAmtWins_pred),classTestData$UpsetAmt)
+        
+          0 High Low Medium
+  Low     0    4  61     28
+  Medium  0    0   3      2
+> table(nflDataUpsetAmtWins_pred,droplevels(classTestData$UpsetAmt)
++ table(nflDataUpsetAmtWins_pred,droplevels(classTestData$UpsetAmt))
+Error: unexpected symbol in:
+"table(nflDataUpsetAmtWins_pred,droplevels(classTestData$UpsetAmt)
+table"
+> table(nflDataUpsetAmtWins_pred,droplevels(classTestData)$UpsetAmt)
+                        
+nflDataUpsetAmtWins_pred High Low Medium
+                  High      0   0      0
+                  Low       4  61     28
+                  Medium    0   3      2
+> View(testData)
+> View(testData)
+> nflDataUpsetAmtWins_rpart <- rpart(UpsetAmt ~ AorH + Time + Weather + DaysRest, data = nflDataUpsetWins, method = "class")
+> printcp(nflDataUpsetAmtWins_rpart)
+
+Classification tree:
+rpart(formula = UpsetAmt ~ AorH + Time + Weather + DaysRest, 
+    data = nflDataUpsetWins, method = "class")
+
+Variables actually used in tree construction:
+[1] AorH    Time    Weather
+
+Root node error: 69/178 = 0.38764
+
+n= 178 
+
+        CP nsplit rel error xerror     xstd
+1 0.014493      0   1.00000  1.000 0.094206
+2 0.010000      3   0.95652  1.087 0.095475
+> plotcp(nflDataUpsetAmtWins_rpart)
+> plot(nflDataUpsetAmtWins_rpart)
+> text(nflDataUpsetAmtWins_rpart, use.n=TRUE)
+> text(nflDataUpsetAmtWins_rpart, use.n=TRUE)
+> nflDataUpsetAmtWins_rpart <- rpart(UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWins, method = "class")
+> printcp(nflDataUpsetAmtWins_rpart)
+
+Classification tree:
+rpart(formula = UpsetAmt ~ AorH + Time + Weather, data = nflDataUpsetWins, 
+    method = "class")
+
+Variables actually used in tree construction:
+[1] AorH    Time    Weather
+
+Root node error: 69/178 = 0.38764
+
+n= 178 
+
+        CP nsplit rel error xerror     xstd
+1 0.014493      0   1.00000 1.0000 0.094206
+2 0.010000      3   0.95652 1.1739 0.096287
+> plotcp(nflDataUpsetAmtWins_rpart)
+> plot(nflDataUpsetAmtWins_rpart)
+> text(nflDataUpsetAmtWins_rpart, use.n=TRUE)
+> 
