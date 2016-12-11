@@ -1,0 +1,36 @@
+> nflDataUpsetAmtWins_pred
+
+
+    33     34     37     38     49     50     53     54     55     56
+   Low Medium    Low    Low    Low    Low Medium    Low    Low    Low
+     61     62     63     64     69     70     73     74     79     80
+ Medium    Low    Low    Low    Low Medium    Low    Low    Low    Low
+     81     82     83     84     91     92     95     96     99    100
+    Low    Low Medium    Low    Low    Low Medium    Low    Low    Low
+    101    102    105    106    109    110    111    112    119    120
+ Medium    Low    Low    Low Medium    Low    Low Medium    Low    Low
+    121    122    133    134    135    136    141    142    143    144
+ Medium    Low   Low    Low    Low    Low    Low    Low    Low    Low
+    147    148    153    154    155    156    157    158    159    160
+ Medium    Low    Low Medium    Low Medium    Low    Low    Low    Low
+    165    166    169    170    177    178    189    190    195    196
+    Low Medium    Low    Low    Low    Low    Low    Low    Low    Low
+    197    198    201    202    203    204    205    206    207    208
+    Low    Low Medium    Low    Low    Low    Low    Low Medium Medium
+    221    222    231    232    239    240 
+    Low    Low Medium    Low    Low    Low 
+
+Levels: High Low Medium
+
+
+
+> table(nflDataUpsetAmtWins_pred,droplevels(classTestDataFiltered)$UpsetAmt)
+                        
+nflDataUpsetAmtWins_pred High Low Medium
+                  High      0   0      0
+                  Low       2  48     18
+                  Medium    0  14      4
+
+
+
+> 

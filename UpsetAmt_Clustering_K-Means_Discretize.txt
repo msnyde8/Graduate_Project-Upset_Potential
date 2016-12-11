@@ -1,0 +1,6 @@
+> table(discretize(nflDataUpsetWins$UpsetAmt, method="cluster", categories=4))
+
+[ 1.00, 6.06) [ 6.06,12.48) [12.48,22.36) [22.36,45.00] 
+          250           131           112            42 
+> 
+> nflDataUpsetWins$UpsetAmt <- UpsetAmtBin(nflDataUpsetWins$UpsetAmt)
