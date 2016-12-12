@@ -1,0 +1,7 @@
+> table(pred,droplevels(classTestDataFiltered)$UpsetAmt)
+        
+pred     High Low Medium
+  High      0   0      0
+  Low       2  62     22
+  Medium    0   0      0
+

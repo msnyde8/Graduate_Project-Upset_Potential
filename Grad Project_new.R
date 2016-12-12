@@ -143,99 +143,8 @@ nflDataUpsetWins <- subset(nflDataWins, nflDataWins$Upset == "1")
 nflDataUpsetLoses <- subset(nflDataLoses, nflDataLoses$Upset == "1")
 #nflDataUpsetLoses[1:20,]
 
-#### Magnitude of Upset
-### MofU - Clustering
-newDataUpsetWins <- cbind(nflDataUpsetWins$Odds, nflDataUpsetWins$UpsetAmt)
-#newDataUpsetWins$Odds <- lapply(newDataUpsetWins$Odds, abs);
-newDataUpsetWins <- abs(newDataUpsetWins)
-plot(newDataUpsetWins)
 
-## Density-based approach: DBSCAN
-#Run dbscan with eps = 2 and MinPts = 5
-dbr <- dbscan(newDataUpsetWins, eps=2, MinPts=5)
-str(dbr)
-plot(newDataUpsetWins, col=dbr$cluster+1L)
-# Silhouette plot
-d <- dist(newDataUpsetWins)
-sil <- silhouette(dbr$cluster,d)
-plot(sil)
-
-## Partitioning approach: K-means
-myData <- newDataUpsetWins
-wss<-(nrow(myData)-1)*sum(apply(myData,2,var))
-for (i in 2:15) wss[i] <- sum(kmeans(myData,
-                                     centers=i)$withinss)
-plot(1:15, wss, type="b", xlab="Number of Clusters",
-     ylab="Within groups")
-#run k-means with k = 4
-km4 <- kmeans(newDataUpsetWins, centers = 4)
-km4
-#visualize results colored by cluster
-plot(newDataUpsetWins, col=km4$cluster)
-#plot cluster centers
-points(km4$centers,pch='x',cex=1.5)
-#run k-means with k = 3
-km3 <- kmeans(newDataUpsetWins, centers = 3)
-km3
-#visualize results colored by cluster
-plot(newDataUpsetWins, col=km3$cluster)
-#plot cluster centers
-points(km3$centers,pch='x',cex=1.5)
-#silhouette plots
-d <- dist(newDataUpsetWins)
-sil <- silhouette(km4$cluster,d)
-plot(sil)
-d <- dist(newDataUpsetWins)
-sil <- silhouette(km3$cluster,d)
-plot(sil)
-
-
-### MofU Discretize
-nflDataUpsetWins$UpsetAmt
-table(discretize(nflDataUpsetWins$UpsetAmt, method="cluster", categories=4))
-
-nflDataUpsetWins$UpsetAmt <- UpsetAmtBin(nflDataUpsetWins$UpsetAmt)
-testData$UpsetAmt <- UpsetAmtBin(testData$UpsetAmt)
-
-### MofU Classification
-## Decision Tree Classification
-classTestData <- subset(testData, testData$Upset!=0 & testData$Outcome!="T")
-nflDataUpsetWinsFiltered <- subset(nflDataUpsetWins, complete.cases(nflDataUpsetWins))
-classTestDataFiltered <- subset(classTestData, complete.cases(classTestData))
-classTestDataFiltered <- BinningData(classTestDataFiltered)
-classTestDataFiltered <- subset(classTestDataFiltered, classTestDataFiltered$UpsetAmt != "0")
-#classTestDataFiltered$UpsetAmt <- UpsetAmtBin(classTestDataFiltered$UpsetAmt)
-
-
-#nflDataUpsetWins$Odds <- abs(nflDataUpsetWins$Odds)
-#nflDataUpsetWinsMedHigh <- subset(nflDataUpsetWins, nflDataUpsetWins$UpsetAmt!="Low")
-nflDataUpsetAmtWins_rpart <- rpart(UpsetAmt ~ AorH + Time + Weather + AvgPF + AvgPA, data = nflDataUpsetWinsFiltered, method = "class", control=rpart.control(minsplit=1, minbucket=5, cp=0.01))
-printcp(nflDataUpsetAmtWins_rpart)
-plotcp(nflDataUpsetAmtWins_rpart)
-plot(nflDataUpsetAmtWins_rpart)
-text(nflDataUpsetAmtWins_rpart, use.n=TRUE)
-#testData$Odds <- abs(testData$Odds)
-#classTestData$UpsetAmt <- as.factor(classTestData$UpsetAmt)
-nflDataUpsetAmtWins_pred <- predict(nflDataUpsetAmtWins_rpart, newData = classTestDataFiltered, type="class")
-nflDataUpsetAmtWins_pred <- predict(nflDataUpsetAmtWins_rpart, classTestDataFiltered[,-6], type="class")
-nflDataUpsetAmtWins_pred
-table(nflDataUpsetAmtWins_pred,droplevels(classTestDataFiltered)$UpsetAmt)
-
-## Naive Bayes Classification
-classifier <- naiveBayes(UpsetAmt ~ AorH + Time + Weather + AvgPF + AvgPA, data = nflDataUpsetWinsFiltered, method = "class")
-pred <- predict(classifier, classTestDataFiltered[,-5])
-table(pred)
-table(classTestDataFiltered$UpsetAmt)
-table(pred,droplevels(classTestDataFiltered)$UpsetAmt)
-
-
-
-
-
-nflDataSubset <- subset(nflData, nflData$Upset > 0)
-nflDataSubset <- subset(nflDataSubset, nflDataSubset$Outcome =="L")
-
-# Assumed to matter
+### Data Anaylsis
 pairs(~nflDataWins$Upset+
         nflDataWins$Weather+
         nflDataWins$AvgPF+
@@ -381,47 +290,137 @@ hist(nflDataUpsetLoses$AorH,
      main = "Histogram of Upset Loses Away or Home")
 
 
+#### Magnitude of Upset
+### MofU - Clustering
+newDataUpsetWins <- cbind(nflDataUpsetWins$Odds, nflDataUpsetWins$UpsetAmt)
+#newDataUpsetWins$Odds <- lapply(newDataUpsetWins$Odds, abs);
+newDataUpsetWins <- abs(newDataUpsetWins)
+plot(newDataUpsetWins)
+
+## Density-based approach: DBSCAN
+#Run dbscan with eps = 2 and MinPts = 5
+dbr <- dbscan(newDataUpsetWins, eps=2, MinPts=5)
+str(dbr)
+plot(newDataUpsetWins, col=dbr$cluster+1L)
+# Silhouette plot
+d <- dist(newDataUpsetWins)
+sil <- silhouette(dbr$cluster,d)
+plot(sil)
+
+## Partitioning approach: K-means
+myData <- newDataUpsetWins
+wss<-(nrow(myData)-1)*sum(apply(myData,2,var))
+for (i in 2:15) wss[i] <- sum(kmeans(myData,
+                                     centers=i)$withinss)
+plot(1:15, wss, type="b", xlab="Number of Clusters",
+     ylab="Within groups")
+#run k-means with k = 4
+km4 <- kmeans(newDataUpsetWins, centers = 4)
+km4
+#visualize results colored by cluster
+plot(newDataUpsetWins, col=km4$cluster)
+#plot cluster centers
+points(km4$centers,pch='x',cex=1.5)
+#run k-means with k = 3
+km3 <- kmeans(newDataUpsetWins, centers = 3)
+km3
+#visualize results colored by cluster
+plot(newDataUpsetWins, col=km3$cluster)
+#plot cluster centers
+points(km3$centers,pch='x',cex=1.5)
+#silhouette plots
+d <- dist(newDataUpsetWins)
+sil <- silhouette(km4$cluster,d)
+plot(sil)
+d <- dist(newDataUpsetWins)
+sil <- silhouette(km3$cluster,d)
+plot(sil)
+
+## MofU Discretize
+nflDataUpsetWins$UpsetAmt
+table(discretize(nflDataUpsetWins$UpsetAmt, method="cluster", categories=4))
+
+nflDataUpsetWins$UpsetAmt <- UpsetAmtBin(nflDataUpsetWins$UpsetAmt)
+testData$UpsetAmt <- UpsetAmtBin(testData$UpsetAmt)
+
+
+### MofU Classification
+## Decision Tree Classification
+classTestData <- subset(testData, testData$Upset!=0 & testData$Outcome!="T")
+nflDataUpsetWinsFiltered <- subset(nflDataUpsetWins, complete.cases(nflDataUpsetWins))
+classTestDataFiltered <- subset(classTestData, complete.cases(classTestData))
+classTestDataFiltered <- BinningData(classTestDataFiltered)
+classTestDataFiltered <- subset(classTestDataFiltered, classTestDataFiltered$UpsetAmt != "0")
+#classTestDataFiltered$UpsetAmt <- UpsetAmtBin(classTestDataFiltered$UpsetAmt)
+
+#nflDataUpsetWins$Odds <- abs(nflDataUpsetWins$Odds)
+#nflDataUpsetWinsMedHigh <- subset(nflDataUpsetWins, nflDataUpsetWins$UpsetAmt!="Low")
+nflDataUpsetAmtWins_rpart <- rpart(UpsetAmt ~ AorH + Time + Weather + AvgPF + AvgPA, data = nflDataUpsetWinsFiltered, method = "class", control=rpart.control(minsplit=1, minbucket=5, cp=0.01))
+printcp(nflDataUpsetAmtWins_rpart)
+plotcp(nflDataUpsetAmtWins_rpart)
+plot(nflDataUpsetAmtWins_rpart)
+text(nflDataUpsetAmtWins_rpart, use.n=TRUE)
+#testData$Odds <- abs(testData$Odds)
+#classTestData$UpsetAmt <- as.factor(classTestData$UpsetAmt)
+nflDataUpsetAmtWins_pred <- predict(nflDataUpsetAmtWins_rpart, newData = classTestDataFiltered, type="class")
+nflDataUpsetAmtWins_pred <- predict(nflDataUpsetAmtWins_rpart, classTestDataFiltered[,-6], type="class")
+nflDataUpsetAmtWins_pred
+table(nflDataUpsetAmtWins_pred,droplevels(classTestDataFiltered)$UpsetAmt)
+
+## Naive Bayes Classification
+classifier <- naiveBayes(UpsetAmt ~ AorH + Time + Weather + AvgPF + AvgPA, data = nflDataUpsetWinsFiltered, method = "class")
+pred <- predict(classifier, classTestDataFiltered[,-5])
+table(pred)
+table(classTestDataFiltered$UpsetAmt)
+table(pred,droplevels(classTestDataFiltered)$UpsetAmt)
+
+
 
 #### Classification
 ### Train & Test
-
-## Decision Tree Classification
-decisionTreeClassifyData <- function(trainData, testData) {
-nflDataUpsetWins_rpart <- rpart(Upset ~ Odds + Time + Weather, data = nflDataWins, method = "class")
+## Past Years to Current Year
+# Naive Bayes Classification
+classifier <- naiveBayes(Upset ~ Time + Weather + Offense + Defense, data = TRAINDATA, method = "class")
+classifier
+pred <- predict(classifier, TESTDATA[,-5])
+table(pred)
+table(TESTDATA$Upset)
+table(pred,droplevels(TESTDATA)$Upset)
+# Decision Tree Classification
+nflDataUpsetWins_rpart <- rpart(Upset ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = TRAINDATA, method = "class")
 printcp(nflDataUpsetWins_rpart)
 plotcp(nflDataUpsetWins_rpart)
 plot(nflDataUpsetWins_rpart)
 text(nflDataUpsetWins_rpart, use.n=TRUE)
 #nflDataUpsetWins_pred <- predict(nflDataUpsetWins_rpart, newData = testData, type="class")
-nflDataUpsetWins_pred <- predict(nflDataUpsetWins_rpart, testData[,-6], type="class")
+nflDataUpsetWins_pred <- predict(nflDataUpsetWins_rpart, TESTDATA[,-6], type="class")
 #balanceScale_pred <- predict(balanceScale_rpart, newData = testData, type="class")
 nflDataUpsetWins_pred
 table(nflDataUpsetWins_pred, testData$Upset)
-}
-decisionTreeClassifyData(nflDataWins, testData)
-  
 
-classifyData(nflDataWins, nflDataUndetermined)
-classifyData(nflDataLoses, nflDataUndetermined)
-
-## Naive Bayes Classification
-# library(class)
-# library(e1071)
-# classifier <- naiveBayes(class ~ balanceData, data = trainData)
-classifier <- naiveBayes(Upset ~ Time + Weather + Offense + Defense, data = nflDataWins, method = "class")
+## 70/30 split
+set.seed(1234)
+ind <- sample(2, nrow(NFLDATA), replace=TRUE,
+              prob=c(0.7,0.3))
+trainData <- NFLDATA[ind==1,]
+testData <- NFLDATA[ind==2,]
+# Naive Bayes Classification
+classifier <- naiveBayes(Upset ~ Time + Weather + Offense + Defense, data = TRAINDATA, method = "class")
 classifier
-pred <- predict(classifier, testData[,-5])
+pred <- predict(classifier, TESTDATA[,-5])
 table(pred)
-table(nflDataWins$Upset)
-table(pred,nflDataWins$Upset)
-
-## Random Forest?
-# install.packages("randomForest")
-# library(randomForest)
-# fit <- randomForest(class ~ balanceData, data = trainData)
-fit <- randomForest(Upset ~ Time + DaysRest + Offense + Defense, data = nflData, method = "class")
-print(fit)
-importance(fit)
-
+table(TESTDATA$Upset)
+table(pred,droplevels(TESTDATA)$Upset)
+# Decision Tree Classification
+nflDataUpsetWins_rpart <- rpart(Upset ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = TRAINDATA, method = "class")
+printcp(nflDataUpsetWins_rpart)
+plotcp(nflDataUpsetWins_rpart)
+plot(nflDataUpsetWins_rpart)
+text(nflDataUpsetWins_rpart, use.n=TRUE)
+#nflDataUpsetWins_pred <- predict(nflDataUpsetWins_rpart, newData = testData, type="class")
+nflDataUpsetWins_pred <- predict(nflDataUpsetWins_rpart, TESTDATA[,-6], type="class")
+#balanceScale_pred <- predict(balanceScale_rpart, newData = testData, type="class")
+nflDataUpsetWins_pred
+table(nflDataUpsetWins_pred, testData$Upset)
 
 
