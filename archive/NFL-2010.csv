@@ -1,0 +1,513 @@
+Team,Score,Ending,Outcome,Date,GameNum,DaysRest,AorH,Time,Timezone,Weather,W+,OppScore,AvgPF,AvgPA,Odds,Upset,QB,RB,WR,TE,C,LT,LG,RG,RT,Other 1,Other 2,Offense,DE,DT,NT,RDT,LB,Other LB 1,Other 2,Other 3,LCB,RCB,FS,SS,Defense
+Minnesota Vikings,9,Final,L,09-09-10,1,,A,1930,Central,Dome,,14,,,-5.0,N,P,,,,P,,,,,,,2,,,,,,,,,,,,,0
+New Orleans Saints,14,Final,W,09-09-10,1,,H,1930,Central,Dome,,9,,,5.0,N,,,P,,,,,,,,,1,,,,,,,P,,,P,,,2
+Atlanta Falcons,9,OT,L,09-12-10,1,,A,1300,Eastern,65,Cloudy,15,,,1.0,Y,,,O,,,,,,,,,2,,,,,,,P,,P,,,,2
+Pittsburgh Steelers,15,OT,W,09-12-10,1,,H,1300,Eastern,65,Cloudy,9,,,-1.0,Y,,,,,,,P,,,,,1,,,,,,,,,,,,,0
+Cincinnati Bengals,24,Final,L,09-12-10,1,,A,1300,Eastern,62,Cloudy,38,,,-5.0,N,,,,,,,,,,,,0,,,,,,,,,,,,,0
+New England Patriots,38,Final,W,09-12-10,1,,H,1300,Eastern,62,Cloudy,24,,,5.0,N,P,,,,,,,,,,,1,,,,,P,,,,,P,,,2
+Cleveland Browns,14,Final,L,09-12-10,1,,A,1300,Eastern,87,Partly Cloudy,17,,,-3.0,N,,,,,,,,P,,,,1,,,,,,,,,,,,,0
+Tampa Bay Buccaneers,17,Final,W,09-12-10,1,,H,1300,Eastern,87,Partly Cloudy,14,,,3.0,N,P,,,,,,,,,,,1,,,,,,,,,,,,,0
+Miami Dolphins,15,Final,W,09-12-10,1,,A,1300,Eastern,62,Cloudy,10,,,3.0,N,,,,,,P,,,,P,,2,,,,,O,,,,,,,,2
+Buffalo Bills,10,Final,L,09-12-10,1,,H,1300,Eastern,62,Cloudy,15,,,-3.0,N,,P,,,,,,,,,,1,,,,,,,,,,,P,,1
+Oakland Raiders,13,Final,L,09-12-10,1,,A,1200,Central,77,Sunny,38,,,-6.5,N,,,,,,,,,,,,0,,,,,,,,,,,,,0
+Tennessee Titans,38,Final,W,09-12-10,1,,H,1200,Central,77,Sunny,13,,,6.5,N,,,,,,,P,,,,,1,,P,,,,,,,,,,,1
+Indianapolis Colts,24,Final,L,09-12-10,1,,A,1200,Central,Dome,,34,,,1.5,Y,,,,,P,P,,,,,,2,,,,,,,,,,,,,0
+Houston Texans,34,Final,W,09-12-10,1,,H,1200,Central,Dome,,24,,,-1.5,Y,,,,P,,P,,,,,,2,,,,,,,,P,,P,,,2
+Detroit Lions,14,Final,L,09-12-10,1,,A,1200,Central,75,Sunny,19,,,-6.5,N,,,,,,,,,,,,0,,,,,,O,,,,,P,,3
+Chicago Bears,19,Final,W,09-12-10,1,,H,1200,Central,75,Sunny,14,,,6.5,N,,,,,,,,,,,,0,,,,,P,,,,,,,,1
+Denver Broncos,17,Final,L,09-12-10,1,,A,1300,Eastern,90,Rain Clouds,24,,,-3.0,N,,P,,P,,,,,O,,,4,,,,,,,,,,,,,0
+Jacksonville Jaguars,24,Final,W,09-12-10,1,,H,1300,Eastern,90,Rain Clouds,17,,,3.0,N,,,,,,,,,,,,0,,,,,,,,,,,,,0
+Carolina Panthers,18,Final,L,09-12-10,1,,A,1300,Eastern,64,Light Rain,31,,,-5.5,N,,,,,,,,,,,,0,P,,,,,,,,,,,,1
+New York Giants,31,Final,W,09-12-10,1,,H,1300,Eastern,64,Light Rain,18,,,5.5,N,,,,,,,,,,,,0,,,,P,,,,,P,,,,2
+Arizona Cardinals,17,Final,W,09-12-10,1,,A,1515,Central,Dome,,13,,,3.0,N,,,,,,,,,,P,,1,,,,,,,P,,,,,,1
+St. Louis Rams,13,Final,L,09-12-10,1,,H,1515,Central,Dome,,17,,,-3.0,N,,,,,,,,,,,,0,,,,,,,,,,,,,0
+San Francisco 49ers,6,Final,L,09-12-10,1,,A,1315,Pacific,64,Sunny,31,,,3.0,Y,,,,,,,,,,,,0,,,,,,,,,,,,,0
+Seattle Seahawks,31,Final,W,09-12-10,1,,H,1315,Pacific,64,Sunny,6,,,-3.0,Y,,,,,,O,,,,,,2,,,,,,,,,,,,,0
+Green Bay Packers,27,Final,W,09-12-10,1,,A,1615,Eastern,69,Cloudy,20,,,3.0,N,,,,,,P,,,P,,,2,,,,,,P,P,,P,,,,3
+Philadelphia Eagles,20,Final,L,09-12-10,1,,H,1615,Eastern,69,Cloudy,27,,,-3.0,N,,,,,,,,,,,,0,,,,,,,,,,,,,0
+Dallas Cowboys,7,Final,L,09-12-10,1,,A,2020,Eastern,66,Cloudy,13,,,3.5,Y,,,,,,,O,,O,,,4,,,,,,,,,,,,P,1
+Washington Redskins,13,Final,W,09-12-10,1,,H,2020,Eastern,66,Cloudy,7,,,-3.5,Y,P,,,,,,,,O,,,3,,,,,,,,,,,O,,2
+Baltimore Ravens,10,Final,W,09-13-10,1,,A,1900,Eastern,67,,9,,,-1.0,Y,,,,,,,,,,,,0,,,,,,,,,,,,,0
+New York Jets,9,Final,L,09-13-10,1,,H,1900,Eastern,67,,10,,,1.0,Y,,,,,,,,,,,,0,P,,,,,,O,,,,O,,5
+San Diego Chargers,14,Final,L,09-13-10,1,,A,2115,Central,78,"Rain, Wind",21,,,4.0,Y,,,,,,,,,,,,0,,,,,,,,P,,,,,1
+Kansas City Chiefs,21,Final,W,09-13-10,1,,H,2115,Central,78,"Rain, Wind",14,,,-4.0,Y,,,,,,,,,,,,0,,,,,,,,O,,,,,2
+Baltimore Ravens,10,Final,L,09-19-10,2,6,A,1300,Eastern,78,Cloudy,15,10.00,9.00,3.0,Y,,,P,P,,,,,,,,2,,,,,P,P,,O,,,,,4
+Cincinnati Bengals,15,Final,W,09-19-10,2,7,H,1300,Eastern,78,Cloudy,10,24.00,38.00,-3.0,Y,,P,,,,,,,,,,1,,,,,,,O,,,,,,2
+Kansas City Chiefs,16,Final,W,09-19-10,2,6,A,1300,Eastern,65,Cloudy,14,21.00,14.00,-3.0,Y,,,,,,,,,,,,0,,,,,,,,P,,,,,1
+Cleveland Browns,14,Final,L,09-19-10,2,7,H,1300,Eastern,65,Cloudy,16,14.00,17.00,3.0,Y,,,,,,,,P,,,,1,,,,,,,,P,,,,,1
+Buffalo Bills,7,Final,L,09-19-10,2,7,A,1300,Eastern,58,Partly Sunny,34,10.00,15.00,-12.5,N,,,,,P,,,,,,,1,,,,,,O,,P,,,,,3
+Green Bay Packers,34,Final,W,09-19-10,2,7,H,1300,Eastern,58,Partly Sunny,7,27.00,20.00,12.5,N,,,,,,P,P,,,,,2,,,P,,,O,P,P,P,,,,6
+Philadelphia Eagles,35,Final,W,09-19-10,2,7,A,1300,Eastern,Dome,,32,20.00,27.00,6.5,N,,,,,,P,P,,,,,2,,,,,,O,P,,,,,,3
+Detroit Lions,32,Final,L,09-19-10,2,7,H,1300,Eastern,Dome,,35,14.00,19.00,-6.5,N,,P,P,,,,,,,,,2,O,,,,,O,,P,,,P,,6
+Pittsburgh Steelers,19,Final,W,09-19-10,2,7,A,1200,Central,87,Sunny,11,15.00,9.00,-6.0,Y,,,,,,,,,,,,0,,,O,,,P,,,P,,,,4
+Tennessee Titans,11,Final,L,09-19-10,2,7,H,1200,Central,87,Sunny,19,38.00,13.00,6.0,Y,,,,,,,,,,,,0,,P,,,,,,,,,P,,2
+Arizona Cardinals,7,Final,L,09-19-10,2,7,A,1300,Eastern,Dome,,41,17.00,13.00,-7.0,N,,,,,,,,,,P,,1,,,,,,,,,,,,,0
+Atlanta Falcons,41,Final,W,09-19-10,2,7,H,1300,Eastern,Dome,,7,9.00,15.00,7.0,N,,,O,,,,,,P,,,3,,P,,,,,,,,P,,,2
+Tampa Bay Buccaneers,20,Final,W,09-19-10,2,7,A,1300,Eastern,89,Sunny,7,17.00,14.00,-4.0,Y,P,,,P,,,,P,,,,3,,,,,,,,P,P,,,,2
+Carolina Panthers,7,Final,L,09-19-10,2,7,H,1300,Eastern,89,Sunny,20,18.00,31.00,4.0,Y,,,,,,,,,,,,0,O,,,,,,,,P,,,,3
+Chicago Bears,27,Final,W,09-19-10,2,7,A,1200,Central,Dome,,20,19.00,14.00,-7.0,Y,,P,,,,,,,,,,1,,,,,P,,,,,,,,1
+Dallas Cowboys,20,Final,L,09-19-10,2,7,H,1200,Central,Dome,,27,7.00,13.00,7.0,Y,,,,,,,P,,P,,,2,,,,,,,,P,,,,,1
+Miami Dolphins,14,Final,W,09-19-10,2,7,A,1200,Central,Dome,,10,15.00,10.00,-5.5,Y,,,,,,,,,,,,0,,,,,O,,,,,,,,2
+Minnesota Vikings,10,Final,L,09-19-10,2,10,H,1200,Central,Dome,,14,9.00,14.00,5.5,Y,P,,,,P,P,,,,P,,4,,,,,,,,,,,,,0
+St. Louis Rams,14,Final,L,09-19-10,2,7,A,1305,Pacific,72,Cloudy,16,13.00,17.00,-3.5,N,,P,P,,,,,,,,,2,,,,,,,P,,,,,,1
+Oakland Raiders,16,Final,W,09-19-10,2,7,H,1305,Pacific,72,Cloudy,14,13.00,38.00,3.5,N,,,,,,,O,,,,,2,,O,,,,,,,P,,,,3
+Seattle Seahawks,14,Final,L,09-19-10,2,7,A,1406,Mountain,91,Sunny,31,31.00,6.00,-3.0,N,,,,,,O,,,,,P,3,,,,,,,,,,,,,0
+Denver Broncos,31,Final,W,09-19-10,2,7,H,1406,Mountain,91,Sunny,14,17.00,24.00,3.0,N,,,,,,,,,O,P,,3,,,,,,,,,,,,,0
+Houston Texans,30,OT,W,09-19-10,2,7,A,1615,Eastern,85,Sunny,27,34.00,24.00,2.5,N,,,P,P,,P,,,,,P,4,P,P,,,,,,P,,,P,,4
+Washington Redskins,27,OT,L,09-19-10,2,7,H,1615,Eastern,85,Sunny,30,13.00,7.00,-2.5,N,P,,,,,,,,,,,1,,,,,,,,,,,O,,2
+Jacksonville Jaguars,13,Final,L,09-19-10,2,7,A,1315,Pacific,76,Sunny,38,24.00,17.00,-7.0,N,P,,,,,,,,,,,1,,,,,,,,,,,,,0
+San Diego Chargers,38,Final,W,09-19-10,2,6,H,1315,Pacific,76,Sunny,13,14.00,21.00,7.0,N,,,,,,,,,,,,0,,,,,,,O,,,,,,2
+New England Patriots,14,Final,L,09-19-10,2,7,A,1615,Eastern,81,Clear,28,38.00,24.00,3.0,Y,P,,,,,,,,,,,1,,,,,,,,,,,,,0
+New York Jets,28,Final,W,09-19-10,2,6,H,1615,Eastern,81,Clear,14,9.00,10.00,-3.0,Y,,,,,P,,,,,,,1,,,,,,,O,P,,,P,,4
+New York Giants,14,Final,L,09-19-10,2,7,A,2020,Eastern,74,Clear,38,31.00,18.00,-4.5,N,,,,O,,,,,,P,,3,,,,,,,,P,,,,P,2
+Indianapolis Colts,38,Final,W,09-19-10,2,7,H,2020,Eastern,74,Clear,14,24.00,34.00,4.5,N,,,,,P,P,,,P,,,3,P,,,,,P,,,,P,,,3
+New Orleans Saints,25,Final,W,09-20-10,2,11,A,1730,Pacific,65,Sunny,22,14.00,9.00,4.5,N,,,,,,,,,,,,0,,,,,,,P,,,,,,1
+San Francisco 49ers,22,Final,L,09-20-10,2,8,H,1730,Pacific,65,Sunny,25,6.00,31.00,-4.5,N,,,,,,,,O,,,,2,,,,,,,,P,,,,,1
+Dallas Cowboys,27,Final,W,09-26-10,3,7,A,1200,Central,Dome,,13,13.50,20.00,-2.5,Y,,,,,,,,,,,P,1,,,,,,,,,,P,,,1
+Houston Texans,13,Final,L,09-26-10,3,7,H,1200,Central,Dome,,27,32.00,25.50,2.5,Y,,,P,P,,,,,,P,,3,,P,,,,,,P,,,,,2
+Tennessee Titans,29,Final,W,09-26-10,3,7,A,1300,Eastern,70,Cloudy,10,24.50,16.00,-3.0,Y,,,,,,,,,,,,0,P,P,,,,,,,,P,,,3
+New York Giants,10,Final,L,09-26-10,3,7,H,1300,Eastern,70,Cloudy,29,22.50,28.00,3.0,Y,,,P,P,,,,,,,,2,P,,,,,,,,,,,,1
+Cincinnati Bengals,20,Final,W,09-26-10,3,7,A,1300,Eastern,67,Showers,7,19.50,24.00,3.5,N,,,P,,,,,,,,,1,,,,,,,P,,,,,,1
+Carolina Panthers,7,Final,L,09-26-10,3,7,H,1300,Eastern,67,Showers,20,12.50,25.50,-3.5,N,,,P,,,,,,,,,1,P,,,,,,,P,,,,,2
+Cleveland Browns,17,Final,L,09-26-10,3,7,A,1300,Eastern,64,Chance of Rain,24,14.00,16.50,-12.5,N,,,,,,,P,P,,O,,4,,,,P,P,,P,,,,,,3
+Baltimore Ravens,24,Final,W,09-26-10,3,7,H,1300,Eastern,64,Chance of Rain,17,10.00,12.00,12.5,N,,P,,P,,,,,,P,P,4,,P,,,P,P,P,,,,,,4
+Buffalo Bills,30,Final,L,09-26-10,3,7,A,1300,Eastern,68,Partly Cloudy,38,8.50,24.50,-14.5,N,,,,,,,P,,,,,1,,,,,,O,,,,,,,2
+New England Patriots,38,Final,W,09-26-10,3,7,H,1300,Eastern,68,Partly Cloudy,30,26.00,26.00,14.5,N,P,,,,,,,,,,,1,,,,,,,,,,,,,0
+Atlanta Falcons,27,OT,W,09-26-10,3,7,A,1200,Central,Dome,,24,25.00,11.00,-3.0,Y,,P,O,,,,,,,,,3,,,,,,,,,,,,,0
+New Orleans Saints,24,OT,L,09-26-10,3,6,H,1200,Central,Dome,,27,19.50,15.50,3.0,Y,,,,,,,,,,,,0,,,,,,,,,,,,,0
+Pittsburgh Steelers,38,Final,W,09-26-10,3,7,A,1300,Eastern,90,Cloudy,13,17.00,10.00,2.5,N,,,P,,,,P,,,,,2,,,P,,,,,,,,,,1
+Tampa Bay Buccaneers,13,Final,L,09-26-10,3,7,H,1300,Eastern,90,Cloudy,38,18.50,10.50,-2.5,N,P,P,,P,P,,,,,,,4,,,,,,,,,,,,,0
+San Francisco 49ers,10,Final,L,09-26-10,3,6,A,1200,Central,55,Sunny,31,14.00,28.00,3.0,Y,,,,,,,,P,,,,1,,,,,,,P,,,,,,1
+Kansas City Chiefs,31,Final,W,09-26-10,3,7,H,1200,Central,55,Sunny,10,18.50,14.00,-3.0,Y,,,,,,,,,,,,0,,,,,,,,P,,,,,1
+Detroit Lions,10,Final,L,09-26-10,3,7,A,1200,Central,Dome,,24,23.00,27.00,-13.0,N,,,O,,,,,P,,,,3,P,,,,,P,,,,,P,,3
+Minnesota Vikings,24,Final,W,09-26-10,3,7,H,1200,Central,Dome,,10,9.50,14.00,13.0,N,P,,P,,P,P,,,,P,,5,,,,,,,P,,,,,,1
+Oakland Raiders,23,Final,L,09-26-10,3,7,A,1315,Pacific,Dome,,24,14.50,26.00,-5.5,N,,,,,,,O,,,,,2,,P,,,,,,,,,,,1
+Arizona Cardinals,24,Final,W,09-26-10,3,7,H,1315,Pacific,Dome,,23,12.00,27.00,5.5,N,,,P,,,,P,,,,,2,,,,,,P,,,,,,,1
+Washington Redskins,16,Final,L,09-26-10,3,7,A,1505,Central,Dome,,30,20.00,18.50,5.0,Y,,,O,,,O,,,,,,4,,,,,,,,,,,P,P,2
+St. Louis Rams,30,Final,W,09-26-10,3,7,H,1505,Central,Dome,,16,13.50,16.50,-5.0,Y,,,O,O,,P,,,,,,5,,,,,,,,,,,P,O,3
+Philadelphia Eagles,28,Final,W,09-26-10,3,7,A,1605,Eastern,89,Chance of Rain,3,27.50,29.50,2.5,N,,,,P,,,P,,,,,2,,,,,,P,,,,,,,1
+Jacksonville Jaguars,3,Final,L,09-26-10,3,7,H,1605,Eastern,89,Chance of Rain,28,18.50,27.50,-2.5,N,,P,,,,,,,,,,1,,,,,O,,,,,P,,,3
+Indianapolis Colts,27,Final,W,09-26-10,3,7,A,1415,Mountain,85,Sunny,13,31.00,24.00,6.0,N,,,P,,P,O,,,,,,4,,,,,,P,,,,P,,,2
+Denver Broncos,13,Final,L,09-26-10,3,7,H,1415,Mountain,85,Sunny,27,24.00,19.00,-6.0,N,,O,,,,,,,O,,,4,,,,O,,,,,P,,,,3
+San Diego Chargers,20,Final,L,09-26-10,3,7,A,1315,Pacific,68,Cloudy,27,26.00,17.00,3.5,Y,,O,P,,,,,,,,,3,,,,,,,O,,P,,,,3
+Seattle Seahawks,27,Final,W,09-26-10,3,7,H,1315,Pacific,68,Cloudy,20,22.50,18.50,-3.5,Y,,,,,,O,,,P,,P,4,,,,,,,,,,,,,0
+New York Jets,31,Final,W,09-26-10,3,7,A,2020,Eastern,83,Cloudy,23,18.50,12.00,-2.5,Y,,,,,P,,,,,,,1,,,,,,,O,O,,,,,4
+Miami Dolphins,23,Final,L,09-26-10,3,7,H,2020,Eastern,83,Cloudy,31,14.50,10.00,2.5,Y,,,,,,,,O,,P,,3,,,,,O,,,,,,,,2
+Green Bay Packers,17,Final,L,09-27-10,3,8,A,1930,Central,56,Mostly Clear,20,30.50,13.50,3.0,Y,,,,,,P,P,,,,,2,P,,,,,P,P,,P,,,O,6
+Chicago Bears,20,Final,W,09-27-10,3,8,H,1930,Central,56,Mostly Clear,17,23.00,17.00,-3.0,Y,,,,,,,O,,,,,2,P,,,,P,,,,,,,,2
+Seattle Seahawks,3,Final,L,10-03-10,4,7,A,1200,Central,Dome,,20,24.00,19.00,2.0,Y,,,,,,P,,,P,,P,3,,,,,P,,,P,P,,,,3
+St. Louis Rams,20,Final,W,10-03-10,4,7,H,1200,Central,Dome,,3,19.00,16.33,-2.0,Y,,P,O,O,,,,,,,,5,,,,,,,,,,,P,P,2
+Denver Broncos,26,Final,W,10-03-10,4,7,A,1200,Central,54,Cloudy,20,20.33,21.67,-6.5,Y,,O,,,,,,,P,,,3,,,,O,,,,,,,P,,3
+Tennessee Titans,20,Final,L,10-03-10,4,7,H,1200,Central,54,Cloudy,26,26.00,14.00,6.5,Y,,,,,,,,,,,,0,,P,,,,,,,,,,,1
+New York Jets,38,Final,W,10-03-10,4,7,A,1300,Eastern,51,Showers,14,22.67,15.67,5.5,N,,,,,P,,,,,,,1,,,,,,,O,O,,,,,4
+Buffalo Bills,14,Final,L,10-03-10,4,7,H,1300,Eastern,51,Showers,38,15.67,29.00,-5.5,N,,,,,,,,,,,,0,,,,,,P,O,,,,,,3
+Detroit Lions,26,Final,L,10-03-10,4,7,A,1200,Central,52,Partly Cloudy,28,18.67,26.00,-14.5,N,,P,O,,,,,P,,,,4,P,,,,,O,,,P,,P,P,6
+Green Bay Packers,28,Final,W,10-03-10,4,6,H,1200,Central,52,Partly Cloudy,26,26.00,15.67,14.5,N,,,,,,P,,,,,,1,,,,,,,,,P,,P,O,4
+Cincinnati Bengals,20,Final,L,10-03-10,4,7,A,1300,Eastern,50,Cloudy,23,19.67,18.33,2.0,Y,,P,P,,,,,,,,,2,,,,,,,P,,,,,,1
+Cleveland Browns,23,Final,W,10-03-10,4,7,H,1300,Eastern,50,Cloudy,20,15.00,19.00,-2.0,Y,,,,,,,,,O,O,,4,P,,,,,,,,,,,,1
+Baltimore Ravens,17,Final,W,10-03-10,4,7,A,1300,Eastern,52,Cloudy,14,14.67,13.67,-2.5,Y,,P,,P,P,,,P,,,,4,O,,,,P,,,,P,,,,4
+Pittsburgh Steelers,14,Final,L,10-03-10,4,7,H,1300,Eastern,52,Cloudy,17,24.00,11.00,2.5,Y,,,,,,,,,,,,0,,,,,,,,,,,,,0
+Carolina Panthers,14,Final,L,10-03-10,4,7,A,1200,Central,Dome,,16,10.67,23.67,-12.5,N,,,,,,,P,,,,,1,P,,,,,,,,,,,,1
+New Orleans Saints,16,Final,W,10-03-10,4,7,H,1200,Central,Dome,,14,21.00,19.33,12.5,N,,,,,,,,,,,,0,,,,,,,,,,,,O,2
+San Francisco 49ers,14,Final,L,10-03-10,4,7,A,1300,Eastern,Dome,,16,12.67,29.00,-7.0,N,,,,,,,,,,,,0,,,,,,,P,,,,P,,2
+Atlanta Falcons,16,Final,W,10-03-10,4,7,H,1300,Eastern,Dome,,14,25.67,15.33,7.0,N,,,O,,,,,,,,,2,,,,,,,P,,,,,,1
+Indianapolis Colts,28,Final,L,10-03-10,4,7,A,1605,Eastern,80,Partly Cloudy,31,29.67,20.33,7.0,Y,,O,O,,P,P,,,,,,6,,,,,O,P,,,,P,,,4
+Jacksonville Jaguars,31,Final,W,10-03-10,4,7,H,1605,Eastern,80,Partly Cloudy,28,13.33,27.67,-7.0,Y,,,,,,,,,,,,0,,,,,O,,,,P,,,,3
+Houston Texans,31,Final,W,10-03-10,4,7,A,1305,Pacific,71,Partly Cloudy,24,25.67,26.00,3.0,N,,,O,P,,,,,,,,3,,,,,,,,P,,,O,,3
+Oakland Raiders,24,Final,L,10-03-10,4,7,H,1305,Pacific,71,Partly Cloudy,31,17.33,25.33,-3.0,N,,,P,P,,,O,P,P,P,P,8,,P,,,P,,,,,,,,2
+Arizona Cardinals,10,Final,L,10-03-10,4,7,A,1315,Pacific,72,Sunny,41,16.00,25.67,-10.0,N,,,O,,,,P,,,,,3,,,,,P,,,,,,,,1
+San Diego Chargers,41,Final,W,10-03-10,4,7,H,1315,Pacific,72,Sunny,10,24.00,20.33,10.0,N,,P,,,,,P,O,,,,4,,,,,,,P,,,,,,1
+Washington Redskins,17,Final,W,10-03-10,4,7,A,1615,Eastern,63,Cloudy,12,18.67,22.33,-5.0,Y,,,P,,,O,P,,,,,4,,,,,,,,,P,,P,,2
+Philadelphia Eagles,12,Final,L,10-03-10,4,7,H,1615,Eastern,63,Cloudy,17,27.67,20.67,5.0,Y,,,,P,,,,,,P,,2,,,,,,,P,,,,,,1
+Chicago Bears,3,Final,L,10-03-10,4,6,A,2020,Eastern,59,Scattered Showers,17,22.00,17.00,-3.5,N,,,,,,,O,P,,,,3,P,,,,,,,,,,P,,2
+New York Giants,17,Final,W,10-03-10,4,7,H,2020,Eastern,59,Scattered Showers,3,18.33,28.33,3.5,N,,,P,,,,,,,,,1,,,,,O,,,P,,,,,3
+New England Patriots,41,Final,W,10-04-10,4,8,A,2030,Eastern,80,Clear,14,30.00,27.33,0.0,Y,P,,,,,,,,,,,1,,,,,,,,,,,,,0
+Miami Dolphins,14,Final,L,10-04-10,4,8,H,2030,Eastern,80,Clear,41,17.33,17.00,0.0,Y,,,,,,P,,O,,,,3,,,,,O,,,,,,,,2
+St. Louis Rams,6,Final,L,10-10-10,5,7,A,1300,Eastern,Dome,,44,19.25,13.00,-3.0,N,,P,P,O,,P,,,,,,5,,,,P,,,,,,,,,1
+Detroit Lions,44,Final,W,10-10-10,5,7,H,1300,Eastern,Dome,,6,20.50,26.50,3.0,N,,P,P,,,,,,,,,2,,,,,,O,,,,,P,,3
+Denver Broncos,17,Final,L,10-10-10,5,7,A,1300,Eastern,67,Sunny,31,21.75,21.25,-8.0,N,,O,,,,,,,,,,2,,,,P,,,,,,,,,1
+Baltimore Ravens,31,Final,W,10-10-10,5,7,H,1300,Eastern,67,Sunny,17,15.25,13.75,8.0,N,,P,,P,,,,,,,P,3,,,,,,,,,,P,,,1
+Jacksonville Jaguars,36,Final,W,10-10-10,5,10,A,1300,Eastern,62,Sunny,26,17.75,27.75,-2.5,Y,,P,,,,,,,,,,1,,,,,O,,,,,,,,2
+Buffalo Bills,26,Final,L,10-10-10,5,7,H,1300,Eastern,62,Sunny,36,15.25,31.25,2.5,Y,,,,,,,,,,,,0,,,,,,,P,,,,,,1
+Green Bay Packers,13,OT,L,10-10-10,5,7,A,1300,Eastern,72,Sunny,16,26.50,18.25,3.0,Y,,,,,,P,,,,,,1,,,,,,,,,P,,P,P,3
+Washington Redskins,16,OT,W,10-10-10,5,7,H,1300,Eastern,72,Sunny,13,18.25,19.75,-3.0,Y,P,,,,,,P,,,,,2,,,,,,,,,,,,P,1
+Atlanta Falcons,20,Final,W,10-10-10,5,7,A,1300,Eastern,71,Sunny,10,23.25,15.00,3.0,N,,,O,,,,,,,,,2,,,,,,P,,,,,,,1
+Cleveland Browns,10,Final,L,10-10-10,5,7,H,1300,Eastern,71,Sunny,20,17.00,19.25,-3.0,N,,P,,,,,,,O,P,,4,P,,,,,,,,,,,,1
+Kansas City Chiefs,9,Final,L,10-10-10,4,14,A,1300,Eastern,Dome,,19,22.67,12.67,-7.5,N,,,,,,,,,,,,0,,,,,,,,,,,,,0
+Indianapolis Colts,19,Final,W,10-10-10,5,7,H,1300,Eastern,Dome,,9,29.25,23.00,7.5,N,,O,P,,,P,,,,P,,5,,,,,O,P,,,,P,P,,5
+Chicago Bears,23,Final,W,10-10-10,5,7,A,1300,Eastern,81,Sunny,6,17.25,17.00,-3.0,Y,O,,,,,,O,,,,,4,,,,,,,,,,,,,0
+Carolina Panthers,6,Final,L,10-10-10,5,7,H,1300,Eastern,81,Sunny,23,11.50,21.75,3.0,Y,,,O,,,,,,,,,2,,,,,,,,,,,O,,2
+Tampa Bay Buccaneers,24,Final,W,10-10-10,4,14,A,1300,Eastern,81,Sunny,21,16.67,19.67,-6.5,Y,P,,,P,,,,,,,,2,,,,,,,,,,,,,0
+Cincinnati Bengals,21,Final,L,10-10-10,5,7,H,1300,Eastern,81,Sunny,24,19.75,19.50,6.5,Y,,,,,,,,,,,,0,,P,,,,P,,,P,,,O,5
+New York Giants,34,Final,W,10-10-10,5,7,A,1200,Central,Dome,,10,18.00,22.00,-3.0,Y,,P,,,,,,,,,,1,,,,,O,,,P,,P,,P,5
+Houston Texans,10,Final,L,10-10-10,5,7,H,1200,Central,Dome,,34,27.00,25.50,3.0,Y,,,P,P,,,,,,,,2,,,,,P,,,P,,,P,P,4
+New Orleans Saints,20,Final,L,10-10-10,5,7,A,1305,Pacific,Dome,,30,19.75,18.00,7.0,Y,P,,P,P,,,,,P,,,4,,,,,,,,O,,O,,P,5
+Arizona Cardinals,30,Final,W,10-10-10,5,7,H,1305,Pacific,Dome,,20,14.50,29.50,-7.0,Y,,,O,,,,,,,,,2,,,,,P,,,,,,,,1
+San Diego Chargers,27,Final,L,10-10-10,5,7,A,1315,Pacific,61,Clear,35,28.25,17.75,7.0,Y,,P,,,,,,O,,,,3,,,,,P,,,,,,,,1
+Oakland Raiders,35,Final,W,10-10-10,5,7,H,1315,Pacific,61,Clear,27,19.00,26.75,-7.0,Y,,O,,P,,,O,,,P,,6,,,,,O,,,,,,,,2
+Tennessee Titans,34,Final,W,10-10-10,5,7,A,1515,Central,Dome,,27,24.50,17.00,-7.0,Y,,,,,,,O,,,,,2,,P,,,,,,,,,,,1
+Dallas Cowboys,27,Final,L,10-10-10,4,14,H,1515,Central,Dome,,34,18.00,17.67,7.0,Y,,,,,,,P,,,,P,2,,,,,,,,,,,,,0
+Philadelphia Eagles,27,Final,W,10-10-10,5,7,A,1720,Pacific,71,Sunny,24,23.75,19.75,-3.5,Y,O,P,,P,,,P,,,,,5,P,,,,,,,,O,,,,3
+San Francisco 49ers,24,Final,L,10-10-10,5,7,H,1720,Pacific,71,Sunny,27,13.00,25.75,3.5,Y,,,,,,,,P,,,,1,,,,,,P,,,,,,,1
+Minnesota Vikings,20,Final,L,10-11-10,4,15,A,2115,Eastern,72,Cloudy,29,14.33,12.67,-4.0,N,P,,,P,O,P,,,,,,5,,,,,,,,,,,,,0
+New York Jets,29,Final,W,10-11-10,5,8,H,2115,Eastern,72,Cloudy,20,26.50,15.25,4.0,N,,,P,,P,,,P,,,,3,P,,,,,,P,P,,,,,3
+San Diego Chargers,17,Final,L,10-17-10,6,7,A,1200,Central,Dome,,20,28.00,21.20,8.5,Y,,P,,,,,,P,,,O,4,,,,,,,,,,,,,0
+St. Louis Rams,20,Final,W,10-17-10,6,7,H,1200,Central,Dome,,17,16.60,19.20,-8.5,Y,,,,P,,,P,,,,,2,,,,P,,,,,P,,,,2
+New Orleans Saints,31,Final,W,10-17-10,6,7,A,1300,Eastern,81,Clear,6,19.80,20.40,5.0,N,P,,P,,,,,,P,,,3,,,,,,O,,P,,O,,P,6
+Tampa Bay Buccaneers,6,Final,L,10-17-10,5,7,H,1300,Eastern,81,Clear,31,18.50,20.00,-5.0,N,,,,P,O,,,,,P,,4,,,,,,,,,,,,P,1
+Seattle Seahawks,23,Final,W,10-17-10,5,14,A,1200,Central,61,Sunny,20,18.75,19.25,-6.0,Y,,,,,,,,,,,,0,,,,,,,,O,P,,,,3
+Chicago Bears,20,Final,L,10-17-10,6,7,H,1200,Central,61,Sunny,23,18.40,14.80,6.0,Y,P,,,,,,P,O,,,,4,,,,,O,,P,,,P,,,4
+Baltimore Ravens,20,OT,L,10-17-10,6,7,A,1300,Eastern,57,Sunny,23,18.40,14.40,-3.0,N,,P,,P,,,,,,,P,3,,P,,O,,P,,,,,,,4
+New England Patriots,23,OT,W,10-17-10,5,13,H,1300,Eastern,57,Sunny,20,32.75,24.00,3.0,N,P,,,,,,,,,,,1,,,,,,,,O,,,P,,3
+Miami Dolphins,23,OT,W,10-17-10,5,13,A,1200,Central,57,Sunny,20,16.50,23.00,-3.0,Y,,,,,,P,,O,,,,3,,,,,P,,,,,,,,1
+Green Bay Packers,20,OT,L,10-17-10,6,7,H,1200,Central,57,Sunny,23,23.80,17.80,3.0,Y,P,,P,,,P,,,,,,3,O,,,,,,O,,P,,P,,6
+Cleveland Browns,10,Final,L,10-17-10,6,7,A,1300,Eastern,61,Sunny,28,15.60,19.40,-14.0,N,,P,,,,,,P,O,,,4,P,,,,,,,,,,,P,2
+Pittsburgh Steelers,28,Final,W,10-17-10,5,14,H,1300,Eastern,61,Sunny,10,21.50,12.50,14.0,N,P,,,,,,,,,,,1,,,,,,,,,,,,,0
+Atlanta Falcons,17,Final,L,10-17-10,6,7,A,1300,Eastern,66,Sunny,31,22.60,14.00,-2.0,N,,,P,,,,,,,,,1,P,,,,,P,,,,,,,2
+Philadelphia Eagles,31,Final,W,10-17-10,6,7,H,1300,Eastern,66,Sunny,17,24.40,20.60,2.0,N,O,P,,P,,O,P,,,,,7,P,,,,,,,,P,P,,,3
+Detroit Lions,20,Final,L,10-17-10,6,7,A,1300,Eastern,63,Sunny,28,25.20,22.40,-10.0,N,,P,P,,,,,,,P,,3,,,,,,O,,O,,,P,,5
+New York Giants,28,Final,W,10-17-10,6,7,H,1300,Eastern,63,Sunny,20,21.20,19.60,10.0,N,,,,,,P,,,,,,1,,,,,O,,,P,,,,P,4
+Kansas City Chiefs,31,Final,L,10-17-10,5,7,A,1200,Central,78,Partly Cloudy,35,19.25,14.25,-4.5,N,,,,,,P,,,,,,1,,,,,,,,,,,,,0
+Houston Texans,35,Final,W,10-17-10,6,7,H,1200,Central,78,Partly Cloudy,31,23.60,27.20,4.5,N,,P,P,P,,,,O,,,,5,,,,,P,,,P,,,,P,3
+Oakland Raiders,9,Final,L,10-17-10,6,7,A,1305,Pacific,53,Rain,17,22.20,26.80,-7.5,N,,O,,,,,P,,,,,3,,,,,P,,,,,,,,1
+San Francisco 49ers,17,Final,W,10-17-10,6,7,H,1305,Pacific,53,Rain,9,15.20,26.00,7.5,N,,,,,,P,,,,,,1,,,,,,,,,,,,,0
+New York Jets,24,Final,W,10-17-10,6,6,A,1405,Mountain,73,Partly Cloudy,20,27.00,16.20,3.5,N,,,,,P,,,P,,,,2,,,,,,,P,P,,,,P,3
+Denver Broncos,20,Final,L,10-17-10,6,7,H,1405,Mountain,73,Partly Cloudy,24,20.80,23.20,-3.5,N,,P,,,,,,,,,,1,,,,O,O,P,,,P,,O,,8
+Dallas Cowboys,21,Final,L,10-17-10,5,7,A,1515,Central,Dome,,24,20.25,21.75,-1.5,N,,,,O,P,,,,,,,3,P,,,,,P,,,,,P,,3
+Minnesota Vikings,24,Final,W,10-17-10,5,6,H,1515,Central,Dome,,21,15.75,16.75,1.5,N,P,,,P,O,,,,,,,4,,,,,,,,,,,P,,1
+Indianapolis Colts,27,Final,W,10-17-10,6,7,A,2020,Eastern,70,Sunny,24,27.20,20.20,3.0,N,,O,P,,,P,,,,,,4,,,,,O,O,,,,P,P,,6
+Washington Redskins,24,Final,L,10-17-10,6,7,H,2020,Eastern,70,Sunny,27,17.80,18.40,-3.0,N,P,,,,,P,,,O,,,4,,,,,O,,,,,,P,P,4
+Tennessee Titans,30,Final,W,10-18-10,6,8,A,2030,Eastern,70,Clear,3,26.40,19.00,3.0,N,,P,,,P,,P,,,,,3,,P,,,,,,,,,,,1
+Jacksonville Jaguars,3,Final,L,10-18-10,6,8,H,2030,Eastern,70,Clear,30,21.40,27.40,-3.0,N,,P,,,,,,,,,,1,P,,,,P,,,O,,,,,4
+Buffalo Bills,34,OT,L,10-24-10,6,14,A,1300,Eastern,70,Partly Sunny,37,17.40,32.20,-12.5,N,,,,,,,,,,,,0,,,P,,,,,,,,,,1
+Baltimore Ravens,37,OT,W,10-24-10,7,7,H,1300,Eastern,70,Partly Sunny,34,18.67,15.83,12.5,N,,P,,P,,,,,,P,,3,,,P,P,P,,,,,,O,,5
+St. Louis Rams,17,Final,L,10-24-10,7,7,A,1300,Eastern,84,Clear,18,17.17,18.83,-3.0,N,,,,,,,,,,,,0,,,,,P,,,,P,,,,2
+Tampa Bay Buccaneers,18,Final,W,10-24-10,6,7,H,1300,Eastern,84,Clear,17,16.00,22.20,3.0,N,,,,P,O,,,P,,,,4,,,,,,,P,,,,,,1
+Cleveland Browns,30,Final,W,10-24-10,7,7,A,1200,Central,Dome,,17,14.67,20.83,-12.5,Y,,P,O,P,,,,P,O,,,7,P,,,,,,,,,,,,1
+New Orleans Saints,17,Final,L,10-24-10,7,7,H,1200,Central,Dome,,30,21.67,18.00,12.5,Y,P,,,P,,,,P,P,,,4,,,,,,O,,P,O,O,,P,8
+Philadelphia Eagles,19,Final,L,10-24-10,7,7,A,1200,Central,78,Cloudy,37,25.50,20.00,-3.0,N,O,P,O,P,,O,,,P,,,9,,,,,,,,,,,,,0
+Tennessee Titans,37,Final,W,10-24-10,7,6,H,1200,Central,78,Cloudy,19,27.00,16.33,3.0,N,O,P,,P,,,,,,,,4,,O,,P,,,,,,,,,3
+Pittsburgh Steelers,23,Final,W,10-24-10,6,7,A,1300,Eastern,80,Cloudy,22,22.80,12.00,3.0,N,,,,,,,,,,,,0,O,,,,,,,,,,,,2
+Miami Dolphins,22,Final,L,10-24-10,6,7,H,1300,Eastern,80,Cloudy,23,17.80,22.40,-3.0,N,,,,,,,,O,,,P,3,,,,,,P,,,,,,,1
+San Francisco 49ers,20,Final,L,10-24-10,7,7,A,1300,Eastern,75,Sunny,23,15.50,23.17,2.0,Y,,,P,P,,P,,P,,,,4,,,,P,P,P,,,,P,,,4
+Carolina Panthers,23,Final,W,10-24-10,6,14,H,1300,Eastern,75,Sunny,20,10.40,22.00,-2.0,Y,,,P,,,,P,,,,,2,,,,,,,,,,,P,,1
+Jacksonville Jaguars,20,Final,L,10-24-10,7,6,A,1200,Central,63,Partly Cloudy,42,18.33,27.83,-9.0,N,O,,P,,,,,,,,,3,,P,,,,,,P,,,,,2
+Kansas City Chiefs,42,Final,W,10-24-10,6,7,H,1200,Central,63,Partly Cloudy,20,21.60,18.40,9.0,N,,,,,,,,,,,,0,,,,,,,,,,,P,,1
+Washington Redskins,17,Final,W,10-24-10,7,7,A,1200,Central,67,Partly Cloudy,14,18.83,19.83,-3.0,Y,,P,,O,,P,,,,,,4,,,,,P,,,,P,P,,P,4
+Chicago Bears,14,Final,L,10-24-10,7,7,H,1200,Central,67,Partly Cloudy,17,18.67,16.17,3.0,Y,,,,,,,,O,,,,2,,,,,P,,P,,,,P,P,4
+Cincinnati Bengals,32,Final,L,10-24-10,6,14,A,1300,Eastern,Dome,,39,20.00,20.40,-3.5,N,,,,,,,,,,,,0,,O,,,,,,,O,,,O,6
+Atlanta Falcons,39,Final,W,10-24-10,7,7,H,1300,Eastern,Dome,,32,21.67,16.83,3.5,N,,,,,,,,,,,,0,,,,,,P,,,,O,,,3
+Arizona Cardinals,10,Final,L,10-24-10,6,14,A,1305,Pacific,52,Cloudy,22,17.60,27.60,-6.5,N,,,O,,,,,,,,,2,,,,,,,,,,,P,,1
+Seattle Seahawks,22,Final,W,10-24-10,6,7,H,1305,Pacific,52,Cloudy,10,19.60,19.40,6.5,N,,,,,,,,,,,,0,,,,,,,,O,,O,,,4
+Oakland Raiders,59,Final,W,10-24-10,7,7,A,1415,Mountain,63,Mostly Cloudy,14,20.00,25.17,-7.0,Y,P,P,,,,,,,,,,2,,,,,,,,,,,,P,1
+Denver Broncos,14,Final,L,10-24-10,7,7,H,1415,Mountain,63,Mostly Cloudy,59,20.67,23.33,7.0,Y,,,,,,,,,,P,,1,P,,,O,O,,,,P,,O,,8
+New England Patriots,23,Final,W,10-24-10,6,7,A,1315,Pacific,69,Sunny,20,30.80,23.20,-2.5,Y,P,,,,,,,,,,,1,,,,,,,,P,,P,,P,3
+San Diego Chargers,20,Final,L,10-24-10,7,7,H,1315,Pacific,69,Sunny,23,26.17,21.00,2.5,Y,,P,O,P,,,,,,,O,6,,,,,,,,,,,,,0
+Minnesota Vikings,24,Final,L,10-24-10,6,7,A,1920,Central,58,Cloudy,28,17.40,17.60,-2.5,N,P,,,,P,,,,,P,,3,,,,,,P,,,,,,O,3
+Green Bay Packers,28,Final,W,10-24-10,7,7,H,1920,Central,58,Cloudy,24,23.17,18.67,2.5,N,,,P,,,P,,,,,,2,P,,,,P,,P,,P,,P,,5
+New York Giants,41,Final,W,10-25-10,7,8,A,1930,Central,84,Roof open,35,22.33,19.67,-3.5,Y,,,,,,,,,,P,,1,P,,,,P,,,P,,,,,3
+Dallas Cowboys,35,Final,L,10-25-10,6,8,H,1930,Central,84,Roof open,41,20.40,22.20,3.5,Y,,,,,P,,O,,,,,3,,,,,,P,,,,,,,1
+Carolina Panthers,10,Final,L,10-31-10,7,7,A,1200,Central,Dome,,20,12.50,21.67,-2.5,N,,,,,,,,,,,,0,,,,,,,,,,,,,0
+St. Louis Rams,20,Final,W,10-31-10,8,7,H,1200,Central,Dome,,10,17.14,18.71,2.5,N,,P,,,,,,,O,,,3,,,,,,P,P,,P,,,,3
+Washington Redskins,25,Final,L,10-31-10,8,7,A,1300,Eastern,Dome,,37,18.57,19.00,-2.5,N,P,,,,P,,P,,O,,,5,,,,,,,P,,P,,P,P,4
+Detroit Lions,37,Final,W,10-31-10,7,14,H,1300,Eastern,Dome,,25,24.33,23.33,2.5,N,,P,,,,,,,,,,1,,,,,,P,,P,,,P,,3
+Green Bay Packers,9,Final,W,10-31-10,8,7,A,1300,Eastern,57,Clear,0,23.86,19.43,-6.5,Y,,,P,,,P,,,,,,2,O,,,,,,,,P,,P,,4
+New York Jets,0,Final,L,10-31-10,7,14,H,1300,Eastern,57,Clear,9,26.50,16.83,6.5,Y,,,,,P,,,,,,,1,,,,,,,P,P,,,,,2
+Jacksonville Jaguars,35,Final,W,10-31-10,8,7,A,1200,Central,Dome,,17,18.57,29.86,-6.5,Y,P,,,,,,,,,,,1,,P,,,,O,,,,,,,3
+Dallas Cowboys,17,Final,L,10-31-10,7,6,H,1200,Central,Dome,,35,22.83,25.33,6.5,Y,,,,,,,O,,,,,2,,,,,,P,,,P,,,,2
+Miami Dolphins,22,Final,W,10-31-10,7,7,A,1300,Eastern,54,Sunny,14,18.50,22.50,0.0,Y,,,,,,,,,,,,0,,,,,,,,,,,,,0
+Cincinnati Bengals,14,Final,L,10-31-10,7,7,H,1300,Eastern,54,Sunny,22,22.00,23.50,0.0,Y,P,,P,,,,,,,,,2,,,,,,,P,,O,P,,O,6
+Denver Broncos,16,Final,L,10-31-10,8,7,A*,1000,Pacific,54,Mostly Cloudy,24,19.71,28.43,-2.0,N,,P,,,,,,,,P,,2,O,,,P,O,,,,,O,P,,8
+San Francisco 49ers,24,Final,W,10-31-10,8,7,H*,1000,Pacific,54,Mostly Cloudy,16,16.14,23.14,2.0,N,O,,,P,,,,,,,,3,,,,,,,,,,P,,,1
+Buffalo Bills,10,OT,L,10-31-10,7,7,A,1200,Central,51,Partly Sunny,13,20.17,33.00,-7.0,N,,,,,,P,,,,,,1,,,,,,,,,,,P,,1
+Kansas City Chiefs,13,OT,W,10-31-10,7,7,H,1200,Central,51,Partly Sunny,10,25.00,18.67,7.0,N,,,,,,,,O,,,,2,,,,,,,,,,,,,0
+Tampa Bay Buccaneers,38,Final,W,10-31-10,7,7,A,1315,Pacific,Dome,,35,16.33,21.33,-3.0,Y,,,,P,O,,,,,,,3,,,,,,P,,,P,,,,2
+Arizona Cardinals,35,Final,L,10-31-10,7,7,H,1315,Pacific,Dome,,38,16.33,26.67,3.0,Y,,,P,,,,,,,,,1,,,,,,O,P,,,P,,,4
+Tennessee Titans,25,Final,L,10-31-10,8,7,A,1305,Pacific,65,Sunny,33,28.43,16.71,-5.5,N,,P,,,,,P,,,,,2,,O,,,,,,,,,,,2
+San Diego Chargers,33,Final,W,10-31-10,8,7,H,1305,Pacific,65,Sunny,25,25.29,21.29,5.5,N,,,O,P,,,,,,,O,5,,,,,,,,,,,,,0
+Seattle Seahawks,3,Final,L,10-31-10,7,7,A,1315,Pacific,66,Sunny,33,20.00,17.83,-2.0,N,,,,,,O,,,,,,2,,,,,,,,O,,O,,,4
+Oakland Raiders,33,Final,W,10-31-10,8,7,H,1315,Pacific,66,Sunny,3,25.57,23.57,2.0,N,,,,P,P,,P,,,O,,5,,,,,,,P,P,,,,,2
+Minnesota Vikings,18,Final,L,10-31-10,7,7,A,1515,Eastern,49,Partly Cloudy,28,18.50,19.33,-5.0,N,P,,,,P,,P,,,P,,4,,,P,,,,,,,,,P,2
+New England Patriots,28,Final,W,10-31-10,7,7,H,1515,Eastern,49,Partly Cloudy,18,29.50,22.67,5.0,N,P,,P,,,,,,,,,2,,,,,,,,,,,,O,2
+Pittsburgh Steelers,10,Final,L,10-31-10,7,7,A,1920,Central,Dome,,20,22.83,13.67,-1.5,N,,,,,P,,,,P,,,2,O,,,,P,,,,,,,,3
+New Orleans Saints,20,Final,W,10-31-10,8,7,H,1920,Central,Dome,,10,21.00,19.71,1.5,N,,,,,P,,,P,,,,2,,,,,,P,,P,O,O,,,6
+Houston Texans,17,Final,L,11-01-10,7,15,A,2030,Eastern,Dome,,30,25.50,27.83,-5.5,N,,,P,P,,P,,P,,,,4,,,,,,,,,,,,,0
+Indianapolis Colts,30,Final,W,11-01-10,7,15,H,2030,Eastern,Dome,,17,27.17,20.83,5.5,N,,P,P,,,,,,,P,,3,,,,,O,P,,,,O,,,5
+Miami Dolphins,10,Final,L,11-07-10,8,7,A,1300,Eastern,50,Partly Cloudy,26,19.00,21.29,-5.5,N,,,,,,,,,,,,0,,,,,P,,,,,,,P,2
+Baltimore Ravens,26,Final,W,11-07-10,8,14,H,1300,Eastern,50,Partly Cloudy,10,21.29,18.43,5.5,N,,,,P,,,,,,P,,2,,,,,,,,,,,,,0
+Tampa Bay Buccaneers,21,Final,L,11-07-10,8,7,A,1300,Eastern,Dome,,27,19.43,23.29,-10.0,N,,,,P,O,,,,,,,3,,P,,,,,,,,,,,1
+Atlanta Falcons,27,Final,W,11-07-10,8,14,H,1300,Eastern,Dome,,21,24.14,19.00,10.0,N,,,,,,,,,,P,,1,P,,,,,P,,,,P,,,3
+San Diego Chargers,29,Final,W,11-07-10,9,7,A,1200,Central,63,Sunny,23,26.25,21.75,3.0,N,,,O,O,,,O,,,,O,8,,,,,,P,,,,,,,1
+Houston Texans,23,Final,L,11-07-10,8,6,H,1200,Central,63,Sunny,29,24.29,28.14,-3.0,N,,,P,O,,,,P,,,,4,,,P,,,,,P,,,,,2
+New England Patriots,14,Final,L,11-07-10,8,7,A,1300,Eastern,43,"Sunny, cold",34,29.29,22.00,4.0,Y,P,,P,,,,,,,,,2,,,,,,P,,,,,,O,3
+Cleveland Browns,34,Final,W,11-07-10,8,14,H,1300,Eastern,43,"Sunny, cold",14,16.86,20.29,-4.0,Y,,,P,,,,,,O,,,3,P,,,,,,P,,,,,,2
+Chicago Bears,22,Final,W,11-07-10,8,14,A*,1300,Eastern,Dome,,19,18.00,16.29,3.0,N,,,,,,,,P,,,,1,,,,,P,,,,,,,,1
+Buffalo Bills,19,Final,L,11-07-10,8,7,H*,1300,Eastern,Dome,,22,18.71,30.14,-3.0,N,,,,,,P,,P,,,,2,,,,,,,,,,,,,0
+New York Jets,23,OT,W,11-07-10,8,7,A,1300,Eastern,Dome,,20,22.71,15.71,5.5,N,,,,,,,,,,,,0,,,,,,P,P,P,,,P,,4
+Detroit Lions,20,OT,L,11-07-10,8,7,H,1300,Eastern,Dome,,23,26.14,23.57,-5.5,N,O,P,,P,,,,,,P,,5,,,,,,P,,P,,P,P,,4
+New Orleans Saints,34,Final,W,11-07-10,9,7,A,1300,Eastern,50,Sunny,3,20.88,18.50,6.0,N,,,P,,P,,,,P,,,3,,,,,,P,,,P,P,,,3
+Carolina Panthers,3,Final,L,11-07-10,8,7,H,1300,Eastern,50,Sunny,34,12.14,21.43,-6.0,N,,,,,,,,,,,,0,,,,,,,P,,,,,,1
+Arizona Cardinals,24,OT,L,11-07-10,8,7,A,1200,Central,Dome,,27,19.00,28.29,-7.5,N,,,P,,,,,,,,,1,,,,,,O,,,,,P,,3
+Minnesota Vikings,27,OT,W,11-07-10,8,7,H,1200,Central,Dome,,24,18.43,20.57,7.5,N,P,,,,P,,,,,P,,3,,,P,,,,P,,,P,,,3
+New York Giants,41,Final,W,11-07-10,8,13,A,1305,Pacific,55,Partly Sunny,7,25.00,21.86,7.0,N,,,,,,,,,P,,,1,,,,,,,,P,,,,,1
+Seattle Seahawks,7,Final,L,11-07-10,8,7,H,1305,Pacific,55,Partly Sunny,41,17.57,20.00,-7.0,N,O,,,,P,O,,,,,P,6,,,,O,,,,O,,,,,4
+Kansas City Chiefs,20,OT,L,11-07-10,8,7,A,1315,Pacific,62,Overcast,23,23.29,17.43,1.0,Y,,,,,,,,P,,,,1,,,,,,,,,,,O,,2
+Oakland Raiders,23,OT,W,11-07-10,9,7,H,1315,Pacific,62,Overcast,20,26.50,21.00,-1.0,Y,,,P,O,P,,,,,O,,6,,,,,,,,,O,,,,2
+Indianapolis Colts,24,Final,L,11-07-10,8,6,A,1615,Eastern,52,Partly Cloudy,26,27.57,20.29,-3.0,N,,,,,,,,,P,,,1,P,,,,P,,,,,O,,,4
+Philadelphia Eagles,26,Final,W,11-07-10,8,14,H,1615,Eastern,52,Partly Cloudy,24,24.57,22.43,3.0,N,P,,P,,,P,,,,,,3,,,,,,,,P,,,,,1
+Dallas Cowboys,7,Final,L,11-07-10,8,7,A,1920,Central,43,Clear,45,22.00,26.71,-7.5,N,,,,,,,P,,P,P,,3,,,,,,P,,,P,,,,2
+Green Bay Packers,45,Final,W,11-07-10,9,7,H,1920,Central,43,Clear,7,22.00,17.00,7.5,N,P,,O,,,P,P,,,,,5,P,,,,,,P,,P,,P,,4
+Pittsburgh Steelers,27,Final,W,11-08-10,8,8,A,2030,Eastern,44,Clear,21,21.00,14.57,5.0,N,,,,,P,,,,,,,1,,,,,,,,,,,,,0
+Cincinnati Bengals,21,Final,L,11-08-10,8,8,H,2030,Eastern,44,Clear,27,20.86,23.29,-5.0,N,,,,,,,,,,,,0,,,,,,,P,,P,,,P,3
+Baltimore Ravens,21,Final,L,11-11-10,9,4,A,2020,Eastern,Dome,,26,21.88,17.38,-1.0,N,,,,,,,,,,,,0,,,,,,,,,,,,,0
+Atlanta Falcons,26,Final,W,11-11-10,9,4,H,2020,Eastern,Dome,,21,24.50,19.25,1.0,N,,,,,P,,,,,P,,2,P,,,,,P,,,,,,,2
+New York Jets,26,OT,W,11-14-10,9,7,A,1300,Eastern,46,Cloudy,20,22.75,16.25,3.0,N,,,,,,,P,,P,,,2,,,,,,,P,P,,,,,2
+Cleveland Browns,20,OT,L,11-14-10,9,7,H,1300,Eastern,46,Cloudy,26,19.00,19.50,-3.0,N,,,,,,,,,P,,,1,P,,,P,,,,,,,,,2
+Carolina Panthers,16,Final,L,11-14-10,9,7,A,1300,Eastern,73,Sunny,31,11.00,23.00,-7.0,N,,,,,,,,,,,,0,,,,,,,O,,,,,,2
+Tampa Bay Buccaneers,31,Final,W,11-14-10,9,7,H,1300,Eastern,73,Sunny,16,19.63,23.75,7.0,N,,,,P,P,,,,,,,2,,,,,O,,,,,,,,2
+Cincinnati Bengals,17,Final,L,11-14-10,9,6,A,1300,Eastern,Dome,0,23,20.88,23.75,-7.0,N,P,,,,,,,,,,,1,,,,,P,,P,,,,O,,4
+Indianapolis Colts,23,Final,W,11-14-10,9,7,H,1300,Eastern,Dome,,17,27.13,21.00,7.0,N,,,,,,P,,,,,,1,,,,,,O,,,,P,,,3
+Detroit Lions,12,Final,L,11-14-10,9,7,A,1300,Eastern,52,Mostly Cloudy/Rain,14,25.38,23.50,-1.5,N,P,P,,,,,,P,,,,3,O,P,,,,,,P,P,P,,,6
+Buffalo Bills,14,Final,W,11-14-10,9,7,H,1300,Eastern,52,Mostly Cloudy/Rain,12,18.75,29.13,1.5,N,,,P,,,P,,P,,,,3,,,,,P,,,,,,,,1
+Minnesota Vikings,13,Final,L,11-14-10,9,7,A,1200,Central,44,"Partly Cloudy, Windy 29 mph",27,19.50,21.00,1.0,Y,P,,O,,P,,,,P,P,,6,,,P,,,,,,,O,,,3
+Chicago Bears,27,Final,W,11-14-10,9,7,H,1200,Central,44,"Partly Cloudy, Windy 29 mph",13,18.50,16.63,-1.0,Y,,,,,P,,,,,,,1,,,,,,,,,P,,,,1
+Tennessee Titans,17,Final,L,11-14-10,9,14,A,1300,Eastern,79,Fair,29,28.00,18.75,-1.0,N,P,P,,,,,,,,,,2,,P,,,,,,,,,,,1
+Miami Dolphins,29,Final,W,11-14-10,9,7,H,1300,Eastern,79,Fair,17,17.88,21.88,1.0,N,,,,P,,P,,,,,,2,,,,,,P,,,,,P,P,3
+Houston Texans,24,Final,L,11-14-10,9,7,A,1300,Eastern,70,Sunny,31,24.13,28.25,-1.0,N,P,,P,O,,,,P,,,,5,,,P,,,,,P,P,,,,3
+Jacksonville Jaguars,31,Final,W,11-14-10,9,14,H,1300,Eastern,70,Sunny,24,20.63,28.25,1.0,N,,,,,,,,,,P,,1,O,P,,,,P,,,,P,,,5
+Kansas City Chiefs,29,Final,L,11-14-10,9,7,A,1405,Mountain,43,Partly Cloudy,49,22.88,18.13,1.0,Y,,,,,,,,,,,,0,,,,,,,,,,,O,,2
+Denver Broncos,49,Final,W,11-14-10,9,14,H,1405,Mountain,43,Partly Cloudy,29,19.25,27.88,-1.0,Y,,,,,,,,,,,,0,P,,,O,O,,,P,,,,,6
+St. Louis Rams,20,OT,L,11-14-10,9,14,A,1315,Pacific,74,Sunny,23,17.50,17.63,-5.0,N,,P,,,,,,,,,,1,P,,,,P,P,,,P,,,,4
+San Francisco 49ers,23,OT,W,11-14-10,9,14,H,1315,Pacific,74,Sunny,20,17.13,22.25,5.0,N,O,,,,,,,,,,,2,,,,,,,,,,P,,,1
+Dallas Cowboys,33,Final,W,11-14-10,9,7,A,1615,Eastern,60,Clear,20,20.13,29.00,-12.0,Y,,,,,,,,,,,,0,,,,,,P,P,,P,,,,3
+New York Giants,20,Final,L,11-14-10,9,7,H,1615,Eastern,60,Clear,33,27.00,20.00,12.0,Y,,,,,,O,,,,,,2,,,,,,P,,P,,,,,2
+Seattle Seahawks,36,Final,W,11-14-10,9,7,A,1415,Mountain,Dome,,18,16.25,22.63,-3.5,Y,P,P,,P,,O,,,,,P,6,,,,O,,P,,,,,,,3
+Arizona Cardinals,18,Final,L,11-14-10,9,7,H,1415,Mountain,Dome,,36,19.63,28.13,3.5,Y,,,,,,,,,,,,0,,O,,,P,P,P,,,,P,,6
+New England Patriots,39,Final,W,11-14-10,9,7,A,2020,Eastern,49,Cloudy,26,27.38,23.50,-4.5,Y,P,,,,,,,O,,,,3,,,,,,,,,,,,P,1
+Pittsburgh Steelers,26,Final,L,11-14-10,9,6,H,2020,Eastern,49,Cloudy,39,21.75,15.38,4.5,Y,,,,P,,,O,,,,,3,O,,,,,,P,,,,,,3
+Philadelphia Eagles,59,Final,W,11-15-10,9,8,A,2030,Eastern,52,"Cloudy, Rain",28,24.75,22.63,3.0,N,,,,,,,P,P,,,,2,,,,,,,,P,,,O,,3
+Washington Redskins,28,Final,L,11-15-10,9,15,H,2030,Eastern,52,"Cloudy, Rain",59,19.38,21.25,-3.0,N,P,O,,,,,,,,,,3,,,,,,,P,,,,,P,2
+Chicago Bears,16,Final,W,11-18-10,10,4,A,2020,Eastern,75,Clear,0,19.44,16.22,-2.5,Y,,,P,,,,,,,P,,2,,,,,,O,,,,,,,2
+Miami Dolphins,0,Final,L,11-18-10,10,4,H,2020,Eastern,75,Clear,16,19.11,21.33,2.5,Y,O,,,,O,P,,,P,,,6,P,,,,P,P,P,,,,O,P,7
+Oakland Raiders,3,Final,L,11-21-10,10,14,A,1300,Eastern,57,Partly Cloudy,35,26.11,20.89,-7.0,N,,,O,P,,,,,,P,,4,,,,,,P,,,O,,,P,4
+Pittsburgh Steelers,35,Final,W,11-21-10,10,7,H,1300,Eastern,57,Partly Cloudy,3,22.22,18.00,7.0,N,,,,,,,P,,,,,1,O,,,,,,,P,,,,P,4
+Detroit Lions,19,Final,L,11-21-10,10,7,A,1200,Central,Dome,,35,23.89,22.44,-5.5,N,,P,,,,,,,,P,,2,O,P,,,,,,P,P,O,,,7
+Dallas Cowboys,35,Final,W,11-21-10,10,7,H,1200,Central,Dome,,19,21.56,28.00,5.5,N,,,,,,,,,,,,0,,,P,,,P,,,P,P,,,4
+Buffalo Bills,49,Final,W,11-21-10,10,7,A,1300,Eastern,65,,31,18.22,27.22,-4.5,Y,,,,,,P,,P,,,,2,,,P,,,,,,,,,,1
+Cincinnati Bengals,31,Final,L,11-21-10,10,7,H,1300,Eastern,65,,49,20.44,23.67,4.5,Y,P,P,,,,,,,,,,2,,,,,P,,,,,,P,,2
+Cleveland Browns,20,Final,L,11-21-10,10,7,A,1300,Eastern,76,Sunny,24,19.11,20.22,-2.5,N,,,,,,,P,P,,,,2,P,,,,P,O,,,,P,,,5
+Jacksonville Jaguars,24,Final,W,11-21-10,10,7,H,1300,Eastern,76,Sunny,20,21.78,27.78,2.5,N,,,O,,,,,,,,,2,O,P,,,P,P,,,,,,,5
+Washington Redskins,19,OT,W,11-21-10,10,6,A,1200,Central,66,Sunny,16,20.33,25.44,-7.0,Y,P,O,,,,,,O,O,P,,8,P,,,,,,,,,O,,O,5
+Tennessee Titans,16,OT,L,11-21-10,10,7,H,1200,Central,66,Sunny,19,26.78,19.89,7.0,Y,,,,,,,,,,O,,2,,P,,,,,,,,P,,,2
+Arizona Cardinals,13,Final,L,11-21-10,10,7,A,1200,Central,66,Cloudy,31,19.44,29.00,-7.0,N,,,,P,,,,,O,,,3,,P,,,P,O,,,,O,P,,7
+Kansas City Chiefs,31,Final,W,11-21-10,10,7,H,1200,Central,66,Cloudy,13,23.56,21.56,7.0,N,,,,O,,,P,,,,,3,,,,,,,,,,,P,,1
+Houston Texans,27,Final,L,11-21-10,10,7,A,1300,Eastern,46,Sunny,30,24.11,28.56,-6.5,N,P,,P,O,P,,,P,,,P,7,,,P,,,O,,P,,P,,,5
+New York Jets,30,Final,W,11-21-10,10,7,H,1300,Eastern,46,Sunny,27,23.11,16.67,6.5,N,P,,,,P,,P,,P,,,4,,,,,,,P,P,,,,,2
+Baltimore Ravens,37,Final,W,11-21-10,10,10,A,1300,Eastern,65,Sunny,13,21.78,18.33,13.0,N,,,,P,,,,O,,,,3,,,,,,,,,,P,,,1
+Carolina Panthers,13,Final,L,11-21-10,10,7,H,1300,Eastern,65,Sunny,37,11.56,23.89,-13.0,N,O,,,,,,O,,,,,4,,,,,,P,O,P,,,,,4
+Green Bay Packers,31,Final,W,11-21-10,10,14,A,1200,Central,Dome,,3,24.56,15.89,3.0,N,,,P,,P,P,,,,,,3,P,,,,,,P,,P,,,,3
+Minnesota Vikings,3,Final,L,11-21-10,10,7,H,1200,Central,Dome,,31,18.78,21.67,-3.0,N,P,,P,,P,,,P,,P,,5,,,,,,,,,,P,,,1
+Seattle Seahawks,19,Final,L,11-21-10,10,7,A,1505,Central,Dome,,34,18.44,22.11,-11.0,N,P,,,,,P,,,,,,2,,,,O,,P,,,,,,,3
+New Orleans Saints,34,Final,W,11-21-10,10,14,H,1505,Central,Dome,,19,22.33,16.78,11.0,N,,,,O,,,,,P,,,3,,,,,,,,,,,O,,2
+Atlanta Falcons,34,Final,W,11-21-10,10,10,A,1505,Central,Dome,,17,24.67,19.44,3.5,N,,,,,,,,,,,,0,O,,,,,P,,,,,,,3
+St. Louis Rams,17,Final,L,11-21-10,10,7,H,1505,Central,Dome,,34,17.78,18.22,-3.5,N,,,,,,P,,,,,,1,,,,,,,P,,,,,,1
+Tampa Bay Buccaneers,21,Final,W,11-21-10,10,7,A,1305,Pacific,54,Cloudy,0,20.89,22.89,-3.5,Y,,,,P,,,,,,P,,2,,,,,O,,,,,,,,2
+San Francisco 49ers,0,Final,L,11-21-10,10,7,H,1305,Pacific,54,Cloudy,21,17.78,22.00,3.5,Y,O,P,P,P,,O,,,,,,7,,,,,,,,,,P,,,1
+Indianapolis Colts,28,Final,L,11-21-10,10,7,A,1615,Eastern,37,"Sunny, Cold",31,26.67,20.56,-4.5,N,,,,,,,,,,P,,1,,,,,,O,,,P,,,,3
+New England Patriots,31,Final,W,11-21-10,10,7,H,1615,Eastern,37,"Sunny, Cold",28,28.67,23.78,4.5,N,P,,,,,,,O,,P,,4,,,,,,,,,,,,,0
+New York Giants,17,Final,L,11-21-10,10,7,A,2020,Eastern,45,Partly Cloudy,27,26.22,21.44,-3.5,N,,,,P,,O,,,,,,3,,,,,,,,P,P,,,,2
+Philadelphia Eagles,27,Final,W,11-21-10,10,6,H,2020,Eastern,45,Partly Cloudy,17,28.56,23.22,3.5,N,,P,,,,,,,,,,1,,,,,,,P,P,,,P,,3
+Denver Broncos,14,Final,L,11-22-10,10,8,A,1730,Pacific,55,Partly Cloudy,35,22.56,28.00,-9.0,N,,,,,,,,,,P,,1,,,,O,O,,,,,,,P,5
+San Diego Chargers,35,Final,W,11-22-10,10,15,H,1730,Pacific,55,Partly Cloudy,14,26.56,21.89,9.0,N,,O,P,O,,,P,P,,,O,9,,,,,,,,,,,,,0
+New England Patriots,45,Final,W,11-25-10,11,4,A,1230,Eastern,Dome,,24,28.90,24.20,6.0,N,P,,,,,,,O,,P,,4,,,,,,,,,,,,,0
+Detroit Lions,24,Final,L,11-25-10,11,4,H,1230,Eastern,Dome,,45,23.40,23.70,-6.0,N,P,P,,,,,,,,P,,3,P,P,,,,P,,P,P,O,,,7
+New Orleans Saints,30,Final,W,11-25-10,11,4,A,1515,Central,Dome,,27,23.50,17.00,4.5,N,,,,O,P,P,,,P,,,5,,P,,,,,,,,,P,,2
+Dallas Cowboys,27,Final,L,11-25-10,11,4,H,1515,Central,Dome,,30,22.90,27.10,-4.5,N,,,P,,,,,,,,,1,,,P,,,P,,,P,P,,,4
+Cincinnati Bengals,10,Final,L,11-25-10,11,4,A,2020,Eastern,39,Cloudy,26,21.50,26.20,-10.0,N,P,P,,,,,,,,,P,3,,,,,P,,,,O,,O,O,7
+New York Jets,26,Final,W,11-25-10,11,4,H,2020,Eastern,39,Cloudy,10,23.80,17.70,10.0,N,P,,,,P,,P,,P,,,4,P,,P,,,P,P,P,,,,,5
+Jacksonville Jaguars,20,Final,L,11-28-10,11,7,A,1300,Eastern,43,Sunny,24,22.00,27.00,-7.5,N,,P,P,,,O,,,,P,,5,O,P,,,P,,,,,,,,4
+New York Giants,24,Final,W,11-28-10,11,7,H,1300,Eastern,43,Sunny,20,25.30,22.00,7.5,N,,,,,,O,,,,O,,4,P,,,,,,,P,,,,,2
+Tennessee Titans,0,Final,L,11-28-10,11,7,A,1200,Central,58,Mostly Cloudy,20,25.70,19.80,-5.0,N,O,,,,,,,,,P,,3,,P,,,,,,O,,,,,3
+Houston Texans,20,Final,W,11-28-10,11,7,H,1200,Central,58,Mostly Cloudy,0,24.40,28.70,5.0,N,P,,P,O,,,,,,,,4,,,P,,P,P,,P,P,,,,5
+Minnesota Vikings,17,Final,W,11-28-10,11,7,A,1300,Eastern,47,Sunny,13,17.20,22.60,2.0,N,P,,O,,P,,,O,,,,6,P,,,,P,,,,,,,P,3
+Washington Redskins,13,Final,L,11-28-10,11,7,H,1300,Eastern,47,Sunny,17,20.20,24.50,-2.0,N,P,O,,,P,,,P,,P,,6,P,,,,P,P,,,,P,,O,6
+Green Bay Packers,17,Final,L,11-28-10,11,7,A,1300,Eastern,Dome,,20,25.20,14.60,-2.0,N,,,P,,P,P,,,,,,3,P,,,,,,P,,P,,,,3
+Atlanta Falcons,20,Final,W,11-28-10,11,7,H,1300,Eastern,Dome,,17,25.60,19.20,2.0,N,,,,,,,,,,P,,1,P,,,,,P,,,,,,,2
+Pittsburgh Steelers,19,OT,W,11-28-10,11,7,A,1300,Eastern,36,Cloudy,16,23.50,16.50,6.5,N,,,,,,,,,,O,,2,O,,,,,,,,,,,P,3
+Buffalo Bills,16,OT,L,11-28-10,11,7,H,1300,Eastern,36,Cloudy,19,21.30,27.60,-6.5,N,,,,,,P,,O,,,,3,,,P,,P,,,,,,,,2
+Carolina Panthers,23,Final,L,11-28-10,11,7,A,1300,Eastern,39,Sunny,24,11.70,25.20,-8.0,N,P,,,,,,O,,,,,3,,,,,,,O,,,,,,2
+Cleveland Browns,24,Final,W,11-28-10,11,7,H,1300,Eastern,39,Sunny,23,19.20,20.60,8.0,N,O,,,P,,,,P,,,,4,P,,,,P,O,,,O,,,,6
+Miami Dolphins,33,Final,W,11-28-10,11,10,A,1305,Pacific,54,Sunny,17,17.20,20.80,-3.0,Y,P,,,,P,P,,,P,O,,6,,,,,,P,,,,,P,,2
+Oakland Raiders,17,Final,L,11-28-10,11,7,H,1305,Pacific,54,Sunny,33,23.80,22.30,3.0,Y,,,P,P,,,P,,,,,3,O,,,,,,,,P,,,P,4
+Kansas City Chiefs,42,Final,W,11-28-10,11,7,A,1305,Pacific,43,Sunny,24,24.30,20.70,1.5,N,,,,P,,O,,P,,,,4,,,,,,,,,O,,,,2
+Seattle Seahawks,24,Final,L,11-28-10,11,7,H,1305,Pacific,43,Sunny,42,18.50,23.30,-1.5,N,P,,,,P,,,,,,O,4,P,,,O,,P,,,P,,,,5
+Philadelphia Eagles,26,Final,L,11-28-10,11,7,A,1515,Central,45,Partly Cloudy,31,28.40,22.60,3.0,Y,,P,,,,,P,,,,,2,,,,P,,,P,O,O,,,,6
+Chicago Bears,31,Final,W,11-28-10,11,10,H,1515,Central,45,Partly Cloudy,26,19.10,14.60,-3.0,Y,,,,,,,,,,,,0,,,,,,P,,,,,,,1
+Tampa Bay Buccaneers,10,Final,L,11-28-10,11,7,A,1615,Eastern,48,Clear,17,20.90,20.60,-7.5,N,,,,P,,,,,,,,1,,,,,P,,,,,,,,1
+Baltimore Ravens,17,Final,W,11-28-10,11,7,H,1615,Eastern,48,Clear,10,23.30,17.80,7.5,N,,,,,,,,O,,,,2,P,,,,,,,,,,,,1
+St. Louis Rams,36,Final,W,11-28-10,11,7,A,1415,Mountain,45,Mostly Cloudy,33,17.70,19.80,-3.0,Y,,,P,,,P,,,,,,2,,,,,,,,,,,,,0
+Denver Broncos,33,Final,L,11-28-10,11,6,H,1415,Mountain,45,Mostly Cloudy,36,21.70,28.70,3.0,Y,,,,,,,,,,,,0,,,,O,P,,P,P,,,,,5
+San Diego Chargers,36,Final,W,11-28-10,11,6,A,2020,Eastern,Dome,,14,27.40,21.10,-2.0,Y,,O,P,P,,,,O,,P,P,8,P,,,,,,,,,,,,1
+Indianapolis Colts,14,Final,L,11-28-10,11,7,H,2020,Eastern,Dome,,36,26.80,21.60,2.0,Y,,,,,,,,,,P,,1,,,,,,O,,,,,,,2
+San Francisco 49ers,27,Final,W,11-29-10,11,8,A,1830,Mountain,Dome,,6,16.00,21.90,2.0,N,,P,P,P,,O,,,P,,,6,,,,,,,,,,P,P,,2
+Arizona Cardinals,6,Final,L,11-29-10,11,8,H,1830,Mountain,Dome,,27,18.80,29.20,-2.0,N,,,P,,,,,,O,,,3,O,P,,,,P,,,,O,P,,7
+Houston Texans,24,Final,L,12-02-10,12,4,A,2020,Eastern,36,Partly Cloudy,34,24.00,26.09,-8.0,N,P,,P,O,,,,,P,P,P,7,,,,,P,,,P,P,,,,3
+Philadelphia Eagles,34,Final,W,12-02-10,12,4,H,2020,Eastern,36,Partly Cloudy,24,28.18,23.36,8.0,N,,P,,,,,,,,,,1,,,,,,,,O,O,,,,4
+San Francisco 49ers,16,Final,L,12-05-10,12,6,A,1200,Central,26,Cloudy,34,17.00,20.45,-9.0,N,,O,P,,P,O,,,,,,6,,,,,O,,,,P,,,,3
+Green Bay Packers,34,Final,W,12-05-10,12,7,H,1200,Central,26,Cloudy,16,24.45,15.09,9.0,N,,,,,,P,,,P,P,,3,P,,,,,,P,,P,,P,,4
+Cleveland Browns,13,Final,W,12-05-10,12,7,A,1300,Eastern,76,Clear,10,19.64,20.82,-5.5,Y,O,,,,,,,P,,,,3,P,,,,P,O,,,P,,P,,6
+Miami Dolphins,10,Final,L,12-05-10,12,7,H,1300,Eastern,76,Clear,13,18.64,20.45,5.5,Y,,,,,P,P,,,P,O,,5,,,,,O,P,,,,,,,3
+Washington Redskins,7,Final,L,12-05-10,12,7,A,1300,Eastern,33,Mostly Cloudy,31,19.55,23.82,-7.5,N,P,O,,,P,P,,P,,P,,7,P,,,,,P,P,,,O,P,O,8
+New York Giants,31,Final,W,12-05-10,12,7,H,1300,Eastern,33,Mostly Cloudy,7,25.18,21.82,7.5,N,,,,,,O,,,,O,,4,,,,,,,,P,,,,,1
+Chicago Bears,24,Final,W,12-05-10,12,7,A,1300,Eastern,Dome,,20,20.18,15.64,5.5,N,,,,,,,,,,,,0,,,,,,O,,,,,,,2
+Detroit Lions,20,Final,L,12-05-10,12,10,H,1300,Eastern,Dome,,24,23.45,25.64,-5.5,N,O,P,P,,,,,,P,,,5,P,P,,,,P,,,,O,,,5
+Jacksonville Jaguars,17,Final,W,12-05-10,12,7,A,1200,Central,35,Sunny,6,21.82,26.73,-3.0,Y,P,,O,,,P,P,,,,,5,O,P,,,,,,,,,,,3
+Tennessee Titans,6,Final,L,12-05-10,12,7,H,1200,Central,35,Sunny,17,23.36,19.82,3.0,Y,O,,P,,P,,,,,,,4,P,P,,,,,,P,P,,P,,5
+New Orleans Saints,34,Final,W,12-05-10,12,10,A,1300,Eastern,32,Cloudy,30,24.09,17.91,6.5,N,,,,,,,,,,,,0,,,,,,,,,,,,,0
+Cincinnati Bengals,30,Final,L,12-05-10,12,10,H,1300,Eastern,32,Cloudy,34,20.45,26.18,-6.5,N,,,P,,,,,,,P,,2,,P,,,,,,,P,,O,P,5
+Denver Broncos,6,Final,L,12-05-10,12,7,A,1200,Central,26,Sunny,10,22.73,29.36,-8.0,N,,,,,,,,,,,,0,,,,O,,,,,,,O,,4
+Kansas City Chiefs,10,Final,W,12-05-10,12,7,H,1200,Central,26,Sunny,6,25.91,21.00,8.0,N,,,,,,,,P,,,,1,,,,,,,,,P,,O,,3
+Buffalo Bills,14,Final,L,12-05-10,12,7,A,1200,Central,Dome,,38,20.82,26.82,-5.5,N,,,,,,P,,O,,,,3,O,,,,P,,,,,,,,3
+Minnesota Vikings,38,Final,W,12-05-10,12,7,H,1200,Central,Dome,,14,17.18,21.73,5.5,N,P,P,P,,,,O,O,,O,,9,,,,,,,,O,,,,P,3
+Oakland Raiders,28,Final,W,12-05-10,12,7,A,1305,Pacific,67,"Cloudy, Sun",13,23.18,23.27,-13.0,Y,,,,,,,,,,,,0,O,P,,,,P,,,P,,,P,6
+San Diego Chargers,13,Final,L,12-05-10,12,7,H,1305,Pacific,67,"Cloudy, Sun",28,28.18,20.45,13.0,Y,,O,P,P,,,,O,,,P,7,,P,,,,,P,,,,,,2
+St. Louis Rams,19,Final,W,12-05-10,12,7,A,1415,Mountain,Dome,0,6,19.36,21.00,-3.0,Y,,,,,,,,,,,,0,,,,,,,,,,,,,0
+Arizona Cardinals,6,Final,L,12-05-10,12,6,H,1415,Mountain,Dome,,19,17.64,29.00,3.0,Y,,,P,,,,,,O,,,3,P,P,,,P,P,,,P,P,,,6
+Dallas Cowboys,38,OT,W,12-05-10,12,10,A,1615,Eastern,Dome,0,35,23.27,27.36,-6.0,Y,,O,,,,,,,,,,2,,,,,P,P,,,,,,,2
+Indianapolis Colts,35,OT,L,12-05-10,12,7,H,1615,Eastern,Dome,,38,25.64,22.91,6.0,Y,,,,,,P,,,,P,,2,,,,P,,P,,,O,,,P,5
+Carolina Panthers,14,Final,L,12-05-10,12,7,A,1315,Pacific,45,Cloudy,31,12.73,25.09,-5.0,N,,,,,,,O,P,,,,3,,,,,P,,O,,O,,,,5
+Seattle Seahawks,31,Final,W,12-05-10,12,7,H,1315,Pacific,45,Cloudy,14,19.00,25.00,5.0,N,P,,,,,,,,,O,P,4,P,,,O,,P,,,P,,,,5
+Atlanta Falcons,28,Final,W,12-05-10,12,7,A,1615,Eastern,72,Sunny,24,25.09,19.00,3.0,N,,,P,,,,,,,P,,2,P,,,,,P,P,P,,,,P,5
+Tampa Bay Buccaneers,24,Final,L,12-05-10,12,7,H,1615,Eastern,72,Sunny,28,19.91,20.27,-3.0,N,,P,,P,,,,O,,,,4,,,,,P,,P,,,,O,,4
+Pittsburgh Steelers,13,Final,W,12-05-10,12,7,A,2020,Eastern,35,Partly Cloudy,10,23.09,16.45,-3.0,Y,P,,,,,,,,,O,,3,P,,,,,,,,P,,,P,3
+Baltimore Ravens,10,Final,L,12-05-10,12,7,H,2020,Eastern,35,Partly Cloudy,13,22.73,17.09,3.0,Y,,,,,,P,,P,,P,O,5,,,,,,,,,,,,P,1
+New York Jets,3,Final,L,12-06-10,12,11,A,2030,Eastern,27,"Cloudy, cold, windy, snow flurries",45,24.00,17.00,-4.0,N,P,,,,P,,P,,P,,,4,P,,P,,,P,P,,,,,O,6
+New England Patriots,45,Final,W,12-06-10,12,11,H,2030,Eastern,27,"Cloudy, cold, windy, snow flurries",3,30.36,24.18,4.0,N,P,,,,,,,O,,,,3,,,,,,,,,,,,,0
+Indianapolis Colts,30,Final,W,12-09-10,13,4,A,1920,Central,35,"Clear, Cold",28,26.42,24.17,3.5,N,,P,,,,P,,,,P,,3,,,,,,P,,,O,O,,,5
+Tennessee Titans,28,Final,L,12-09-10,13,4,H,1920,Central,35,"Clear, Cold",30,21.92,19.58,-3.5,N,O,,,,,,,,,,,2,,P,,,,,,O,,,,,3
+Cincinnati Bengals,7,Final,L,12-12-10,13,7,A,1300,Eastern,37,Light Rain,23,21.25,26.83,-8.5,N,,,P,P,P,,P,,,,,4,,P,,,P,,,,O,,O,,6
+Pittsburgh Steelers,23,Final,W,12-12-10,13,7,H,1300,Eastern,37,Light Rain,7,22.25,15.92,8.5,N,,,,O,,,,,P,P,,4,,,,,,,,,,,,P,1
+Oakland Raiders,31,Final,L,12-12-10,13,7,A,1300,Eastern,54,Sunny,38,23.58,22.42,3.5,Y,,,,P,,,,,,,,1,O,,,,,O,,,P,,,P,6
+Jacksonville Jaguars,38,Final,W,12-12-10,13,7,H,1300,Eastern,54,Sunny,31,21.42,25.00,-3.5,Y,,,P,,,,P,,,,,2,O,P,,,P,,,,,,,O,6
+Cleveland Browns,6,Final,L,12-12-10,13,7,A,1300,Eastern,36,Rain,13,19.08,19.92,0.0,Y,O,,,,,,,P,,,,3,P,,,,P,O,,,P,,,,5
+Buffalo Bills,13,Final,W,12-12-10,13,7,H,1300,Eastern,36,Rain,6,20.25,27.75,0.0,Y,,,,,O,P,,,,,,3,O,,,,,,,,,,,P,3
+Tampa Bay Buccaneers,17,Final,W,12-12-10,13,7,A,1300,Eastern,43,Rain,16,20.25,20.92,1.5,N,,,,P,O,,,O,,P,,6,,,,,P,,,,O,,O,,5
+Washington Redskins,16,Final,L,12-12-10,13,7,H,1300,Eastern,43,Rain,17,18.50,24.42,-1.5,N,P,P,,,P,P,,,,P,,5,P,,,,,P,P,,,O,P,O,8
+Green Bay Packers,3,Final,L,12-12-10,13,7,A,1300,Eastern,Dome,,7,25.25,15.17,7.0,Y,,,P,,,P,,,,,,2,P,,,,,,P,,P,,,,3
+Detroit Lions,7,Final,W,12-12-10,13,7,H,1300,Eastern,Dome,,3,23.17,25.50,-7.0,Y,,P,P,,,,,,O,P,,5,P,,,,,P,,,,O,,,4
+Atlanta Falcons,31,Final,W,12-12-10,13,7,A,1300,Eastern,44,Cloudy,10,25.33,19.42,7.5,N,,,,P,,,,P,,P,,3,P,P,,,,P,,P,,,,,4
+Carolina Panthers,10,Final,L,12-12-10,13,7,H,1300,Eastern,44,Cloudy,31,12.83,25.58,-7.5,N,,,,,,,O,,,,,2,,,,,,P,O,,O,,,,5
+Seattle Seahawks,21,Final,L,12-12-10,13,7,A,1305,Pacific,55,Overcast,40,20.00,24.08,-4.5,N,P,,,,,,,,,P,O,4,P,,,P,,P,,,,,,,3
+San Francisco 49ers,40,Final,W,12-12-10,13,7,H,1305,Pacific,55,Overcast,21,16.92,21.58,4.5,N,,O,P,,,O,,,P,,,6,,,P,,P,,P,,P,P,,,5
+St. Louis Rams,13,Final,L,12-12-10,13,7,A,1515,Central,Dome,,31,19.33,19.75,-9.5,N,,,,,,,,,,,,0,,,,,O,,,,O,,P,P,6
+New Orleans Saints,31,Final,W,12-12-10,13,7,H,1515,Central,Dome,,13,24.92,18.92,9.5,N,,,,,,,,,P,,,1,,,,,,,,,,,,,0
+Miami Dolphins,10,Final,W,12-12-10,13,7,A,1615,Eastern,53,Rain,6,17.92,19.83,-5.0,Y,,,O,,,P,,,O,P,,6,P,,,,P,P,,,,P,,,4
+New York Jets,6,Final,L,12-12-10,13,6,H,1615,Eastern,53,Rain,10,22.25,19.33,5.0,Y,,,,,P,P,,,P,,,3,P,,P,,,,,,,,,O,4
+Denver Broncos,13,Final,L,12-12-10,13,7,A,1415,Mountain,Dome,,43,21.33,27.75,4.0,Y,,,,,,,,,,,,0,,,,P,,,,,,P,O,,4
+Arizona Cardinals,43,Final,W,12-12-10,13,7,H,1415,Mountain,Dome,,13,16.67,28.17,-4.0,Y,O,,P,,,,,,O,,,5,P,P,,,,P,P,,,P,,,5
+Kansas City Chiefs,0,Final,L,12-12-10,13,7,A,1315,Pacific,86,Sunny,31,24.58,19.75,-10.0,N,O,,,,,,,,,,,2,,,,,,,,,,,P,,1
+San Diego Chargers,31,Final,W,12-12-10,13,7,H,1315,Pacific,86,Sunny,0,26.92,21.08,10.0,N,,P,,O,,,,O,,,O,7,,P,,,,,P,,,,,,2
+New England Patriots,36,Final,W,12-12-10,13,6,A,1515,Central,26,"Snow, Windy 53 mph",7,31.58,22.42,3.0,N,P,,,,,,,O,,,,3,,,,,,,,,,,,,0
+Chicago Bears,7,Final,L,12-12-10,13,7,H,1515,Central,26,"Snow, Windy 53 mph",36,20.50,16.00,-3.0,N,,,,,,,,,,,,0,,,,,,O,,,,,,,2
+Philadelphia Eagles,30,Final,W,12-12-10,13,10,A,1920,Central,Dome,,27,28.67,23.42,4.5,N,P,,,,,,,,O,,,3,,,,,,,,P,O,,,,3
+Dallas Cowboys,27,Final,L,12-12-10,13,7,H,1920,Central,Dome,,30,24.50,28.00,-4.5,N,,O,,,,,,,,,,2,,,,,P,P,,,,,,P,3
+New York Giants,21,Final,W,12-13-10,13,8,A*,1920,Eastern,Dome,,3,25.67,20.58,5.0,N,,P,,,,P,,,,P,,3,,,,,,,,P,,,,,1
+Minnesota Vikings,3,Final,L,12-13-10,13,8,H*,1920,Eastern,Dome,,21,18.92,21.08,-5.0,N,O,P,P,,,,O,O,,O,,10,,,,,,,,O,,,,,2
+Baltimore Ravens,34,OT,W,12-13-10,13,8,A,1930,Central,Dome,,28,21.67,16.75,3.0,N,,,,O,,,,,,,P,3,,,,,,,,,,O,,,2
+Houston Texans,28,OT,L,12-13-10,13,11,H,1930,Central,Dome,,34,24.00,26.75,-3.0,N,P,,P,P,,,,P,P,P,,6,,,,,P,,,P,P,,,,3
+San Francisco 49ers,7,Final,L,12-16-10,14,4,A,1720,Pacific,56,Partly Cloudy,34,18.69,21.54,-10.0,N,,O,,,,O,P,,,,,5,,,,,,,P,P,,,,,2
+San Diego Chargers,34,Final,W,12-16-10,14,4,H,1720,Pacific,56,Partly Cloudy,7,27.23,19.46,10.0,N,,,O,O,,P,,O,,,P,8,P,P,,,,,,,,,,,2
+Kansas City Chiefs,27,Final,W,12-19-10,14,7,A,1200,Central,Dome,,13,22.69,20.62,-3.0,Y,P,,,,,,,,,,,1,,,,,,,,,,,,,0
+St. Louis Rams,13,Final,L,12-19-10,14,7,H,1200,Central,Dome,,27,18.85,20.62,3.0,Y,,,,,,,P,,,,,1,,,,,O,,,,P,,,,3
+Jacksonville Jaguars,24,Final,L,12-19-10,14,7,A,1300,Eastern,Dome,,34,22.69,25.46,-4.5,N,P,P,P,,,,P,,,,,4,O,P,,,O,,,,,,,O,7
+Indianapolis Colts,34,Final,W,12-19-10,14,10,H,1300,Eastern,Dome,,24,26.69,24.46,4.5,N,,,,,,P,,,,,,1,,P,,,,,,,O,O,,,5
+Buffalo Bills,17,Final,W,12-19-10,14,7,A,1300,Eastern,67,Cloudy,14,19.69,26.08,-5.5,Y,,,,,O,P,P,,,,,4,O,,,,P,,,,,P,,,4
+Miami Dolphins,14,Final,L,12-19-10,14,7,H,1300,Eastern,67,Cloudy,17,17.31,18.77,5.5,Y,,,O,,P,,,,O,,,5,,,,,,,,,,P,,,1
+Houston Texans,17,Final,L,12-19-10,14,6,A,1200,Central,36,"Sunny, Cold",31,24.31,27.31,-1.5,N,P,,P,P,,,,O,P,,P,7,,,,,P,,,O,P,,,,4
+Tennessee Titans,31,Final,W,12-19-10,14,10,H,1200,Central,36,"Sunny, Cold",17,22.38,20.38,1.5,N,O,,,,O,,,,,,,4,,,,,,,,O,,,,,2
+Cleveland Browns,17,Final,L,12-19-10,14,7,A,1300,Eastern,28,Partly Cloudy,19,18.08,19.38,0.0,Y,P,,,,,,,P,,,,2,P,,,P,,O,,,P,P,,,6
+Cincinnati Bengals,19,Final,W,12-19-10,14,7,H,1300,Eastern,28,Partly Cloudy,17,20.15,26.54,0.0,Y,,,P,,,,,,,,,1,,P,,,,,P,,P,,O,,5
+Washington Redskins,30,Final,L,12-19-10,14,7,A,1200,Central,51,Roof Open,33,18.31,23.85,-9.5,N,O,P,,,P,,,,,,,4,O,,,,,P,,,,P,P,O,7
+Dallas Cowboys,33,Final,W,12-19-10,14,7,H,1200,Central,51,Roof Open,30,24.69,28.15,9.5,N,,O,,,,,,,,O,,4,,,,,P,P,,,P,,,,3
+Detroit Lions,23,OT,W,12-19-10,14,7,A,1300,Eastern,54,Cloudy,20,21.92,23.77,-4.0,Y,O,P,,,,,,,O,,,5,P,,,,,P,,P,P,O,,,6
+Tampa Bay Buccaneers,20,OT,L,12-19-10,14,7,H,1300,Eastern,54,Cloudy,23,20.00,20.54,4.0,Y,,,,P,O,,,O,,P,,6,,O,,,O,,,,O,,O,,8
+Philadelphia Eagles,38,Final,W,12-19-10,14,7,A,1300,Eastern,33,Partly Cloudy,31,28.77,23.69,-3.0,Y,,,P,,,,,,O,,,3,,,,,,O,,,P,,,,3
+New York Giants,31,Final,L,12-19-10,14,6,H,1300,Eastern,33,Partly Cloudy,38,25.31,19.23,3.0,Y,,,P,,,,,P,,,,2,,,,,,,,P,,,,,1
+New Orleans Saints,24,Final,L,12-19-10,14,7,A,1300,Eastern,34,Partly Cloudy,30,25.38,18.46,-2.0,N,,,,,,P,,,,,O,3,,,P,,,,P,,,P,P,,4
+Baltimore Ravens,30,Final,W,12-19-10,14,6,H,1300,Eastern,34,Partly Cloudy,24,22.62,17.62,2.0,N,,,,O,,,,,,P,,3,,,,,,,,,,P,,,1
+Arizona Cardinals,12,Final,L,12-19-10,14,7,A,1300,Eastern,42,Sunny,19,18.69,27.00,-2.5,N,O,,P,,,,,,O,,,5,P,,,,,P,P,,,,,,3
+Carolina Panthers,19,Final,W,12-19-10,14,7,H,1300,Eastern,42,Sunny,12,12.62,26.00,2.5,N,,,,,,,O,,,,,2,,,,,P,,O,,O,,,,5
+Atlanta Falcons,34,Final,W,12-19-10,14,7,A,1305,Pacific,45,Sunny,18,25.77,18.69,5.5,N,,,,,,,,,P,P,,2,P,P,,,P,P,,,,,,,4
+Seattle Seahawks,18,Final,L,12-19-10,14,7,H,1305,Pacific,45,Sunny,34,20.08,25.31,-5.5,N,P,,O,,P,,,,,,P,5,P,,,,,,,,,,,,1
+Denver Broncos,23,Final,L,12-19-10,14,7,A,1215,Pacific,54,"Cloudy, Rainy",39,20.69,28.92,-8.0,N,O,,P,,,,,,,,,3,,,,,,,,,,,O,,2
+Oakland Raiders,39,Final,W,12-19-10,14,7,H,1215,Pacific,54,"Cloudy, Rainy",23,24.15,23.62,8.0,N,,,,P,,,,,,,,1,O,,,,,P,,,P,,,P,5
+New York Jets,22,Final,W,12-19-10,14,7,A,1615,Eastern,23,Cloudy,17,21.00,18.62,-3.5,Y,,,,,P,,,,O,,,3,,,P,,,,,,,,,O,3
+Pittsburgh Steelers,17,Final,L,12-19-10,14,7,H,1615,Eastern,23,Cloudy,22,22.31,15.23,3.5,Y,,,,O,,,,,P,,,3,,,,,,,,,P,,,O,3
+Green Bay Packers,27,Final,L,12-19-10,14,7,A,2020,Eastern,32,"Cloudy, Cold",31,23.54,14.54,-14.5,N,O,,P,,,P,P,P,,,,6,P,,,,,,P,O,P,,,,5
+New England Patriots,31,Final,W,12-19-10,14,7,H,2020,Eastern,32,"Cloudy, Cold",27,31.92,21.23,14.5,N,P,,P,,,,,O,,,,4,,,,,,,,,P,P,,,2
+Chicago Bears,40,Final,W,12-20-10,14,8,A*,1930,Central,23,Snow,14,19.46,17.54,5.5,N,,,,,,,,,,,,0,,,,,,O,,,,,,,2
+Minnesota Vikings,14,Final,L,12-20-10,14,7,H*,1930,Central,23,Snow,40,17.69,21.08,-5.5,N,P,O,,,,,O,O,,P,,8,,,,,,,,P,,P,,,2
+Carolina Panthers,3,Final,L,12-23-10,15,4,A,2020,Eastern,27,Cloudy,27,13.07,25.00,-14.0,N,,O,,,,,O,,P,,,5,P,,,,,,O,,O,,,,5
+Pittsburgh Steelers,27,Final,W,12-23-10,15,4,H,2020,Eastern,27,Cloudy,3,21.93,15.71,14.0,N,,,,P,,,,,,,,1,,,,,,,,,,,,O,2
+Dallas Cowboys,26,Final,L,12-25-10,15,6,A,1730,Mountain,Dome,0,27,25.29,28.29,7.0,Y,,P,,,,,,,,P,,2,,,,,P,P,,,,,,P,3
+Arizona Cardinals,27,Final,W,12-25-10,15,6,H,1730,Mountain,Dome,,26,18.21,26.43,-7.0,Y,O,,,P,,,,,O,,,5,P,,,,,P,O,,,,,,4
+San Francisco 49ers,17,Final,L,12-26-10,15,10,A,1200,Central,Dome,,25,17.86,22.43,-2.5,N,,O,P,,P,O,,,,,,6,,,,,,,P,P,,P,,,3
+St. Louis Rams,25,Final,W,12-26-10,15,7,H,1200,Central,Dome,,17,18.43,21.07,2.5,N,,,,,,,,,P,,,1,,,,,O,,,P,,,,,3
+New York Jets,34,Final,L,12-26-10,15,7,A,1200,Central,33,"Cloudy, flurries, steady temp",38,21.07,18.50,-2.5,N,P,,P,,P,,,,O,,,5,,,,,P,,,P,,,,O,4
+Chicago Bears,38,Final,W,12-26-10,15,6,H,1200,Central,33,"Cloudy, flurries, steady temp",34,20.93,17.29,2.5,N,,,,,,,,,,,,0,,,,,P,P,,,,,,,2
+Baltimore Ravens,20,Final,W,12-26-10,15,7,A,1300,Eastern,26,"Clear, Windy, Wind Chill 13",10,23.14,18.07,3.5,N,,,,O,P,,,,,P,,4,,P,,,,,,,,,O,,3
+Cleveland Browns,10,Final,L,12-26-10,15,7,H,1300,Eastern,26,"Clear, Windy, Wind Chill 13",20,18.00,19.36,-3.5,N,P,,,P,,,,P,,,,3,P,,,,,O,,,O,P,,,6
+New England Patriots,34,Final,W,12-26-10,15,7,A,1300,Eastern,22,Cloudy,3,31.86,21.64,7.0,N,P,,P,,,,,O,,,,4,,,,,O,,,P,,P,,,4
+Buffalo Bills,3,Final,L,12-26-10,15,7,H,1300,Eastern,22,Cloudy,34,19.50,25.21,-7.0,N,,,,,O,P,,,,,,3,O,,,,P,,,,,,,,3
+Washington Redskins,20,OT,W,12-26-10,15,7,A,1300,Eastern,38,Cloudy,17,19.14,24.50,-7.0,Y,O,,,,P,,,P,,,,4,O,,O,,P,P,O,,,,O,O,12
+Jacksonville Jaguars,17,OT,L,12-26-10,15,7,H,1300,Eastern,38,Cloudy,20,22.79,26.07,7.0,Y,,O,P,,,,P,P,P,P,,7,O,,,P,O,,P,,,,,P,7
+Tennessee Titans,14,Final,L,12-26-10,15,7,A,1200,Central,19,Cloudy,34,23.00,20.14,-4.0,N,O,,,,O,,,,,,,4,P,,,,,,,O,,,,,3
+Kansas City Chiefs,34,Final,W,12-26-10,15,7,H,1200,Central,19,Cloudy,14,23.00,20.07,4.0,N,,,,,,,,,,,,0,,,,,,,,,,,,,0
+Detroit Lions,34,Final,W,12-26-10,15,7,A,1300,Eastern,65,"Sunny, Windy",27,22.00,23.50,-3.5,Y,P,P,,,,,,,O,P,,5,P,,,,,,,P,P,O,,P,6
+Miami Dolphins,27,Final,L,12-26-10,15,7,H,1300,Eastern,65,"Sunny, Windy",34,17.07,18.64,3.5,Y,,,O,,,,,,O,,,4,,,,,,O,,,,,P,,3
+San Diego Chargers,20,Final,L,12-26-10,15,10,A,1605,Eastern,25,"Cloudy, Flurries",34,27.71,18.57,8.0,Y,,P,O,O,,,,P,,,,6,,,,,P,,O,,,,,,3
+Cincinnati Bengals,34,Final,W,12-26-10,15,7,H,1605,Eastern,25,"Cloudy, Flurries",20,20.07,25.86,-8.0,Y,,,O,,P,,,,,,P,4,,,,,,,,,,,O,,2
+Indianapolis Colts,31,Final,W,12-26-10,15,7,A,1305,Pacific,58,Sunny,26,27.21,24.43,2.0,N,,,,,,P,,,,,,1,,,,O,,,,,O,O,,,6
+Oakland Raiders,26,Final,L,12-26-10,15,7,H,1305,Pacific,58,Sunny,31,25.21,23.57,-2.0,N,,,,P,,,,,O,,,3,O,O,,,,,,,P,,,,5
+Houston Texans,23,Final,L,12-26-10,15,7,A,1405,Mountain,50,Partly Cloudy,24,23.79,27.57,2.0,Y,P,P,O,,,P,,O,,,,7,,,,,P,,,O,,,,,3
+Denver Broncos,24,Final,W,12-26-10,15,7,H,1405,Mountain,50,Partly Cloudy,23,20.86,29.64,-2.0,Y,O,P,,,,,,,,P,,4,,,,,,,,,,,P,,1
+New York Giants,17,Final,L,12-26-10,15,7,A,1515,Central,25,Partly Cloudy,45,25.71,20.57,-3.0,N,,,P,,,P,,,,,,2,,,,,,,,P,,,,,1
+Green Bay Packers,45,Final,W,12-26-10,15,7,H,1515,Central,25,Partly Cloudy,17,23.79,15.71,3.0,N,P,,,,P,P,,,,,,3,P,,,,,,P,O,P,,P,,6
+Seattle Seahawks,15,Final,L,12-26-10,15,7,A,1615,Eastern,49,Cloudy,38,19.93,25.93,-5.5,N,,,O,,,P,,,,,,3,P,,,,,P,,,P,,,,3
+Tampa Bay Buccaneers,38,Final,W,12-26-10,15,7,H,1615,Eastern,49,Cloudy,15,20.00,20.71,5.5,N,,,,P,O,,,O,O,,,7,,O,,,O,,,,O,,O,,8
+New Orleans Saints,17,Final,W,12-27-10,15,8,A,2030,Eastern,Dome,,14,25.29,19.29,-2.0,Y,,,,,,,,,,,O,2,,P,P,,O,,P,,P,,,,6
+Atlanta Falcons,14,Final,L,12-27-10,15,8,H,2030,Eastern,Dome,,17,26.36,18.64,2.0,Y,,,,,,,,,,P,,1,P,P,,,,P,,,,,,,3
+Minnesota Vikings,24,Final,W,12-28-10,15,8,A,1900,Eastern,32,Partly Cloudy,14,17.43,22.43,-14.0,Y,O,P,,,,,O,O,,,,7,,,,,,,,,,,O,,2
+Philadelphia Eagles,14,Final,L,12-28-10,15,9,H,1900,Eastern,32,Partly Cloudy,24,29.43,24.21,14.0,Y,,,P,,,,,,P,,,2,,P,,,P,O,,,,,O,,6
+Tampa Bay Buccaneers,23,Final,W,01-02-11,16,7,A,1200,Central,Dome,,13,21.20,20.33,-7.0,Y,,,O,P,O,,,O,P,,,8,,O,,,O,,,,O,,O,,8
+New Orleans Saints,13,Final,L,01-02-11,16,6,H,1200,Central,Dome,,23,24.73,18.93,7.0,Y,,,O,,,,,,,,O,4,P,,P,,,,,,,,,,2
+Cincinnati Bengals,7,Final,L,01-02-11,16,7,A,1300,Eastern,51,Cloudy,13,21.00,25.47,-9.5,N,,,O,O,,,,,,,,4,,,,,,,,,P,,,,1
+Baltimore Ravens,13,Final,W,01-02-11,16,7,H,1300,Eastern,51,Cloudy,7,22.93,17.53,9.5,N,,,,P,P,,,,,P,,3,,,,,,,,,,P,O,,3
+Miami Dolphins,7,Final,L,01-02-11,16,7,A,1300,Eastern,47,"Cloudy, Rain",38,17.73,19.67,-4.5,N,,,O,O,,,,,O,,,6,,,,,,O,,,,,,,2
+New England Patriots,38,Final,W,01-02-11,16,7,H,1300,Eastern,47,"Cloudy, Rain",7,32.00,20.40,4.5,N,P,,O,,,,,O,,,,5,,,,,P,,,,P,P,,,3
+Oakland Raiders,31,Final,W,01-02-11,16,7,A,1200,Central,30,Sunny,10,25.27,24.07,-4.5,Y,P,O,,P,,,,,P,,,5,O,O,,,,,,,P,,,,5
+Kansas City Chiefs,10,Final,L,01-02-11,16,7,H,1200,Central,30,Sunny,31,23.73,19.67,4.5,Y,,,,,,,,,,,,0,,,,,,,,,,,,,0
+Pittsburgh Steelers,41,Final,W,01-02-11,16,10,A,1300,Eastern,25,"Sunny, Wind Chill 13",9,22.27,14.87,6.5,N,,,,,,,,,,,,0,,,,,P,,,,,,,P,2
+Cleveland Browns,9,Final,L,01-02-11,16,7,H,1300,Eastern,25,"Sunny, Wind Chill 13",41,17.47,19.40,-6.5,N,,,,P,,,,P,,,,2,P,,,P,,O,P,,O,P,,,8
+Minnesota Vikings,13,Final,L,01-02-11,16,5,A,1300,Eastern,Dome,,20,17.87,21.87,-3.5,N,O,P,P,,,,O,O,,,,8,,,,,,,,,,O,O,,4
+Detroit Lions,20,Final,W,01-02-11,16,7,H,1300,Eastern,Dome,,13,22.80,23.73,3.5,N,,P,,,,,,,O,O,,5,,,,,,,,,O,O,,,4
+Buffalo Bills,7,Final,L,01-02-11,16,7,A,1300,Eastern,48,Overcast,38,18.40,25.80,-1.0,N,O,,,,O,P,,,,,,5,O,,P,,P,,,,,,,,4
+New York Jets,38,Final,W,01-02-11,16,7,H,1300,Eastern,48,Overcast,7,21.93,19.80,1.0,N,P,,P,,P,,,,O,,,5,O,,P,,O,,,O,P,,,O,10
+Carolina Panthers,10,Final,L,01-02-11,16,10,A,1300,Eastern,Dome,,31,12.40,25.13,-14.5,N,,O,O,,,,O,,,,,6,,P,,,,,O,,O,,,,5
+Atlanta Falcons,31,Final,W,01-02-11,16,6,H,1300,Eastern,Dome,,10,25.53,18.53,14.5,N,,,,,P,,,,,P,,2,P,P,,,,P,,,,,,,3
+Chicago Bears,3,Final,L,01-02-11,16,7,A,1515,Central,19,Clear,10,22.07,18.40,-11.5,N,,,,,,,,,,,,0,,,,,,P,,,,,,,1
+Green Bay Packers,10,Final,W,01-02-11,16,7,H,1515,Central,19,Clear,3,25.20,15.80,11.5,N,,,,,P,P,,,,,,2,P,,,,,,P,O,P,,P,,6
+Dallas Cowboys,14,Final,W,01-02-11,16,8,A,1615,Eastern,40,Rain,13,25.33,28.20,2.0,N,O,,,,,,,,,P,,3,,,,,P,P,,,,,,,2
+Philadelphia Eagles,13,Final,L,01-02-11,16,5,H,1615,Eastern,40,Rain,14,28.40,24.20,-2.0,N,O,,O,,P,,,,O,,,7,O,O,,,,O,,,O,,O,,10
+San Diego Chargers,33,Final,W,01-02-11,16,7,A,1415,Mountain,42,Partly Cloudy,28,27.20,19.60,5.0,N,,,P,O,,,,,,,,3,,,,,P,,O,,,,,,3
+Denver Broncos,28,Final,L,01-02-11,16,7,H,1415,Mountain,42,Partly Cloudy,33,21.07,29.20,-5.0,N,O,P,,,,,,,,P,,4,,,,,,P,,,O,,P,,4
+Jacksonville Jaguars,17,Final,L,01-02-11,16,7,A,1515,Central,60,Sunny,34,22.40,25.67,-4.5,N,O,O,P,,,,,,,P,,6,O,,,,O,,,,,,,P,5
+Houston Texans,34,Final,W,01-02-11,16,7,H,1515,Central,60,Sunny,17,23.73,27.33,4.5,N,,,O,P,,,,O,,,,5,,,P,,P,,,O,,,,O,6
+Arizona Cardinals,7,Final,L,01-02-11,16,8,A,1315,Pacific,49,Rain,38,18.80,26.40,-6.0,N,O,,,,,,,,O,,,4,,,,,,P,O,,,,,,3
+San Francisco 49ers,38,Final,W,01-02-11,16,7,H,1315,Pacific,49,Rain,7,17.80,22.60,6.0,N,,O,,P,P,O,,,,,,6,,,,,,,P,O,,,,,3
+Tennessee Titans,20,Final,L,01-02-11,16,7,A,1615,Eastern,Dome,0,23,22.40,21.07,-8.5,N,O,,,,O,,,,,,,4,P,,,,,,,O,,,,,3
+Indianapolis Colts,23,Final,W,01-02-11,16,7,H,1615,Eastern,Dome,,20,27.47,24.53,8.5,N,,,,,,P,,,,,,1,,,,O,,,,,O,O,,,6
+New York Giants,17,Final,W,01-02-11,16,7,A,1615,Eastern,37,Rain,14,25.13,22.20,4.5,N,,P,,,,,,,,O,,3,P,,,P,,,,P,O,,P,,6
+Washington Redskins,14,Final,L,01-02-11,16,7,H,1615,Eastern,37,Rain,17,19.20,24.00,-4.5,N,,P,,,P,,,,,,,2,O,,O,,,,P,,P,O,O,O,12
+St. Louis Rams,6,Final,L,01-02-11,16,7,A,1720,Pacific,34,Clear,16,18.87,20.80,3.0,Y,,,,,,,,,,,,0,,,,,O,,,,,,,,2
+Seattle Seahawks,16,Final,W,01-02-11,16,7,H,1720,Pacific,34,Clear,6,19.60,26.73,-3.0,Y,O,,O,,,,,,,,,4,,,,,,P,,,,,,,1

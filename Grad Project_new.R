@@ -368,7 +368,7 @@ nflDataUpsetAmtWins_pred
 table(nflDataUpsetAmtWins_pred,droplevels(classTestDataFiltered)$UpsetAmt)
 
 ## Naive Bayes Classification
-classifier <- naiveBayes(UpsetAmt ~ AorH + Time + Weather + AvgPF + AvgPA, data = nflDataUpsetWinsFiltered, method = "class")
+classifier <- naiveBayes(UpsetAmt ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = nflDataUpsetWinsFiltered, method = "class")
 pred <- predict(classifier, classTestDataFiltered[,-5])
 table(pred)
 table(classTestDataFiltered$UpsetAmt)
@@ -379,24 +379,28 @@ table(pred,droplevels(classTestDataFiltered)$UpsetAmt)
 #### Classification
 ### Train & Test
 ## Past Years to Current Year
+nflTrainDataFiltered <- subset(nflDataWins, complete.cases(nflDataWins))
+nflTrainDataFiltered <- BinningData(nflTrainDataFiltered)
+classUpsetTestData <- subset(testData, testData$Outcome == "W")
+classUpsetTestDataFiltered <- subset(classUpsetTestData, complete.cases(classUpsetTestData))
+classUpsetTestDataFiltered <- BinningData(classUpsetTestDataFiltered)
+#classTestDataFiltered$UpsetAmt <- UpsetAmtBin(classTestDataFiltered$UpsetAmt)
 # Naive Bayes Classification
-classifier <- naiveBayes(Upset ~ Time + Weather + Offense + Defense, data = TRAINDATA, method = "class")
-classifier
-pred <- predict(classifier, TESTDATA[,-5])
+classifier <- naiveBayes(Upset ~ AorH + Time + Weather + AvgPF + AvgPA, data = nflTrainDataFiltered, method = "class")
+pred <- predict(classifier, classUpsetTestDataFiltered[,-5])
 table(pred)
-table(TESTDATA$Upset)
-table(pred,droplevels(TESTDATA)$Upset)
+table(classUpsetTestDataFiltered$Upset)
 # Decision Tree Classification
-nflDataUpsetWins_rpart <- rpart(Upset ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = TRAINDATA, method = "class")
-printcp(nflDataUpsetWins_rpart)
-plotcp(nflDataUpsetWins_rpart)
-plot(nflDataUpsetWins_rpart)
-text(nflDataUpsetWins_rpart, use.n=TRUE)
+nflDataUpset_rpart <- rpart(Upset ~ AorH + Time + Weather + AvgPF + AvgPA, data = nflTrainDataFiltered, method = "class", control=rpart.control(minsplit=1, minbucket=5, cp=0.01))
+printcp(nflDataUpset_rpart)
+plotcp(nflDataUpset_rpart)
+plot(nflDataUpset_rpart)
+text(nflDataUpset_rpart, use.n=TRUE)
 #nflDataUpsetWins_pred <- predict(nflDataUpsetWins_rpart, newData = testData, type="class")
-nflDataUpsetWins_pred <- predict(nflDataUpsetWins_rpart, TESTDATA[,-6], type="class")
+nflDataUpset_pred <- predict(nflDataUpset_rpart, classUpsetTestDataFiltered[,-6], type="class")
 #balanceScale_pred <- predict(balanceScale_rpart, newData = testData, type="class")
-nflDataUpsetWins_pred
-table(nflDataUpsetWins_pred, testData$Upset)
+nflDataUpset_pred
+table(nflDataUpset_pred, classUpsetTestDataFiltered$Upset)
 
 ## 70/30 split
 set.seed(1234)
