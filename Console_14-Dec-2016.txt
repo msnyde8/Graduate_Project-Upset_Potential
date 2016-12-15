@@ -1,0 +1,1001 @@
++   nflData$Upset[nflData$Upset=="Y"]<-"1"
++   nflData$AorH[nflData$AorH=="A"]<-"0"
++   nflData$AorH[nflData$AorH=="A*"]<-"0"
++   nflData$AorH[nflData$AorH=="H"]<-"1"
++   nflData$AorH[nflData$AorH=="H*"]<-"1"
++ #  nflData$QB[nflData$QB=="P"]<-"1"
++ #  nflData$QB[nflData$QB=="O"]<-"2"
++ #  nflData$QB[nflData$QB=='']<-"0"
++ #  nflData$RB[nflData$RB=="P"]<-"1"
++ #  nflData$RB[nflData$RB=="O"]<-"2"
++ #  nflData$RB[nflData$RB=='']<-"0"
++   nflData$Upset <- as.numeric(nflData$Upset)
++   nflData$AorH <- as.numeric(nflData$AorH)
++ #  nflData$QB <- as.numeric(nflData$QB)
++ #  nflData$RB <- as.numeric(nflData$RB)
++   return(nflData)
++ }
+> 
+> ViewBinnedData <- function(nflData) {
++ #  nflData$Team
++   nflData$Upset
++   nflData$AorH
++   nflData$QB
++   nflData$RB
++   
++  # unique(nflData$Team)
++   unique(nflData$Upset)
++   unique(nflData$AorH)
++   unique(nflData$QB)
++ }
+> 
+> WeatherBin <- function(nflData) {
++   nflData$Weather[nflData$Weather>=85 & nflData$Weather!="Dome"]<-"Hot"
++   nflData$Weather[nflData$Weather>=70 & nflData$Weather<85 & nflData$Weather!="Dome"]<-"Warm"
++   nflData$Weather[nflData$Weather>=55 & nflData$Weather<70 & nflData$Weather!="Dome"]<-"Mild"
++   nflData$Weather[nflData$Weather>=40 & nflData$Weather<55 & nflData$Weather!="Dome"]<-"Cool"
++   nflData$Weather[nflData$Weather<40 & nflData$Weather!="Dome"]<-"Cold"
++   nflData$Weather <- as.factor(nflData$Weather)
++   return(nflData)
++ }
+> 
+> WeatherNumBin <- function(nflData) {
++   nflData$Weather[nflData$Weather=="Dome"]<-"0"
++   nflData$Weather <- as.numeric(nflData$Weather)
++   return(nflData)
++ }
+> 
+> UpsetAmtBin <- function(curData) {
++   curData <- as.numeric(curData)
++   curData[curData>=1 & curData<13]<-"Low"
++   curData[curData>=13 & curData<23]<-"Medium"
++   curData[curData>=23 & curData<=45]<-"High"
++   curData <- as.factor(curData)
++   return(curData)
++ }
+> 
+> decisionTreeClassifyData <- function(trainData, testData) {
++   nflDataUpsetWins_rpart <- rpart(Upset ~ AorH + Time + Weather, data = trainData, method = "class")
++   printcp(nflDataUpsetWins_rpart)
++   plotcp(nflDataUpsetWins_rpart)
++   plot(nflDataUpsetWins_rpart)
++   text(nflDataUpsetWins_rpart, use.n=TRUE)
++   #nflDataUpsetWins_pred <- predict(nflDataUpsetWins_rpart, newData = testData, type="class")
++   nflDataUpsetWins_pred <- predict(nflDataUpsetWins_rpart, testData[,-6], type="class")
++   #balanceScale_pred <- predict(balanceScale_rpart, newData = testData, type="class")
++   nflDataUpsetWins_pred
++   table(nflDataUpsetWins_pred, testData$Upset)
++ }
+> 
+> nflData <- BinningData(nflData)
+> nflData <- WeatherNumBin(nflData)
+> testData <- BinningData(testData)
+> testData <- WeatherNumBin(testData)
+> 
+> nflDataTies <- subset(nflData, nflData$Outcome == "T")
+> #nflDataTies[1:20,]
+> nflDataWins <- subset(nflData, nflData$Outcome == "W")
+> #nflDataWins[1:20,]
+> nflDataLoses <- subset(nflData, nflData$Outcome == "L")
+> #nflDataLoses[1:20,]
+> 
+> nflDataUpsetWins <- subset(nflDataWins, nflDataWins$Upset == "1")
+> #nflDataUpsetWins[1:20,]
+> nflDataUpsetLoses <- subset(nflDataLoses, nflDataLoses$Upset == "1")
+> #nflDataUpsetLoses[1:20,]
+> 
+> #### Magnitude of Upset
+> ### MofU - Clustering
+> newDataUpsetWins <- cbind(nflDataUpsetWins$Odds, nflDataUpsetWins$UpsetAmt)
+> #newDataUpsetWins$Odds <- lapply(newDataUpsetWins$Odds, abs);
+> newDataUpsetWins <- abs(newDataUpsetWins)
+> plot(newDataUpsetWins)
+> 
+> ## Density-based approach: DBSCAN
+> #Run dbscan with eps = 2 and MinPts = 5
+> dbr <- dbscan(newDataUpsetWins, eps=2, MinPts=5)
+> str(dbr)
+List of 4
+ $ cluster: num [1:535] 1 1 1 1 1 1 1 1 1 1 ...
+ $ eps    : num 2
+ $ MinPts : num 5
+ $ isseed : logi [1:535] TRUE TRUE TRUE TRUE TRUE TRUE ...
+ - attr(*, "class")= chr "dbscan"
+> plot(newDataUpsetWins, col=dbr$cluster+1L)
+> # Silhouette plot
+> d <- dist(newDataUpsetWins)
+> sil <- silhouette(dbr$cluster,d)
+> plot(sil)
+> 
+> ## Partitioning approach: K-means
+> myData <- newDataUpsetWins
+> wss<-(nrow(myData)-1)*sum(apply(myData,2,var))
+> for (i in 2:15) wss[i] <- sum(kmeans(myData,
++                                      centers=i)$withinss)
+> plot(1:15, wss, type="b", xlab="Number of Clusters",
++      ylab="Within groups")
+> #run k-means with k = 4
+> km4 <- kmeans(newDataUpsetWins, centers = 4)
+> km4
+K-means clustering with 4 clusters of sizes 105, 231, 138, 61
+
+Cluster means:
+      [,1]      [,2]
+1 7.714286  4.371429
+2 2.735931  4.662338
+3 4.021739 13.884058
+4 3.401639 26.000000
+
+Clustering vector:
+  [1] 2 3 4 2 2 2 2 2 1 3 1 1 3 3 3 2 4 3 2 2 2 3 1 2 2 1 2 4 3 2 3 1 4 3 1 1 2 1 1 2 3 2 2 4 2 2 1 3 2 2 4 2 3 4 3 3 3 3 3 1 4 3 2 2 4 1 3 3 3 1 2 2 2 1 2 4 3 1 2 2
+ [81] 2 2 1 1 2 3 2 2 1 3 4 3 2 2 4 3 3 3 2 3 2 2 2 2 3 1 3 2 2 2 3 2 1 2 2 2 3 2 1 4 2 2 4 1 1 2 2 2 4 3 2 3 1 2 1 1 1 2 2 4 1 4 1 2 3 1 2 2 3 2 3 2 1 2 2 2 2 4 3 2
+[161] 2 3 2 1 3 3 4 4 1 4 3 2 1 4 1 2 3 2 2 1 2 2 2 2 1 4 2 2 2 4 4 1 2 2 2 3 4 4 2 2 2 2 3 2 3 3 2 1 2 1 3 2 2 2 4 3 3 3 2 3 3 2 4 2 3 2 2 3 2 2 3 4 3 2 3 2 2 2 2 3
+[241] 1 1 2 1 2 1 2 2 3 1 2 3 2 3 3 4 4 2 2 2 2 2 3 3 3 3 2 3 2 2 3 1 2 2 2 2 1 2 3 2 4 1 3 2 2 3 2 2 2 2 2 2 3 3 1 4 4 3 3 1 2 3 2 2 1 1 2 2 1 4 2 1 2 1 4 1 2 3 4 1
+[321] 2 1 1 3 2 1 2 2 1 4 2 2 2 2 1 3 3 1 3 2 3 1 1 3 2 2 1 4 2 3 3 2 2 1 3 3 2 2 3 1 2 3 2 3 3 2 4 2 1 3 4 4 2 4 3 3 3 1 1 3 3 2 2 4 2 2 3 1 2 3 1 4 4 2 2 1 3 3 3 3
+[401] 2 2 4 1 2 2 1 2 4 3 1 2 2 3 3 3 4 4 2 3 1 4 2 3 1 2 3 3 3 1 2 2 3 2 4 2 3 4 2 3 2 4 2 2 1 3 3 1 1 3 3 2 2 2 2 3 4 3 2 2 1 2 1 1 2 3 3 4 3 1 2 2 2 2 2 2 1 3 3 1
+[481] 2 1 2 2 2 4 1 4 1 2 2 3 3 2 1 4 2 2 2 3 1 3 2 2 2 1 1 2 1 2 1 2 2 3 1 2 2 3 2 3 2 2 1 3 1 2 1 1 1 2 2 3 4 2 2
+
+Within cluster sum of squares by cluster:
+[1]  945.9429 1349.5541 2027.0797 1756.4098
+ (between_SS / total_SS =  82.8 %)
+
+Available components:
+
+[1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss" "betweenss"    "size"         "iter"         "ifault"      
+> #visualize results colored by cluster
+> plot(newDataUpsetWins, col=km4$cluster)
+> #plot cluster centers
+> points(km4$centers,pch='x',cex=1.5)
+> #run k-means with k = 3
+> km3 <- kmeans(newDataUpsetWins, centers = 3)
+> km3
+K-means clustering with 3 clusters of sizes 141, 61, 333
+
+Cluster means:
+      [,1]      [,2]
+1 4.202128 13.801418
+2 3.401639 26.000000
+3 4.217718  4.522523
+
+Clustering vector:
+  [1] 3 1 2 3 3 3 3 3 3 1 3 3 1 1 1 3 2 1 3 3 3 1 3 3 3 3 3 2 1 3 1 3 2 1 3 3 3 3 3 3 1 3 3 2 3 3 3 1 3 3 2 3 1 2 1 1 1 1 1 3 2 1 3 3 2 3 1 1 1 3 3 3 3 3 3 2 1 3 3 3
+ [81] 3 3 3 3 3 1 3 3 1 1 2 1 3 3 2 1 1 1 3 1 3 3 3 3 1 3 1 3 3 3 1 3 3 3 3 3 1 3 3 2 3 3 2 3 1 3 3 3 2 1 3 1 3 3 3 3 3 3 3 2 3 2 3 3 1 3 3 3 1 3 1 3 3 3 3 3 3 2 1 3
+[161] 3 1 3 3 1 1 2 2 3 2 1 3 3 2 3 3 1 3 3 3 3 3 3 3 3 2 3 3 3 2 2 3 3 3 3 1 2 2 3 3 3 3 1 3 1 1 3 3 3 3 1 3 3 3 2 1 1 1 3 1 1 3 2 3 1 3 3 1 3 3 1 2 1 3 1 3 3 3 3 1
+[241] 3 3 3 3 3 3 3 3 1 3 3 1 3 1 1 2 2 3 3 3 3 3 1 1 1 1 3 1 3 3 1 3 3 3 3 3 3 3 1 3 2 3 1 3 3 1 3 3 3 3 3 3 1 1 3 2 2 1 1 3 3 1 3 3 3 3 3 3 3 2 3 3 3 3 2 3 3 1 2 3
+[321] 3 3 3 1 3 3 3 3 3 2 3 3 3 3 3 1 1 3 1 3 1 3 3 1 3 3 3 2 3 1 1 3 3 3 1 1 3 3 1 3 3 1 3 1 1 3 2 3 3 1 2 2 3 2 1 1 1 3 3 1 1 3 3 2 3 3 1 3 3 1 3 2 2 3 3 3 1 1 1 1
+[401] 3 3 2 3 3 3 3 3 2 1 3 3 3 1 1 1 2 2 3 1 3 2 3 1 3 3 1 1 1 3 3 3 1 3 2 3 1 2 3 1 3 2 3 3 3 1 1 3 3 1 1 3 3 3 3 1 2 1 3 3 3 3 3 3 3 1 1 2 1 3 3 3 3 3 3 3 3 1 1 3
+[481] 3 3 3 3 3 2 3 2 3 3 3 1 1 3 3 2 3 3 3 1 3 1 3 3 3 3 3 3 3 3 3 3 3 1 3 3 3 1 3 1 3 3 3 1 3 3 3 1 3 3 3 1 2 3 3
+
+Within cluster sum of squares by cluster:
+[1] 2291.929 1756.410 3788.047
+ (between_SS / total_SS =  77.8 %)
+
+Available components:
+
+[1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss" "betweenss"    "size"         "iter"         "ifault"      
+> #visualize results colored by cluster
+> plot(newDataUpsetWins, col=km3$cluster)
+> #plot cluster centers
+> points(km3$centers,pch='x',cex=1.5)
+> #silhouette plots
+> d <- dist(newDataUpsetWins)
+> sil <- silhouette(km4$cluster,d)
+> plot(sil)
+> d <- dist(newDataUpsetWins)
+> sil <- silhouette(km3$cluster,d)
+> plot(sil)
+> 
+> 
+> ### MofU Discretize
+> nflDataUpsetWins$UpsetAmt
+  [1]  6 10 25  6  1  7  5  2  8 13  7  4 14 14 19  3 21 14  7  8  3 17  6  3  3  3  5 27 10  3 17  3 24 10  8  7  3  3  3  3 13  3  3 45  3  6  9 18  8  3 20  3 14
+ [54] 20 13 18 13 16 18  3 21 16  5  3 22  3 11 15 13  3  3  7  7  4  4 30 14  3  2  3  7  5  1  3  7 14  1  3 10 10 21 10  2  7 34 18 10 14  3 13  4  4  1  5 13  3
+[107] 10  3  4  5 18  3  1  5  4  7 11  6  6 34  6  7 28  5 10  3  8  3 28 16  7 14  4  3  6  7  4  7  3 27  5 21  4  6 17  7  3  6 18  3 17  6  7  7  3  6  1 27 16
+[160]  2  3 13  7  5 14 15 24 20  3 26 15  3  7 28  4  4 12  4  7  8  4  8  6  8  2 22  3  8  3 20 29  3  7  5  3 11 21 24  3  2  6  7 17  2 16 14  4  3  4  3 10  3
+[213]  1  3 23 12 18 11  1 19 13  1 21  6 10  3  8 10  4  4 18 34 10  7 14  7  6  3  5 14  3  6  6  2  7  3  1  3 10  2  1 10  7 14 17 28 24  3  7  4  3  3 17 10 15
+[266] 19  5 12  6  3 13  7  1  6  1  4  3  4 10  4 38  4 20  3  3 11  7  9  7  3  7  6 16 10  2 25 25 10 14  2  3 18  3  4  6  8  3  2  6 29  6  7  7  2 30  1  3 10
+[319] 23  5  4  4  7 16  3  3  3  3  4 20  3  7  7  6  7 18 11  1 10  2 16  3  7 13  1  3  3 28  7 16 13  3  6  2 16 11  2  9 16  8  3 12  9 19 18  8 31  7  3 13 21
+[372] 27  3 26 15 14 14  7  2 13 18  3  3 20  6  4 17  3  3 11  3 22 21  4  7  3 15 17 16 20  4  8 22  4  9  2  3  7 23 16  1  3  1 11 13 15 21 31  3 11  6 30  8 11
+[425]  3  3 12 16 10  2  9  8 13  8 31  3 13 28  2 17  7 25  8  4  7 14 14  3  4 10 13  6  4  7  7 11 27 14  2  3  2  7  3  1  4 10 11 28 12  4  5  3  9  6  8  6  3
+[478] 14 19  6  8  1  3  3  5 24  2 33  1  2  4 16 16  7  4 28  5  3  7 17  4 10  6  6  6  6  6  4  7  3  7  3  7 13  3  6  6 10  8 14  6  6  3 10  7  5  6 10  3  5
+[531]  5 11 30  3  7
+> table(discretize(nflDataUpsetWins$UpsetAmt, method="cluster", categories=4))
+
+[ 1.00, 6.06) [ 6.06,12.48) [12.48,22.36) [22.36,45.00] 
+          250           131           112            42 
+> 
+> nflDataUpsetWins$UpsetAmt <- UpsetAmtBin(nflDataUpsetWins$UpsetAmt)
+> testData$UpsetAmt <- UpsetAmtBin(testData$UpsetAmt)
+> 
+> ### MofU Classification
+> ## Decision Tree Classification
+> classTestData <- subset(testData, testData$Upset!=0 & testData$Outcome!="T")
+> nflDataUpsetWinsFiltered <- subset(nflDataUpsetWins, complete.cases(nflDataUpsetWins))
+> classTestDataFiltered <- subset(classTestData, complete.cases(classTestData))
+> classTestDataFiltered <- BinningData(classTestDataFiltered)
+> classTestDataFiltered <- subset(classTestDataFiltered, classTestDataFiltered$UpsetAmt != "0")
+> #classTestDataFiltered$UpsetAmt <- UpsetAmtBin(classTestDataFiltered$UpsetAmt)
+> nflDataUpsetAmtWins_rpart <- rpart(UpsetAmt ~ AorH + Time + Weather + AvgPF + AvgPA, data = nflDataUpsetWinsFiltered, method = "class", control=rpart.control(minsplit=1, minbucket=5, cp=0.01))
+> printcp(nflDataUpsetAmtWins_rpart)
+
+Classification tree:
+rpart(formula = UpsetAmt ~ AorH + Time + Weather + AvgPF + AvgPA, 
+    data = nflDataUpsetWinsFiltered, method = "class", control = rpart.control(minsplit = 1, 
+        minbucket = 5, cp = 0.01))
+
+Variables actually used in tree construction:
+[1] AvgPA   AvgPF   Time    Weather
+
+Root node error: 53/165 = 0.32121
+
+n= 165 
+
+        CP nsplit rel error xerror    xstd
+1 0.037736      0   1.00000 1.0000 0.11317
+2 0.031447      5   0.81132 1.0189 0.11372
+3 0.018868      8   0.71698 1.1509 0.11699
+4 0.014151      9   0.69811 1.1887 0.11775
+5 0.010000     13   0.64151 1.1887 0.11775
+> plotcp(nflDataUpsetAmtWins_rpart)
+> plot(nflDataUpsetAmtWins_rpart)
+> text(nflDataUpsetAmtWins_rpart, use.n=TRUE)
+> #testData$Odds <- abs(testData$Odds)
+> #classTestData$UpsetAmt <- as.factor(classTestData$UpsetAmt)
+> nflDataUpsetAmtWins_pred <- predict(nflDataUpsetAmtWins_rpart, newData = classTestDataFiltered, type="class")
+> nflDataUpsetAmtWins_pred <- predict(nflDataUpsetAmtWins_rpart, classTestDataFiltered[,-6], type="class")
+> nflDataUpsetAmtWins_pred
+    33     34     37     38     49     50     53     54     55     56     61     62     63     64     69     70     73     74     79     80     81     82     83 
+   Low Medium    Low    Low    Low    Low Medium    Low    Low    Low Medium    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low Medium 
+    84     91     92     95     96     99    100    101    102    105    106    109    110    111    112    119    120    121    122    133    134    135    136 
+   Low    Low    Low Medium    Low    Low    Low Medium    Low    Low    Low Medium    Low    Low Medium    Low    Low Medium    Low    Low    Low    Low    Low 
+   141    142    143    144    147    148    153    154    155    156    157    158    159    160    165    166    169    170    177    178    189    190    195 
+   Low    Low    Low    Low Medium    Low    Low Medium    Low Medium    Low    Low    Low    Low    Low Medium    Low    Low    Low    Low    Low    Low    Low 
+   196    197    198    201    202    203    204    205    206    207    208    221    222    231    232    239    240 
+   Low    Low    Low Medium    Low    Low    Low    Low    Low Medium Medium    Low    Low Medium    Low    Low    Low 
+Levels: High Low Medium
+> table(nflDataUpsetAmtWins_pred,droplevels(classTestDataFiltered)$UpsetAmt)
+                        
+nflDataUpsetAmtWins_pred High Low Medium
+                  High      0   0      0
+                  Low       2  48     18
+                  Medium    0  14      4
+> classifier <- naiveBayes(UpsetAmt ~ AorH + Time + Weather + AvgPF + AvgPA, data = nflDataUpsetWinsFiltered, method = "class")
+> pred <- predict(classifier, classTestDataFiltered[,-5])
+Warning messages:
+1: In data.matrix(newdata) : NAs introduced by coercion
+2: In data.matrix(newdata) : NAs introduced by coercion
+3: In data.matrix(newdata) : NAs introduced by coercion
+4: In data.matrix(newdata) : NAs introduced by coercion
+5: In data.matrix(newdata) : NAs introduced by coercion
+> table(pred)
+pred
+  High    Low Medium 
+     0     86      0 
+> table(classTestDataFiltered$UpsetAmt)
+
+     0   High    Low Medium 
+     0      2     62     22 
+> table(pred,droplevels(classTestDataFiltered)$UpsetAmt)
+        
+pred     High Low Medium
+  High      0   0      0
+  Low       2  62     22
+  Medium    0   0      0
+> printcp(classifier)
+Error in printcp(classifier) : 'x' must be an "rpart" object
+> plotcp(classifier)
+Error in plotcp(classifier) : Not a legitimate "rpart" object
+> plot(classifier)
+Error in xy.coords(x, y, xlabel, ylabel, log) : 
+  'x' is a list, but does not have components 'x' and 'y'
+> text(classifier, use.n=TRUE)
+Error in xy.coords(x, y, recycle = TRUE) : 
+  'x' is a list, but does not have components 'x' and 'y'
+> View(nflDataUpsetWinsFiltered)
+> nflTrainDataFiltered <- subset(nflDataUpsetWins, complete.cases(nflDataUpsetWins))
+> classUpsetTestData <- subset(testData, testData$Upset!=0 & testData$Outcome!="T")
+> classUpsetTestDataFiltered <- subset(classUpsetTestData, complete.cases(classUpsetTestData))
+> classUpsetTestDataFiltered <- BinningData(classUpsetTestDataFiltered)
+> classUpsetTestDataFiltered <- subset(classUpsetTestDataFiltered, classUpsetTestDataFiltered$UpsetAmt != "0")
+> classifier2 <- naiveBayes(Upset ~ Time + Weather + Offense + Defense, data = nflTrainDataFiltered, method = "class")
+> classifier2
+
+Naive Bayes Classifier for Discrete Predictors
+
+Call:
+naiveBayes.default(x = X, y = Y, laplace = laplace, method = "class")
+
+A-priori probabilities:
+Y
+1 
+1 
+
+Conditional probabilities:
+   Time
+Y      [,1]     [,2]
+  1 1411.97 253.7149
+
+   Weather
+Y       [,1]    [,2]
+  1 42.47879 29.0245
+
+   Offense
+Y       [,1]     [,2]
+  1 3.054545 2.173158
+
+   Defense
+Y       [,1]     [,2]
+  1 2.654545 1.955775
+
+> pred <- predict(classifier2, classUpsetTestDataFiltered[,-5])
+Error in apply(log(sapply(seq_along(attribs), function(v) { : 
+  dim(X) must have a positive length
+In addition: Warning messages:
+1: In data.matrix(newdata) : NAs introduced by coercion
+2: In data.matrix(newdata) : NAs introduced by coercion
+3: In data.matrix(newdata) : NAs introduced by coercion
+4: In data.matrix(newdata) : NAs introduced by coercion
+5: In data.matrix(newdata) : NAs introduced by coercion
+> table(pred)
+pred
+  High    Low Medium 
+     0     86      0 
+> classifier <- naiveBayes(Upset ~ Time + Weather + Offense + Defense, data = nflTrainDataFiltered, method = "class")
+> pred <- predict(classifier, classUpsetTestDataFiltered[,-5])
+Error in apply(log(sapply(seq_along(attribs), function(v) { : 
+  dim(X) must have a positive length
+In addition: Warning messages:
+1: In data.matrix(newdata) : NAs introduced by coercion
+2: In data.matrix(newdata) : NAs introduced by coercion
+3: In data.matrix(newdata) : NAs introduced by coercion
+4: In data.matrix(newdata) : NAs introduced by coercion
+5: In data.matrix(newdata) : NAs introduced by coercion
+> View(classUpsetTestDataFiltered)
+> View(nflTrainDataFiltered)
+> View(classUpsetTestDataFiltered)
+> View(classUpsetTestDataFiltered)
+> nflTrainDataFiltered <- subset(nflData, complete.cases(nflData))
+> classUpsetTestData <- subset(testData, testData$Outcome!="T")
+> classUpsetTestDataFiltered <- subset(classUpsetTestData, complete.cases(classUpsetTestData))
+> classUpsetTestDataFiltered <- BinningData(classUpsetTestDataFiltered)
+> nflTrainDataFiltered <- BinningData(nflTrainDataFiltered)
+> classifier <- naiveBayes(Upset ~ Time + Weather + Offense + Defense, data = nflTrainDataFiltered, method = "class")
+> pred <- predict(classifier, classUpsetTestDataFiltered[,-5])
+Warning messages:
+1: In data.matrix(newdata) : NAs introduced by coercion
+2: In data.matrix(newdata) : NAs introduced by coercion
+3: In data.matrix(newdata) : NAs introduced by coercion
+4: In data.matrix(newdata) : NAs introduced by coercion
+5: In data.matrix(newdata) : NAs introduced by coercion
+> table(pred)
+< table of extent 0 >
+> View(nflTrainDataFiltered)
+> View(nflTrainDataFiltered)
+> classifier <- naiveBayes(Upset ~ AorH + Time + Weather + AvgPF + AvgPA, data = nflTrainDataFiltered, method = "class")
+> pred <- predict(classifier, classUpsetTestDataFiltered[,-5])
+Warning messages:
+1: In data.matrix(newdata) : NAs introduced by coercion
+2: In data.matrix(newdata) : NAs introduced by coercion
+3: In data.matrix(newdata) : NAs introduced by coercion
+4: In data.matrix(newdata) : NAs introduced by coercion
+5: In data.matrix(newdata) : NAs introduced by coercion
+> View(nflTrainDataFiltered)
+> View(nflTrainDataFiltered)
+> nflTrainDataFiltered <- subset(nflDataUpsetWins, complete.cases(nflDataUpsetWins))
+> nflTrainDataFiltered <- BinningData(nflTrainDataFiltered)
+> classUpsetTestData <- subset(testData, testData$Outcome!="T")
+> classUpsetTestData <- subset(testData, testData$Upset!=0 & testData$Outcome!="T")
+> classUpsetTestDataFiltered <- subset(classUpsetTestData, complete.cases(classUpsetTestData))
+> classUpsetTestDataFiltered <- BinningData(classUpsetTestDataFiltered)
+> nflTrainDataFiltered <- subset(nflDataUpsetWins, complete.cases(nflDataUpsetWins))
+> nflTrainDataFiltered <- BinningData(nflTrainDataFiltered)
+> classUpsetTestData <- subset(testData, testData$Upset!=0 & testData$Outcome!="T")
+> classUpsetTestDataFiltered <- subset(classUpsetTestData, complete.cases(classUpsetTestData))
+> classUpsetTestDataFiltered <- BinningData(classUpsetTestDataFiltered)
+> classifier <- naiveBayes(Upset ~ AorH + Time + Weather + AvgPF + AvgPA, data = nflTrainDataFiltered, method = "class")
+> pred <- predict(classifier, classUpsetTestDataFiltered[,-5])
+Error in apply(log(sapply(seq_along(attribs), function(v) { : 
+  dim(X) must have a positive length
+In addition: Warning messages:
+1: In data.matrix(newdata) : NAs introduced by coercion
+2: In data.matrix(newdata) : NAs introduced by coercion
+3: In data.matrix(newdata) : NAs introduced by coercion
+4: In data.matrix(newdata) : NAs introduced by coercion
+5: In data.matrix(newdata) : NAs introduced by coercion
+> classifier <- naiveBayes(Upset ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = nflTrainDataFiltered, method = "class")
+> pred <- predict(classifier, classUpsetTestDataFiltered[,-5])
+Error in apply(log(sapply(seq_along(attribs), function(v) { : 
+  dim(X) must have a positive length
+In addition: Warning messages:
+1: In data.matrix(newdata) : NAs introduced by coercion
+2: In data.matrix(newdata) : NAs introduced by coercion
+3: In data.matrix(newdata) : NAs introduced by coercion
+4: In data.matrix(newdata) : NAs introduced by coercion
+5: In data.matrix(newdata) : NAs introduced by coercion
+> nflDataUpset_rpart <- rpart(Upset ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = nflTrainDataFiltered, method = "class", control=rpart.control(minsplit=1, minbucket=5, cp=0.01))
+Error in cbind(yval2, yprob, nodeprob) : 
+  number of rows of matrices must match (see arg 2)
+> View(nflTrainDataFiltered)
+> View(nflTrainDataFiltered)
+> nflDataUpset_rpart <- rpart(Upset ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = nflTrainDataFiltered, method = "class", control=rpart.control(minsplit=1, minbucket=5, cp=0.01))
+Error in cbind(yval2, yprob, nodeprob) : 
+  number of rows of matrices must match (see arg 2)
+> nflDataUpset_rpart <- rpart(Upset ~ AorH + Time + Weather + AvgPF + AvgPA, data = nflTrainDataFiltered, method = "class", control=rpart.control(minsplit=1, minbucket=5, cp=0.01))
+Error in cbind(yval2, yprob, nodeprob) : 
+  number of rows of matrices must match (see arg 2)
+> nflTrainDataFiltered <- subset(nflDataWins, complete.cases(nflDataWins))
+> nflTrainDataFiltered <- subset(nflDataWins, complete.cases(nflDataWins))
+> nflTrainDataFiltered <- BinningData(nflTrainDataFiltered)
+> classUpsetTestData <- subset(testData, testData$Outcome == "W")
+> classUpsetTestDataFiltered <- subset(classUpsetTestData, complete.cases(classUpsetTestData))
+> classUpsetTestDataFiltered <- BinningData(classUpsetTestDataFiltered)
+> classifier <- naiveBayes(Upset ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = nflTrainDataFiltered, method = "class")
+> pred <- predict(classifier, classUpsetTestDataFiltered[,-5])
+Warning messages:
+1: In data.matrix(newdata) : NAs introduced by coercion
+2: In data.matrix(newdata) : NAs introduced by coercion
+3: In data.matrix(newdata) : NAs introduced by coercion
+4: In data.matrix(newdata) : NAs introduced by coercion
+5: In data.matrix(newdata) : NAs introduced by coercion
+> table(pred)
+< table of extent 0 >
+> View(nflTrainDataFiltered)
+> View(nflTrainDataFiltered)
+> classifier <- naiveBayes(Upset ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = nflTrainDataFiltered, method = "class")
+> pred <- predict(classifier, classUpsetTestDataFiltered[,-5])
+Warning messages:
+1: In data.matrix(newdata) : NAs introduced by coercion
+2: In data.matrix(newdata) : NAs introduced by coercion
+3: In data.matrix(newdata) : NAs introduced by coercion
+4: In data.matrix(newdata) : NAs introduced by coercion
+5: In data.matrix(newdata) : NAs introduced by coercion
+> table(pred)
+< table of extent 0 >
+> nflDataUpset_rpart <- rpart(Upset ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = nflTrainDataFiltered, method = "class", control=rpart.control(minsplit=1, minbucket=5, cp=0.01))
+> printcp(nflDataUpset_rpart)
+
+Classification tree:
+rpart(formula = Upset ~ AorH + Time + Weather + AvgPF + AvgPA + 
+    Odds, data = nflTrainDataFiltered, method = "class", control = rpart.control(minsplit = 1, 
+    minbucket = 5, cp = 0.01))
+
+Variables actually used in tree construction:
+[1] Odds
+
+Root node error: 165/480 = 0.34375
+
+n= 480 
+
+    CP nsplit rel error xerror     xstd
+1 1.00      0         1      1 0.063066
+2 0.01      1         0      0 0.000000
+> plotcp(nflDataUpset_rpart)
+> plot(nflDataUpset_rpart)
+> text(nflDataUpset_rpart, use.n=TRUE)
+> nflDataUpsetWins_pred <- predict(nflDataUpsetWins_rpart, TESTDATA[,-6], type="class")
+Error in predict(nflDataUpsetWins_rpart, TESTDATA[, -6], type = "class") : 
+  object 'nflDataUpsetWins_rpart' not found
+> nflDataUpset_rpart <- rpart(Upset ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = nflTrainDataFiltered, method = "class", control=rpart.control(minsplit=1, minbucket=5, cp=0.01))
+> nflDataUpset_rpart <- rpart(Upset ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = nflTrainDataFiltered, method = "class", control=rpart.control(minsplit=1, minbucket=5, cp=0.01))
+> printcp(nflDataUpset_rpart)
+
+Classification tree:
+rpart(formula = Upset ~ AorH + Time + Weather + AvgPF + AvgPA + 
+    Odds, data = nflTrainDataFiltered, method = "class", control = rpart.control(minsplit = 1, 
+    minbucket = 5, cp = 0.01))
+
+Variables actually used in tree construction:
+[1] Odds
+
+Root node error: 165/480 = 0.34375
+
+n= 480 
+
+    CP nsplit rel error xerror     xstd
+1 1.00      0         1      1 0.063066
+2 0.01      1         0      0 0.000000
+> plotcp(nflDataUpset_rpart)
+> plot(nflDataUpset_rpart)
+> text(nflDataUpset_rpart, use.n=TRUE)
+> nflDataUpset_pred <- predict(nflDataUpset_rpart, classUpsetTestDataFiltered[,-6], type="class")
+> nflDataUpset_pred
+ 33  36  37  39  42  44  46  48  49  52  54  55  58  60  62  63  66  67  69  72  73  75  78  79  82  83  86  88  90  92  94  95  98 100 101 104 106 107 110 111 114 
+  1   0   1   0   0   0   0   0   1   0   1   1   0   0   1   1   0   0   1   0   1   0   0   1   1   1   0   0   0   1   0   1   0   1   1   0   1   0   1   1   0 
+115 117 119 121 124 126 127 129 132 134 135 138 140 141 143 145 148 150 152 153 156 158 160 162 164 166 168 169 172 174 175 177 180 182 184 186 187 189 192 194 195 
+  0   0   1   1   0   0   0   0   0   1   1   0   0   1   1   0   1   0   0   1   1   1   1   0   0   1   0   1   0   0   0   1   0   0   0   0   0   1   0   0   1 
+198 200 202 204 205 207 209 214 216 219 221 223 225 228 230 232 234 236 238 240 
+  1   0   1   1   1   1   0   0   0   0   1   0   0   0   0   1   0   0   0   1 
+Levels: 0 1
+> table(nflDataUpset_pred, testData$Upset)
+Error in table(nflDataUpset_pred, testData$Upset) : 
+  all arguments must have the same length
+> table(nflDataUpset_pred, classUpsetTestData$Upset)
+Error in table(nflDataUpset_pred, classUpsetTestData$Upset) : 
+  all arguments must have the same length
+> table(nflDataUpset_pred, classUpsetTestDataFiltered$Upset)
+                 
+nflDataUpset_pred  0  1
+                0 59  0
+                1  0 43
+> nflDataUpset_rpart <- rpart(Upset ~ AorH + Time + Weather + AvgPF + AvgPA, data = nflTrainDataFiltered, method = "class", control=rpart.control(minsplit=1, minbucket=5, cp=0.01))
+> printcp(nflDataUpset_rpart)
+
+Classification tree:
+rpart(formula = Upset ~ AorH + Time + Weather + AvgPF + AvgPA, 
+    data = nflTrainDataFiltered, method = "class", control = rpart.control(minsplit = 1, 
+        minbucket = 5, cp = 0.01))
+
+Variables actually used in tree construction:
+[1] AorH    AvgPA   AvgPF   Time    Weather
+
+Root node error: 165/480 = 0.34375
+
+n= 480 
+
+        CP nsplit rel error  xerror     xstd
+1 0.112121      0   1.00000 1.00000 0.063066
+2 0.048485      2   0.77576 0.83636 0.060096
+3 0.024242      3   0.72727 0.85455 0.060479
+4 0.022222      4   0.70303 0.86667 0.060727
+5 0.021212      7   0.63636 0.87879 0.060968
+6 0.018182      9   0.59394 0.86667 0.060727
+7 0.012121     10   0.57576 0.87273 0.060848
+8 0.010101     13   0.53939 0.87273 0.060848
+9 0.010000     16   0.50909 0.84242 0.060225
+> plotcp(nflDataUpset_rpart)
+> plot(nflDataUpset_rpart)
+> text(nflDataUpset_rpart, use.n=TRUE)
+> #nflDataUpsetWins_pred <- predict(nflDataUpsetWins_rpart, newData = testData, type="class")
+> nflDataUpset_pred <- predict(nflDataUpset_rpart, classUpsetTestDataFiltered[,-6], type="class")
+> #balanceScale_pred <- predict(balanceScale_rpart, newData = testData, type="class")
+> nflDataUpset_pred
+ 33  36  37  39  42  44  46  48  49  52  54  55  58  60  62  63  66  67  69  72  73  75  78  79  82  83  86  88  90  92  94  95  98 100 101 104 106 107 110 111 114 
+  1   0   1   1   0   0   0   0   1   0   0   1   0   0   0   1   0   1   1   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   1   0   0   1   0   0   1 
+115 117 119 121 124 126 127 129 132 134 135 138 140 141 143 145 148 150 152 153 156 158 160 162 164 166 168 169 172 174 175 177 180 182 184 186 187 189 192 194 195 
+  0   0   0   1   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   1   0   0   0   0   1   0   0   1   0   0   1   0   0   0   0   0   1   0   0   0   0 
+198 200 202 204 205 207 209 214 216 219 221 223 225 228 230 232 234 236 238 240 
+  0   0   0   0   1   0   0   0   1   0   0   0   1   0   0   0   0   0   0   1 
+Levels: 0 1
+> table(nflDataUpset_pred, classUpsetTestDataFiltered$Upset)
+                 
+nflDataUpset_pred  0  1
+                0 49 30
+                1 10 13
+> nflDataUpset_rpart <- rpart(Upset ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = nflTrainDataFiltered, method = "class", control=rpart.control(minsplit=1, minbucket=5, cp=0.01))
+> printcp(nflDataUpset_rpart)
+
+Classification tree:
+rpart(formula = Upset ~ AorH + Time + Weather + AvgPF + AvgPA + 
+    Odds, data = nflTrainDataFiltered, method = "class", control = rpart.control(minsplit = 1, 
+    minbucket = 5, cp = 0.01))
+
+Variables actually used in tree construction:
+[1] Odds
+
+Root node error: 165/480 = 0.34375
+
+n= 480 
+
+    CP nsplit rel error xerror     xstd
+1 1.00      0         1      1 0.063066
+2 0.01      1         0      0 0.000000
+> plotcp(nflDataUpset_rpart)
+> plot(nflDataUpset_rpart)
+> text(nflDataUpset_rpart, use.n=TRUE)
+> #nflDataUpsetWins_pred <- predict(nflDataUpsetWins_rpart, newData = testData, type="class")
+> nflDataUpset_pred <- predict(nflDataUpset_rpart, classUpsetTestDataFiltered[,-6], type="class")
+> #balanceScale_pred <- predict(balanceScale_rpart, newData = testData, type="class")
+> nflDataUpset_pred
+ 33  36  37  39  42  44  46  48  49  52  54  55  58  60  62  63  66  67  69  72  73  75  78  79  82  83  86  88  90  92  94  95  98 100 101 104 106 107 110 111 114 
+  1   0   1   0   0   0   0   0   1   0   1   1   0   0   1   1   0   0   1   0   1   0   0   1   1   1   0   0   0   1   0   1   0   1   1   0   1   0   1   1   0 
+115 117 119 121 124 126 127 129 132 134 135 138 140 141 143 145 148 150 152 153 156 158 160 162 164 166 168 169 172 174 175 177 180 182 184 186 187 189 192 194 195 
+  0   0   1   1   0   0   0   0   0   1   1   0   0   1   1   0   1   0   0   1   1   1   1   0   0   1   0   1   0   0   0   1   0   0   0   0   0   1   0   0   1 
+198 200 202 204 205 207 209 214 216 219 221 223 225 228 230 232 234 236 238 240 
+  1   0   1   1   1   1   0   0   0   0   1   0   0   0   0   1   0   0   0   1 
+Levels: 0 1
+> table(nflDataUpset_pred, classUpsetTestDataFiltered$Upset)
+                 
+nflDataUpset_pred  0  1
+                0 59  0
+                1  0 43
+> nflDataUpset_rpart <- rpart(Upset ~ AorH + Time + Weather + AvgPF + AvgPA, data = nflTrainDataFiltered, method = "class", control=rpart.control(minsplit=1, minbucket=5, cp=0.01))
+> printcp(nflDataUpset_rpart)
+
+Classification tree:
+rpart(formula = Upset ~ AorH + Time + Weather + AvgPF + AvgPA, 
+    data = nflTrainDataFiltered, method = "class", control = rpart.control(minsplit = 1, 
+        minbucket = 5, cp = 0.01))
+
+Variables actually used in tree construction:
+[1] AorH    AvgPA   AvgPF   Time    Weather
+
+Root node error: 165/480 = 0.34375
+
+n= 480 
+
+        CP nsplit rel error  xerror     xstd
+1 0.112121      0   1.00000 1.00000 0.063066
+2 0.048485      2   0.77576 0.89091 0.061203
+3 0.024242      3   0.72727 0.85455 0.060479
+4 0.022222      4   0.70303 0.84242 0.060225
+5 0.021212      7   0.63636 0.84242 0.060225
+6 0.018182      9   0.59394 0.86667 0.060727
+7 0.012121     10   0.57576 0.89091 0.061203
+8 0.010101     13   0.53939 0.84848 0.060353
+9 0.010000     16   0.50909 0.86061 0.060604
+> plotcp(nflDataUpset_rpart)
+> plot(nflDataUpset_rpart)
+> text(nflDataUpset_rpart, use.n=TRUE)
+> #nflDataUpsetWins_pred <- predict(nflDataUpsetWins_rpart, newData = testData, type="class")
+> nflDataUpset_pred <- predict(nflDataUpset_rpart, classUpsetTestDataFiltered[,-6], type="class")
+> #balanceScale_pred <- predict(balanceScale_rpart, newData = testData, type="class")
+> nflDataUpset_pred
+ 33  36  37  39  42  44  46  48  49  52  54  55  58  60  62  63  66  67  69  72  73  75  78  79  82  83  86  88  90  92  94  95  98 100 101 104 106 107 110 111 114 
+  1   0   1   1   0   0   0   0   1   0   0   1   0   0   0   1   0   1   1   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0   1   0   0   1   0   0   1 
+115 117 119 121 124 126 127 129 132 134 135 138 140 141 143 145 148 150 152 153 156 158 160 162 164 166 168 169 172 174 175 177 180 182 184 186 187 189 192 194 195 
+  0   0   0   1   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   1   0   0   0   0   1   0   0   1   0   0   1   0   0   0   0   0   1   0   0   0   0 
+198 200 202 204 205 207 209 214 216 219 221 223 225 228 230 232 234 236 238 240 
+  0   0   0   0   1   0   0   0   1   0   0   0   1   0   0   0   0   0   0   1 
+Levels: 0 1
+> table(nflDataUpset_pred, classUpsetTestDataFiltered$Upset)
+                 
+nflDataUpset_pred  0  1
+                0 49 30
+                1 10 13
+> classifier <- naiveBayes(Upset ~ AorH + Time + Weather + AvgPF + AvgPA, data = nflTrainDataFiltered, method = "class")
+> pred <- predict(classifier, classUpsetTestDataFiltered[,-5])
+Warning messages:
+1: In data.matrix(newdata) : NAs introduced by coercion
+2: In data.matrix(newdata) : NAs introduced by coercion
+3: In data.matrix(newdata) : NAs introduced by coercion
+4: In data.matrix(newdata) : NAs introduced by coercion
+5: In data.matrix(newdata) : NAs introduced by coercion
+> table(pred)
+< table of extent 0 >
+> table(classUpsetTestDataFiltered$Upset)
+
+ 0  1 
+59 43 
+> table(pred,droplevels(classUpsetTestDataFiltered)$Upset)
+Error in table(pred, droplevels(classUpsetTestDataFiltered)$Upset) : 
+  all arguments must have the same length
+> classifier <- naiveBayes(Upset ~ AorH + Time + Weather + AvgPF + AvgPA, data = nflTrainDataFiltered, method = "class")
+> pred <- predict(classifier, classUpsetTestDataFiltered[,-5])
+Warning messages:
+1: In data.matrix(newdata) : NAs introduced by coercion
+2: In data.matrix(newdata) : NAs introduced by coercion
+3: In data.matrix(newdata) : NAs introduced by coercion
+4: In data.matrix(newdata) : NAs introduced by coercion
+5: In data.matrix(newdata) : NAs introduced by coercion
+> table(pred)
+< table of extent 0 >
+> table(classUpsetTestDataFiltered$Upset)
+
+ 0  1 
+59 43 
+> classifier <- naiveBayes(Upset ~ AorH + Time + Weather + AvgPF + AvgPA, data = nflTrainDataFiltered, method = "class", control=rpart.control(minsplit=1, minbucket=5, cp=0.01))
+> pred <- predict(classifier, classUpsetTestDataFiltered[,-5])
+Warning messages:
+1: In data.matrix(newdata) : NAs introduced by coercion
+2: In data.matrix(newdata) : NAs introduced by coercion
+3: In data.matrix(newdata) : NAs introduced by coercion
+4: In data.matrix(newdata) : NAs introduced by coercion
+5: In data.matrix(newdata) : NAs introduced by coercion
+> table(pred)
+< table of extent 0 >
+> table(classUpsetTestDataFiltered$Upset)
+
+ 0  1 
+59 43 
+> classifier <- naiveBayes(Upset ~ AorH + Time + Weather + AvgPF + AvgPA, data = nflTrainDataFiltered, method = "class")
+> pred <- predict(classifier, classUpsetTestDataFiltered[,-5])
+Warning messages:
+1: In data.matrix(newdata) : NAs introduced by coercion
+2: In data.matrix(newdata) : NAs introduced by coercion
+3: In data.matrix(newdata) : NAs introduced by coercion
+4: In data.matrix(newdata) : NAs introduced by coercion
+5: In data.matrix(newdata) : NAs introduced by coercion
+> View(nflTrainDataFiltered)
+> View(nflTrainDataFiltered)
+> nflTrainDataFiltered$Odds <- abs(nflTrainDataFiltered$Odds)
+> nflDataUpset_rpart <- rpart(Upset ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = nflTrainDataFiltered, method = "class", control=rpart.control(minsplit=1, minbucket=5, cp=0.01))
+> printcp(nflDataUpset_rpart)
+
+Classification tree:
+rpart(formula = Upset ~ AorH + Time + Weather + AvgPF + AvgPA + 
+    Odds, data = nflTrainDataFiltered, method = "class", control = rpart.control(minsplit = 1, 
+    minbucket = 5, cp = 0.01))
+
+Variables actually used in tree construction:
+[1] AorH    AvgPA   AvgPF   Odds    Time    Weather
+
+Root node error: 165/480 = 0.34375
+
+n= 480 
+
+        CP nsplit rel error  xerror     xstd
+1 0.112121      0   1.00000 1.00000 0.063066
+2 0.048485      2   0.77576 0.83030 0.059966
+3 0.024242      3   0.72727 0.86061 0.060604
+4 0.022222      4   0.70303 0.86061 0.060604
+5 0.021212      7   0.63636 0.86667 0.060727
+6 0.018182      9   0.59394 0.86667 0.060727
+7 0.012121     12   0.53939 0.89091 0.061203
+8 0.010101     14   0.51515 0.87273 0.060848
+9 0.010000     17   0.48485 0.87273 0.060848
+> plotcp(nflDataUpset_rpart)
+> plot(nflDataUpset_rpart)
+> text(nflDataUpset_rpart, use.n=TRUE)
+> #nflDataUpsetWins_pred <- predict(nflDataUpsetWins_rpart, newData = testData, type="class")
+> nflDataUpset_pred <- predict(nflDataUpset_rpart, classUpsetTestDataFiltered[,-6], type="class")
+> #balanceScale_pred <- predict(balanceScale_rpart, newData = testData, type="class")
+> nflDataUpset_pred
+ 33  36  37  39  42  44  46  48  49  52  54  55  58  60  62  63  66  67  69  72  73  75  78  79  82  83  86  88  90  92  94  95  98 100 101 104 106 107 110 111 114 
+  1   0   1   1   0   0   0   0   1   0   0   1   0   0   0   1   0   1   1   0   1   0   0   0   0   0   0   0   0   0   0   0   1   0   1   0   0   1   0   0   1 
+115 117 119 121 124 126 127 129 132 134 135 138 140 141 143 145 148 150 152 153 156 158 160 162 164 166 168 169 172 174 175 177 180 182 184 186 187 189 192 194 195 
+  0   1   0   1   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   1   0   0   0   0   1   0   0   1   0   0   1   1   0   0   0   0   1   0   0   0   0 
+198 200 202 204 205 207 209 214 216 219 221 223 225 228 230 232 234 236 238 240 
+  0   0   0   0   1   0   0   0   1   0   0   0   1   0   0   0   0   0   0   1 
+Levels: 0 1
+> table(nflDataUpset_pred, classUpsetTestDataFiltered$Upset)
+                 
+nflDataUpset_pred  0  1
+                0 48 28
+                1 11 15
+> classUpsetTestDataFiltered$Odds <- abs(classUpsetTestDataFiltered$Odds)
+> classUpsetTestData <- subset(testData, testData$Outcome == "W")
+> classUpsetTestDataFiltered <- subset(classUpsetTestData, complete.cases(classUpsetTestData))
+> classUpsetTestDataFiltered <- BinningData(classUpsetTestDataFiltered)
+> classifier <- naiveBayes(Upset ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = nflTrainDataFiltered, method = "class")
+> pred <- predict(classifier, classUpsetTestDataFiltered[,-5])
+Warning messages:
+1: In data.matrix(newdata) : NAs introduced by coercion
+2: In data.matrix(newdata) : NAs introduced by coercion
+3: In data.matrix(newdata) : NAs introduced by coercion
+4: In data.matrix(newdata) : NAs introduced by coercion
+5: In data.matrix(newdata) : NAs introduced by coercion
+> nflTrainDataFiltered$AvgPF <- as.numeric(nflTrainDataFiltered$AvgPF)
+> nflTrainDataFiltered$AvgPA <- as.numeric(nflTrainDataFiltered$AvgPA)
+> classifier <- naiveBayes(Upset ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = nflTrainDataFiltered, method = "class")
+> pred <- predict(classifier, classUpsetTestDataFiltered[,-5])
+Warning messages:
+1: In data.matrix(newdata) : NAs introduced by coercion
+2: In data.matrix(newdata) : NAs introduced by coercion
+3: In data.matrix(newdata) : NAs introduced by coercion
+4: In data.matrix(newdata) : NAs introduced by coercion
+5: In data.matrix(newdata) : NAs introduced by coercion
+> str(nflTrainDataFiltered)
+'data.frame':	480 obs. of  43 variables:
+ $ Team      : chr  "Cincinnati Bengals" "Kansas City Chiefs" "Green Bay Packers" "Philadelphia Eagles" ...
+ $ Score     : int  15 16 34 35 19 41 20 27 14 16 ...
+ $ Ending    : chr  "Final" "Final" "Final" "Final" ...
+ $ Outcome   : chr  "W" "W" "W" "W" ...
+ $ Date      : chr  "09-19-10" "09-19-10" "09-19-10" "09-19-10" ...
+ $ GameNum   : int  2 2 2 2 2 2 2 2 2 2 ...
+ $ DaysRest  : int  7 6 7 7 7 7 7 7 7 7 ...
+ $ AorH      : num  1 0 1 0 0 1 0 0 0 1 ...
+ $ Time      : int  1300 1300 1300 1300 1200 1300 1300 1200 1200 1305 ...
+ $ Timezone  : chr  "Eastern" "Eastern" "Eastern" "Eastern" ...
+ $ Weather   : num  78 65 58 0 87 0 89 0 0 72 ...
+ $ W.        : chr  "Cloudy" "Cloudy" "Partly Sunny" "" ...
+ $ OppScore  : int  10 14 7 32 11 7 7 20 10 14 ...
+ $ AvgPF     : num  24 21 27 20 15 9 17 19 15 13 ...
+ $ AvgPA     : num  38 14 20 27 9 15 14 14 10 38 ...
+ $ Odds      : num  3 3 12.5 6.5 6 7 4 7 5.5 3.5 ...
+ $ Upset     : num  1 1 0 0 1 0 1 1 1 0 ...
+ $ UpsetAmt  : int  5 2 0 0 8 0 13 7 4 0 ...
+ $ QB        : chr  "" "" "" "" ...
+ $ RB        : chr  "P" "" "" "" ...
+ $ WR        : chr  "" "" "" "" ...
+ $ TE        : chr  "" "" "" "" ...
+ $ C         : chr  "" "" "" "" ...
+ $ LT        : chr  "" "" "P" "P" ...
+ $ LG        : chr  "" "" "P" "P" ...
+ $ RG        : chr  "" "" "" "" ...
+ $ RT        : chr  "" "" "" "" ...
+ $ Other.1   : chr  "" "" "" "" ...
+ $ Other.2   : chr  "" "" "" "" ...
+ $ Offense   : int  1 0 2 2 0 3 3 1 0 2 ...
+ $ DE        : chr  "" "" "" "" ...
+ $ DT        : chr  "" "" "" "" ...
+ $ NT        : chr  "" "" "P" "" ...
+ $ RDT       : chr  "" "" "" "" ...
+ $ LB        : chr  "" "" "" "" ...
+ $ Other.LB.1: chr  "" "" "O" "O" ...
+ $ Other.2.1 : chr  "O" "" "P" "P" ...
+ $ Other.3   : chr  "" "P" "P" "" ...
+ $ LCB       : chr  "" "" "P" "" ...
+ $ RCB       : chr  "" "" "" "" ...
+ $ FS        : chr  "" "" "" "" ...
+ $ SS        : chr  "" "" "" "" ...
+ $ Defense   : int  2 1 6 3 4 2 2 1 2 3 ...
+> allNflData <- rbind(nflTrainDataFiltered, classUpsetTestDataFiltered)
+Error in rbind(deparse.level, ...) : 
+  numbers of columns of arguments do not match
+> View(nflDataUpsetWins)
+> updatedTrainData <-nflTrainDataFiltered[1:20,]
+> View(updatedTrainData)
+> View(updatedTrainData)
+> View(classUpsetTestDataFiltered)
+> View(classUpsetTestDataFiltered)
+> updatedTrainData <-nflTrainDataFiltered[1:18,]
+> updatedTrainData <-nflTrainDataFiltered[c(-19,-20)]
+> updatedTrainData <-nflTrainDataFiltered[c(-17,-18)]
+> updatedTrainData <-nflTrainDataFiltered[c(-19,-20,-21,-22,-23,-24)]
+> updatedTrainData <-nflTrainDataFiltered[c(-19,-20,-21,-22,-23,-24,-25,-26,-27,-28)]
+> updatedTrainData <-nflTrainDataFiltered[c(-43,-42,-41,-40,-39,-38,-37,-36,-35,-34)]
+> View(classUpsetTestDataFiltered)
+> View(classUpsetTestDataFiltered)
+> updatedTrainData <-nflTrainDataFiltered[c(-43,-42,-41,-40,-39,-38,-37,-36,-35,-34,-33,-32,-31,-30,-29)]
+> updatedTrainData <-nflTrainDataFiltered[c(-43,-42,-41,-40,-39,-38,-37,-36,-35,-34,-33,-32,-31,-30,-29,-28,-27,-26,-25,-24,-23,-22,-21,-20,-19)]
+> allNflData <- rbind(updatedTrainData, classUpsetTestDataFiltered)
+> set.seed(1234)
+> ind <- sample(2, nrow(allNflData), replace=TRUE,
++               prob=c(0.7,0.3))
+> trainData <- allNflData[ind==1,]
+> testData <- allNflData[ind==2,]
+> classifier <- naiveBayes(Upset ~ Time + Weather + Offense + Defense, data = trainData, method = "class")
+Error in eval(expr, envir, enclos) : object 'Offense' not found
+> classifier
+
+Naive Bayes Classifier for Discrete Predictors
+
+Call:
+naiveBayes.default(x = X, y = Y, laplace = laplace, method = "class")
+
+A-priori probabilities:
+Y
+      0       1 
+0.65625 0.34375 
+
+Conditional probabilities:
+   AorH
+Y        [,1]      [,2]
+  0 0.6634921 0.4732667
+  1 0.3454545 0.4769638
+
+   Time
+Y       [,1]     [,2]
+  0 1437.225 263.1393
+  1 1411.970 253.7149
+
+   Weather
+Y       [,1]    [,2]
+  0 41.35238 28.4634
+  1 42.47879 29.0245
+
+   AvgPF
+Y       [,1]     [,2]
+  0 24.09949 5.472692
+  1 20.44024 5.136414
+
+   AvgPA
+Y       [,1]     [,2]
+  0 20.97441 4.535812
+  1 22.30679 4.865004
+
+   Odds
+Y       [,1]     [,2]
+  0 6.053968 3.625626
+  1 4.318182 2.833322
+
+> pred <- predict(classifier, testData[,-5])
+Warning messages:
+1: In data.matrix(newdata) : NAs introduced by coercion
+2: In data.matrix(newdata) : NAs introduced by coercion
+3: In data.matrix(newdata) : NAs introduced by coercion
+4: In data.matrix(newdata) : NAs introduced by coercion
+5: In data.matrix(newdata) : NAs introduced by coercion
+6: In data.matrix(newdata) : NAs introduced by coercion
+> table(pred)
+< table of extent 0 >
+> table(testData$Upset)
+
+  0   1 
+121  59 
+> table(pred,droplevels(testData)$Upset)
+Error in table(pred, droplevels(testData)$Upset) : 
+  all arguments must have the same length
+> allNflDataUpsetWins_rpart <- rpart(Upset ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = trainData, method = "class")
+> printcp(allNflDataUpsetWins_rpart)
+
+Classification tree:
+rpart(formula = Upset ~ AorH + Time + Weather + AvgPF + AvgPA + 
+    Odds, data = trainData, method = "class")
+
+Variables actually used in tree construction:
+[1] AorH    AvgPA   AvgPF   Odds    Time    Weather
+
+Root node error: 149/402 = 0.37065
+
+n= 402 
+
+        CP nsplit rel error  xerror     xstd
+1 0.228188      0   1.00000 1.00000 0.064991
+2 0.073826      1   0.77181 0.77181 0.060812
+3 0.040268      3   0.62416 0.69128 0.058743
+4 0.026846      5   0.54362 0.71141 0.059292
+5 0.020134      6   0.51678 0.67114 0.058171
+6 0.013423      7   0.49664 0.65101 0.057575
+7 0.010000     13   0.41611 0.65101 0.057575
+> plotcp(allNflDataUpsetWins_rpart)
+> plot(allNflDataUpsetWins_rpart)
+> text(allNflDataUpsetWins_rpart, use.n=TRUE)
+> allNflDataUpsetWins_pred <- predict(allNflDataUpsetWins_rpart, testData[,-6], type="class")
+> allNflDataUpsetWins_pred
+  41   60   63   84   87   89  104  110  112  132  137  147  152  154  164  176  179  194  203  212  215  232  254  258  263  266  272  274  276  278  280  294  302 
+   1    1    1    1    0    0    0    0    0    0    1    0    0    0    0    0    1    0    0    0    1    0    0    0    0    0    0    0    0    0    0    0    0 
+ 305  311  316  326  330  339  344  347  370  373  378  384  402  406  411  415  419  422  423  426  428  430  439  443  452  459  464  468  472  486  494  499  506 
+   0    0    0    0    0    1    0    1    0    1    0    0    0    0    1    1    0    0    1    0    1    0    0    0    0    0    0    0    0    0    0    0    0 
+ 512  554  558  562  563  585  598  604  608  611  617  629  632  633  643  649  656  668  674  679  684  686  704  707  724  726  728  729  742  746  752  761  767 
+   0    0    1    0    1    0    0    0    0    0    1    1    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    1    0    0    0    1    1 
+ 771  773  775  779  784  793  796  801  804  806  810  817  842  844  848  849  855  870  871  878  885  888  890  894  900  907  914  928  931  940  942  945  947 
+   1    1    1    0    0    1    0    1    0    0    0    0    0    0    0    0    1    0    0    0    0    0    0    0    0    0    0    0    1    1    1    1    0 
+ 949  954  958  968  970  972  974  987 1012 1015 1022   46   48  491  551  581  751   78   83  862   88  921   95  982 1041 1141 1191  124  140  143  150  158  162 
+   1    0    0    0    0    0    0    0    0    0    0    0    0    1    1    0    0    0    1    1    0    1    1    0    0    1    1    0    0    1    0    1    0 
+1661 1681  169 1721 1771 1821 1841 1921 1951 2001  204  205  219 2361 2381 
+   1    0    1    0    1    0    0    0    1    0    1    1    0    0    0 
+Levels: 0 1
+> table(allNflDataUpsetWins_pred, testData$Upset)
+                        
+allNflDataUpsetWins_pred   0   1
+                       0 109  23
+                       1  12  36
+> plot(allNflDataUpsetWins_rpart)
+> text(allNflDataUpsetWins_rpart, use.n=TRUE)
+> classUpsetTestDataFiltered$Odds <- abs(classUpsetTestDataFiltered$Odds)
+> allNflData <- rbind(updatedTrainData, classUpsetTestDataFiltered)
+> set.seed(1234)
+> ind <- sample(2, nrow(allNflData), replace=TRUE,
++               prob=c(0.7,0.3))
+> trainData <- allNflData[ind==1,]
+> testData <- allNflData[ind==2,]
+> allNflDataUpsetWins_rpart <- rpart(Upset ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = trainData, method = "class")
+> printcp(allNflDataUpsetWins_rpart)
+
+Classification tree:
+rpart(formula = Upset ~ AorH + Time + Weather + AvgPF + AvgPA + 
+    Odds, data = trainData, method = "class")
+
+Variables actually used in tree construction:
+[1] AorH    AvgPA   AvgPF   Odds    Time    Weather
+
+Root node error: 149/402 = 0.37065
+
+n= 402 
+
+        CP nsplit rel error  xerror     xstd
+1 0.114094      0   1.00000 1.00000 0.064991
+2 0.060403      2   0.77181 0.83893 0.062287
+3 0.040268      3   0.71141 0.86577 0.062817
+4 0.033557      4   0.67114 0.84564 0.062422
+5 0.026846      5   0.63758 0.84564 0.062422
+6 0.013423      6   0.61074 0.83893 0.062287
+7 0.011186     10   0.55705 0.81879 0.061867
+8 0.010000     13   0.52349 0.85235 0.062556
+> plotcp(allNflDataUpsetWins_rpart)
+> plot(allNflDataUpsetWins_rpart)
+> text(allNflDataUpsetWins_rpart, use.n=TRUE)
+> #nflDataUpsetWins_pred <- predict(nflDataUpsetWins_rpart, newData = testData, type="class")
+> allNflDataUpsetWins_pred <- predict(allNflDataUpsetWins_rpart, testData[,-6], type="class")
+> #balanceScale_pred <- predict(balanceScale_rpart, newData = testData, type="class")
+> allNflDataUpsetWins_pred
+  41   60   63   84   87   89  104  110  112  132  137  147  152  154  164  176  179  194  203  212  215  232  254  258  263  266  272  274  276  278 
+   1    0    1    1    1    0    0    0    0    0    1    0    0    0    0    1    1    0    0    0    1    0    0    0    0    0    1    0    0    0 
+ 280  294  302  305  311  316  326  330  339  344  347  370  373  378  384  402  406  411  415  419  422  423  426  428  430  439  443  452  459  464 
+   0    0    0    0    0    0    0    0    1    1    1    1    1    1    0    0    1    1    1    0    0    1    0    0    0    0    0    0    0    0 
+ 468  472  486  494  499  506  512  554  558  562  563  585  598  604  608  611  617  629  632  633  643  649  656  668  674  679  684  686  704  707 
+   0    0    0    0    1    0    1    0    1    0    1    0    0    0    0    0    1    1    0    0    0    0    1    0    0    1    0    0    1    0 
+ 724  726  728  729  742  746  752  761  767  771  773  775  779  784  793  796  801  804  806  810  817  842  844  848  849  855  870  871  878  885 
+   0    0    0    1    0    0    0    1    1    1    1    1    0    0    1    0    1    0    0    0    0    0    0    0    1    1    0    1    0    0 
+ 888  890  894  900  907  914  928  931  940  942  945  947  949  954  958  968  970  972  974  987 1012 1015 1022   46   48  491  551  581  751   78 
+   0    1    0    0    0    0    0    1    0    1    1    0    1    0    0    0    0    0    0    0    1    0    0    0    0    1    1    0    0    0 
+  83  862   88  921   95  982 1041 1141 1191  124  140  143  150  158  162 1661 1681  169 1721 1771 1821 1841 1921 1951 2001  204  205  219 2361 2381 
+   1    0    0    0    1    0    0    0    1    0    0    0    0    0    0    0    1    1    0    0    0    0    0    1    0    0    1    0    0    0 
+Levels: 0 1
+> table(allNflDataUpsetWins_pred, testData$Upset)
+                        
+allNflDataUpsetWins_pred  0  1
+                       0 99 27
+                       1 22 32
+> 

@@ -70,7 +70,9 @@ BinningData <- function(nflData){
 #  nflData$RB[nflData$RB=='']<-"0"
   nflData$Upset <- as.numeric(nflData$Upset)
   nflData$AorH <- as.numeric(nflData$AorH)
-#  nflData$QB <- as.numeric(nflData$QB)
+  nflData$AvgPF <- as.numeric(nflData$AvgPF)
+  nflData$AvgPA <- as.numeric(nflData$AvgPA)
+  #  nflData$QB <- as.numeric(nflData$QB)
 #  nflData$RB <- as.numeric(nflData$RB)
   return(nflData)
 }
@@ -381,17 +383,23 @@ table(pred,droplevels(classTestDataFiltered)$UpsetAmt)
 ## Past Years to Current Year
 nflTrainDataFiltered <- subset(nflDataWins, complete.cases(nflDataWins))
 nflTrainDataFiltered <- BinningData(nflTrainDataFiltered)
+nflTrainDataFiltered$Odds <- abs(nflTrainDataFiltered$Odds)
 classUpsetTestData <- subset(testData, testData$Outcome == "W")
 classUpsetTestDataFiltered <- subset(classUpsetTestData, complete.cases(classUpsetTestData))
 classUpsetTestDataFiltered <- BinningData(classUpsetTestDataFiltered)
+
 #classTestDataFiltered$UpsetAmt <- UpsetAmtBin(classTestDataFiltered$UpsetAmt)
 # Naive Bayes Classification
-classifier <- naiveBayes(Upset ~ AorH + Time + Weather + AvgPF + AvgPA, data = nflTrainDataFiltered, method = "class")
+str(nflTrainDataFiltered)
+nflTrainDataFiltered$AvgPF <- as.numeric(nflTrainDataFiltered$AvgPF)
+nflTrainDataFiltered$AvgPA <- as.numeric(nflTrainDataFiltered$AvgPA)
+
+classifier <- naiveBayes(Upset ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = nflTrainDataFiltered, method = "class")
 pred <- predict(classifier, classUpsetTestDataFiltered[,-5])
 table(pred)
 table(classUpsetTestDataFiltered$Upset)
 # Decision Tree Classification
-nflDataUpset_rpart <- rpart(Upset ~ AorH + Time + Weather + AvgPF + AvgPA, data = nflTrainDataFiltered, method = "class", control=rpart.control(minsplit=1, minbucket=5, cp=0.01))
+nflDataUpset_rpart <- rpart(Upset ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = nflTrainDataFiltered, method = "class", control=rpart.control(minsplit=1, minbucket=5, cp=0.01))
 printcp(nflDataUpset_rpart)
 plotcp(nflDataUpset_rpart)
 plot(nflDataUpset_rpart)
@@ -403,28 +411,32 @@ nflDataUpset_pred
 table(nflDataUpset_pred, classUpsetTestDataFiltered$Upset)
 
 ## 70/30 split
+updatedTrainData <-nflTrainDataFiltered[c(-43,-42,-41,-40,-39,-38,-37,-36,-35,-34,-33,-32,-31,-30,-29,-28,-27,-26,-25,-24,-23,-22,-21,-20,-19)]
+classUpsetTestDataFiltered$Odds <- abs(classUpsetTestDataFiltered$Odds)
+
+allNflData <- rbind(updatedTrainData, classUpsetTestDataFiltered)
 set.seed(1234)
-ind <- sample(2, nrow(NFLDATA), replace=TRUE,
+ind <- sample(2, nrow(allNflData), replace=TRUE,
               prob=c(0.7,0.3))
-trainData <- NFLDATA[ind==1,]
-testData <- NFLDATA[ind==2,]
+trainData <- allNflData[ind==1,]
+testData <- allNflData[ind==2,]
 # Naive Bayes Classification
-classifier <- naiveBayes(Upset ~ Time + Weather + Offense + Defense, data = TRAINDATA, method = "class")
+classifier <- naiveBayes(Upset ~ Time + Weather + Offense + Defense, data = trainData, method = "class")
 classifier
-pred <- predict(classifier, TESTDATA[,-5])
+pred <- predict(classifier, testData[,-5])
 table(pred)
-table(TESTDATA$Upset)
-table(pred,droplevels(TESTDATA)$Upset)
+table(testData$Upset)
+table(pred,droplevels(testData)$Upset)
 # Decision Tree Classification
-nflDataUpsetWins_rpart <- rpart(Upset ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = TRAINDATA, method = "class")
-printcp(nflDataUpsetWins_rpart)
-plotcp(nflDataUpsetWins_rpart)
-plot(nflDataUpsetWins_rpart)
-text(nflDataUpsetWins_rpart, use.n=TRUE)
+allNflDataUpsetWins_rpart <- rpart(Upset ~ AorH + Time + Weather + AvgPF + AvgPA + Odds, data = trainData, method = "class")
+printcp(allNflDataUpsetWins_rpart)
+plotcp(allNflDataUpsetWins_rpart)
+plot(allNflDataUpsetWins_rpart)
+text(allNflDataUpsetWins_rpart, use.n=TRUE)
 #nflDataUpsetWins_pred <- predict(nflDataUpsetWins_rpart, newData = testData, type="class")
-nflDataUpsetWins_pred <- predict(nflDataUpsetWins_rpart, TESTDATA[,-6], type="class")
+allNflDataUpsetWins_pred <- predict(allNflDataUpsetWins_rpart, testData[,-6], type="class")
 #balanceScale_pred <- predict(balanceScale_rpart, newData = testData, type="class")
-nflDataUpsetWins_pred
-table(nflDataUpsetWins_pred, testData$Upset)
+allNflDataUpsetWins_pred
+table(allNflDataUpsetWins_pred, testData$Upset)
 
 
